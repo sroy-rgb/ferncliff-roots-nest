@@ -1,4 +1,5 @@
 import { Sun, Users, ShieldCheck, Tree, Backpack, ArrowRight } from "@phosphor-icons/react";
+import { Link } from "@tanstack/react-router";
 
 export function Camp() {
   return (
@@ -65,20 +66,25 @@ export function Camp() {
                 <p className="text-[14px] text-dark-soft">
                   <strong className="font-bold">First time at Ferncliff?</strong> We've got everything you need to feel confident about your child's experience.
                 </p>
-                <a href="#" className="link-arrow mt-1.5">
+                <Link to="/camp/first-time" className="link-arrow mt-1.5">
                   First-Time Camper Guide <ArrowRight size={14} weight="bold" />
-                </a>
+                </Link>
               </div>
             </div>
 
-            <a
-              href="https://ferncliff.campbrainregistration.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-teal"
-            >
-              Register for Camp
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <Link to="/camp" className="btn btn-teal">
+                Explore Camp
+              </Link>
+              <a
+                href="https://ferncliff.campbrainregistration.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline"
+              >
+                Register
+              </a>
+            </div>
           </div>
         </div>
       </div>
