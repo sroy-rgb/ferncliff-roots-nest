@@ -41,11 +41,11 @@ function MediaPage() {
       <PageHeader title="Media Library" action={<Button onClick={() => setShowUpload(true)}><Plus size={14} /> Upload</Button>} />
 
       {showUpload && (
-        <Card className="p-6 mb-4 border-2 border-dashed border-[#2B7A6F]/40 text-center cursor-pointer" onClick={upload}>
+        <div onClick={upload} className="bg-white border-2 border-dashed border-[#2B7A6F]/40 rounded-xl p-6 mb-4 text-center cursor-pointer">
           <CloudArrowUp size={42} className="mx-auto text-[#2B7A6F]" />
           <div className="mt-2 text-[14px] font-medium">Drag files here or click to browse</div>
           <div className="text-[12px] text-[#888]">PNG, JPG, GIF up to 10MB</div>
-        </Card>
+        </div>
       )}
 
       <Card className="p-4 mb-4 flex items-center gap-3">
