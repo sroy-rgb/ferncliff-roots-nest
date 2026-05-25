@@ -67,10 +67,21 @@ function GalleryPage() {
       <CampHero
         image="https://images.pexels.com/photos/2526040/pexels-photo-2526040.jpeg?auto=compress&cs=tinysrgb&w=1920"
         eyebrow="Gallery"
-        title="Camp Gallery"
-        subtitle="See Ferncliff through our campers' eyes."
-        height="40vh"
+        title={<>See Ferncliff through our campers' <HeroEm>eyes</HeroEm></>}
+        subtitle="A look at the lakes, cabins, faces, and moments that make a week here."
+        height="50vh"
       />
+
+      <section className="pt-[80px] pb-4 bg-offwhite">
+        <div className="max-w-[1200px] mx-auto px-8">
+          <SectionIntro
+            eyebrow="Gallery"
+            title={<>See Ferncliff through our campers' <Hw>eyes</Hw></>}
+          />
+        </div>
+      </section>
+
+
 
       <section className="py-[60px] md:py-[80px] bg-offwhite">
         <div className="max-w-[1300px] mx-auto px-6">
