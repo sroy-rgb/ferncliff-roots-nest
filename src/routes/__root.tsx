@@ -9,6 +9,8 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { AdminAuthProvider } from "@/components/admin/adminStore";
+import { AdminToggle } from "@/components/admin/AdminToggle";
 
 function NotFoundComponent() {
   return (
