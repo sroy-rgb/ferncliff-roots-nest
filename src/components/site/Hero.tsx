@@ -4,6 +4,7 @@ import {
   Campfire, Buildings, Leaf, HandHeart, ArrowRight, ArrowSquareOut,
   PaperPlaneTilt, Heart,
 } from "@phosphor-icons/react";
+import { useContentStore } from "@/components/admin/contentStore";
 
 const POSTER = "https://images.pexels.com/photos/1083342/pexels-photo-1083342.jpeg?auto=compress&cs=tinysrgb&w=1920";
 const VIDEO = "https://videos.pexels.com/video-files/1448735/1448735-hd_1920_1080_30fps.mp4";
