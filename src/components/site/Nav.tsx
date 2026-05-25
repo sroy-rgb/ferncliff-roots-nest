@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   MoonStars, Sun, Compass, Backpack, Bed, PresentationChart,
-  ForkKnife, PaperPlaneTilt, Tree, Heart, Leaf, Users, MapPin,
+  ForkKnife, PaperPlaneTilt, Tree, Heart, Leaf, Users, MapPin, CaretDown,
 } from "@phosphor-icons/react";
+
 
 const LOGO = "https://resources.ferncliff.org/hs-fs/hubfs/FRN.01_Logo-Color-wo.png?width=353&height=200";
 
