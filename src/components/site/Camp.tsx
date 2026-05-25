@@ -66,9 +66,9 @@ export function Camp() {
                 <p className="text-[14px] text-dark-soft">
                   <strong className="font-bold">First time at Ferncliff?</strong> We've got everything you need to feel confident about your child's experience.
                 </p>
-                <a href="#" className="link-arrow mt-1.5">
+                <Link to="/camp/first-time" className="link-arrow mt-1.5">
                   First-Time Camper Guide <ArrowRight size={14} weight="bold" />
-                </a>
+                </Link>
               </div>
             </div>
 
