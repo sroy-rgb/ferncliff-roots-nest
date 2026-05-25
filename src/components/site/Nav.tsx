@@ -86,8 +86,9 @@ export function Nav() {
         <div className="hidden md:flex items-center gap-1">
           {navItems.map((item) => (
             <div key={item.label} className="group relative">
-              <button
-                className="px-3 py-2 text-[14px] font-medium rounded-lg transition-colors"
+              <Link
+                to={item.to}
+                className="px-3 py-2 text-[14px] font-medium rounded-lg transition-colors inline-block"
                 style={{
                   color: scrolled ? "var(--color-dark-warm)" : "rgba(255,255,255,0.85)",
                 }}
@@ -101,7 +102,7 @@ export function Nav() {
                 }}
               >
                 {item.label}
-              </button>
+              </Link>
               {item.mega && <MegaMenu mega={item.mega} />}
             </div>
           ))}
