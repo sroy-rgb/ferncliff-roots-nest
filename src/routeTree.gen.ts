@@ -31,6 +31,7 @@ import { Route as CampDiscoveryRouteImport } from './routes/camp/discovery'
 import { Route as CampDayRouteImport } from './routes/camp/day'
 import { Route as CampDatesRouteImport } from './routes/camp/dates'
 import { Route as AdminVolunteersRouteImport } from './routes/admin/volunteers'
+import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as AdminSubscribersRouteImport } from './routes/admin/subscribers'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminSeoRouteImport } from './routes/admin/seo'
@@ -157,6 +158,11 @@ const AdminVolunteersRoute = AdminVolunteersRouteImport.update({
   path: '/admin/volunteers',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/admin/users',
+  path: '/admin/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminSubscribersRoute = AdminSubscribersRouteImport.update({
   id: '/admin/subscribers',
   path: '/admin/subscribers',
@@ -249,6 +255,7 @@ export interface FileRoutesByFullPath {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/subscribers': typeof AdminSubscribersRoute
+  '/admin/users': typeof AdminUsersRoute
   '/admin/volunteers': typeof AdminVolunteersRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
@@ -287,6 +294,7 @@ export interface FileRoutesByTo {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/subscribers': typeof AdminSubscribersRoute
+  '/admin/users': typeof AdminUsersRoute
   '/admin/volunteers': typeof AdminVolunteersRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
@@ -326,6 +334,7 @@ export interface FileRoutesById {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/subscribers': typeof AdminSubscribersRoute
+  '/admin/users': typeof AdminUsersRoute
   '/admin/volunteers': typeof AdminVolunteersRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
@@ -366,6 +375,7 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/settings'
     | '/admin/subscribers'
+    | '/admin/users'
     | '/admin/volunteers'
     | '/camp/dates'
     | '/camp/day'
@@ -404,6 +414,7 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/settings'
     | '/admin/subscribers'
+    | '/admin/users'
     | '/admin/volunteers'
     | '/camp/dates'
     | '/camp/day'
@@ -442,6 +453,7 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/settings'
     | '/admin/subscribers'
+    | '/admin/users'
     | '/admin/volunteers'
     | '/camp/dates'
     | '/camp/day'
@@ -481,6 +493,7 @@ export interface RootRouteChildren {
   AdminSeoRoute: typeof AdminSeoRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminSubscribersRoute: typeof AdminSubscribersRoute
+  AdminUsersRoute: typeof AdminUsersRoute
   AdminVolunteersRoute: typeof AdminVolunteersRoute
   CampDatesRoute: typeof CampDatesRoute
   CampDayRoute: typeof CampDayRoute
@@ -655,6 +668,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminVolunteersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/admin/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/subscribers': {
       id: '/admin/subscribers'
       path: '/admin/subscribers'
@@ -777,6 +797,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminSeoRoute: AdminSeoRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminSubscribersRoute: AdminSubscribersRoute,
+  AdminUsersRoute: AdminUsersRoute,
   AdminVolunteersRoute: AdminVolunteersRoute,
   CampDatesRoute: CampDatesRoute,
   CampDayRoute: CampDayRoute,
