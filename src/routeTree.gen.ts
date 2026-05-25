@@ -29,6 +29,7 @@ import { Route as CampFamilyRouteImport } from './routes/camp/family'
 import { Route as CampDiscoveryRouteImport } from './routes/camp/discovery'
 import { Route as CampDayRouteImport } from './routes/camp/day'
 import { Route as CampDatesRouteImport } from './routes/camp/dates'
+import { Route as AdminLoginRouteImport } from './routes/admin/login'
 
 const RetreatsRoute = RetreatsRouteImport.update({
   id: '/retreats',
@@ -131,6 +132,11 @@ const CampDatesRoute = CampDatesRouteImport.update({
   path: '/camp/dates',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -139,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/nature-school': typeof NatureSchoolRoute
   '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
+  '/admin/login': typeof AdminLoginRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
   '/camp/discovery': typeof CampDiscoveryRoute
@@ -161,6 +168,7 @@ export interface FileRoutesByTo {
   '/nature-school': typeof NatureSchoolRoute
   '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
+  '/admin/login': typeof AdminLoginRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
   '/camp/discovery': typeof CampDiscoveryRoute
@@ -184,6 +192,7 @@ export interface FileRoutesById {
   '/nature-school': typeof NatureSchoolRoute
   '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
+  '/admin/login': typeof AdminLoginRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
   '/camp/discovery': typeof CampDiscoveryRoute
@@ -208,6 +217,7 @@ export interface FileRouteTypes {
     | '/nature-school'
     | '/outreach'
     | '/retreats'
+    | '/admin/login'
     | '/camp/dates'
     | '/camp/day'
     | '/camp/discovery'
@@ -230,6 +240,7 @@ export interface FileRouteTypes {
     | '/nature-school'
     | '/outreach'
     | '/retreats'
+    | '/admin/login'
     | '/camp/dates'
     | '/camp/day'
     | '/camp/discovery'
@@ -252,6 +263,7 @@ export interface FileRouteTypes {
     | '/nature-school'
     | '/outreach'
     | '/retreats'
+    | '/admin/login'
     | '/camp/dates'
     | '/camp/day'
     | '/camp/discovery'
@@ -275,6 +287,7 @@ export interface RootRouteChildren {
   NatureSchoolRoute: typeof NatureSchoolRoute
   OutreachRoute: typeof OutreachRoute
   RetreatsRoute: typeof RetreatsRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   CampDatesRoute: typeof CampDatesRoute
   CampDayRoute: typeof CampDayRoute
   CampDiscoveryRoute: typeof CampDiscoveryRoute
@@ -433,6 +446,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CampDatesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -443,6 +463,7 @@ const rootRouteChildren: RootRouteChildren = {
   NatureSchoolRoute: NatureSchoolRoute,
   OutreachRoute: OutreachRoute,
   RetreatsRoute: RetreatsRoute,
+  AdminLoginRoute: AdminLoginRoute,
   CampDatesRoute: CampDatesRoute,
   CampDayRoute: CampDayRoute,
   CampDiscoveryRoute: CampDiscoveryRoute,
@@ -461,3 +482,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
