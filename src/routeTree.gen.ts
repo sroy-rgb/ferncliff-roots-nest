@@ -35,6 +35,7 @@ import { Route as AdminSeoRouteImport } from './routes/admin/seo'
 import { Route as AdminRoadmapRouteImport } from './routes/admin/roadmap'
 import { Route as AdminRetreatsRouteImport } from './routes/admin/retreats'
 import { Route as AdminPagesRouteImport } from './routes/admin/pages'
+import { Route as AdminNatureRouteImport } from './routes/admin/nature'
 import { Route as AdminMediaRouteImport } from './routes/admin/media'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminInquiriesRouteImport } from './routes/admin/inquiries'
@@ -173,6 +174,11 @@ const AdminPagesRoute = AdminPagesRouteImport.update({
   path: '/admin/pages',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminNatureRoute = AdminNatureRouteImport.update({
+  id: '/admin/nature',
+  path: '/admin/nature',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminMediaRoute = AdminMediaRouteImport.update({
   id: '/admin/media',
   path: '/admin/media',
@@ -217,6 +223,7 @@ export interface FileRoutesByFullPath {
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
+  '/admin/nature': typeof AdminNatureRoute
   '/admin/pages': typeof AdminPagesRoute
   '/admin/retreats': typeof AdminRetreatsRoute
   '/admin/roadmap': typeof AdminRoadmapRoute
@@ -251,6 +258,7 @@ export interface FileRoutesByTo {
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
+  '/admin/nature': typeof AdminNatureRoute
   '/admin/pages': typeof AdminPagesRoute
   '/admin/retreats': typeof AdminRetreatsRoute
   '/admin/roadmap': typeof AdminRoadmapRoute
@@ -286,6 +294,7 @@ export interface FileRoutesById {
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
+  '/admin/nature': typeof AdminNatureRoute
   '/admin/pages': typeof AdminPagesRoute
   '/admin/retreats': typeof AdminRetreatsRoute
   '/admin/roadmap': typeof AdminRoadmapRoute
@@ -322,6 +331,7 @@ export interface FileRouteTypes {
     | '/admin/inquiries'
     | '/admin/login'
     | '/admin/media'
+    | '/admin/nature'
     | '/admin/pages'
     | '/admin/retreats'
     | '/admin/roadmap'
@@ -356,6 +366,7 @@ export interface FileRouteTypes {
     | '/admin/inquiries'
     | '/admin/login'
     | '/admin/media'
+    | '/admin/nature'
     | '/admin/pages'
     | '/admin/retreats'
     | '/admin/roadmap'
@@ -390,6 +401,7 @@ export interface FileRouteTypes {
     | '/admin/inquiries'
     | '/admin/login'
     | '/admin/media'
+    | '/admin/nature'
     | '/admin/pages'
     | '/admin/retreats'
     | '/admin/roadmap'
@@ -425,6 +437,7 @@ export interface RootRouteChildren {
   AdminInquiriesRoute: typeof AdminInquiriesRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminMediaRoute: typeof AdminMediaRoute
+  AdminNatureRoute: typeof AdminNatureRoute
   AdminPagesRoute: typeof AdminPagesRoute
   AdminRetreatsRoute: typeof AdminRetreatsRoute
   AdminRoadmapRoute: typeof AdminRoadmapRoute
@@ -631,6 +644,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPagesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/nature': {
+      id: '/admin/nature'
+      path: '/admin/nature'
+      fullPath: '/admin/nature'
+      preLoaderRoute: typeof AdminNatureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/media': {
       id: '/admin/media'
       path: '/admin/media'
@@ -689,6 +709,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminInquiriesRoute: AdminInquiriesRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminMediaRoute: AdminMediaRoute,
+  AdminNatureRoute: AdminNatureRoute,
   AdminPagesRoute: AdminPagesRoute,
   AdminRetreatsRoute: AdminRetreatsRoute,
   AdminRoadmapRoute: AdminRoadmapRoute,
