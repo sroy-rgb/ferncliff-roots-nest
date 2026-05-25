@@ -59,8 +59,8 @@ function CampPage() {
                   const pct = Math.round((s.reg / s.cap) * 100);
                   const open = expanded === s.week;
                   return (
-                    <>
-                      <tr key={s.week} className="border-b border-[#F0F0F0] hover:bg-[#F8F8F8] cursor-pointer" onClick={() => setExpanded(open ? null : s.week)}>
+                    <FragmentWithKey key={s.week}>
+                      <tr className="border-b border-[#F0F0F0] hover:bg-[#F8F8F8] cursor-pointer" onClick={() => setExpanded(open ? null : s.week)}>
                         <td className="px-4 py-3 font-medium">{s.week}</td>
                         <td className="px-4 py-3">{s.dates}</td>
                         <td className="px-4 py-3 text-[12px] text-[#666]">{s.types}</td>
@@ -80,7 +80,7 @@ function CampPage() {
                           Breakdown — Day: {Math.round(s.reg * 0.5)} · Overnight: {Math.round(s.reg * 0.35)} · Discovery: {Math.round(s.reg * 0.15)}
                         </td></tr>
                       )}
-                    </>
+                    </FragmentWithKey>
                   );
                 })}
               </tbody>
