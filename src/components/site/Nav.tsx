@@ -24,36 +24,36 @@ const campMega: Mega = {
 const retreatsMega: Mega = {
   width: 520,
   items: [
-    { icon: <Bed size={22} />, title: "Lodging", desc: "Hotel rooms, retreat house, cabins", to: "/retreats" },
-    { icon: <PresentationChart size={22} />, title: "Meeting Spaces", desc: "Flexible rooms for groups up to 150", to: "/retreats" },
-    { icon: <ForkKnife size={22} />, title: "Meals & Dining", desc: "Fresh, family-style or buffet", to: "/retreats" },
-    { icon: <PaperPlaneTilt size={22} />, title: "Plan Your Retreat", desc: "Talk to our hospitality team", to: "/retreats" },
+    { icon: <Bed size={22} />, title: "Lodging", desc: "Hotel rooms, retreat house, cabins", to: "/retreats#brown-center" },
+    { icon: <PresentationChart size={22} />, title: "Meeting Spaces", desc: "Flexible rooms for groups up to 150", to: "/retreats#meeting-rooms" },
+    { icon: <ForkKnife size={22} />, title: "Meals & Dining", desc: "Fresh, family-style or buffet", to: "/retreats#meals" },
+    { icon: <PaperPlaneTilt size={22} />, title: "Plan Your Retreat", desc: "Talk to our hospitality team", to: "/retreats#inquire" },
   ],
   image: "https://images.pexels.com/photos/2526040/pexels-photo-2526040.jpeg?auto=compress&cs=tinysrgb&w=520",
 };
 const natureMega: Mega = {
   width: 380,
   items: [
-    { icon: <Tree size={22} />, title: "Nature Preschool", desc: "Forest kindergarten, ages 3–5", to: "/" },
-    { icon: <Compass size={22} />, title: "Wildcraft & Homeschool", desc: "Programs for older learners", to: "/" },
+    { icon: <Tree size={22} />, title: "Nature Preschool", desc: "Forest kindergarten, ages 3–5", to: "/nature-school#preschool" },
+    { icon: <Compass size={22} />, title: "Wildcraft & Homeschool", desc: "Programs for older learners", to: "/nature-school#wildcraft" },
   ],
 };
 const aboutMega: Mega = {
   width: 380,
   items: [
-    { icon: <Heart size={22} />, title: "Our Mission", desc: "Faith, nature, and community since 1937", to: "/" },
-    { icon: <Leaf size={22} />, title: "Sustainability", desc: "Arkansas's greenest non-profit", to: "/" },
-    { icon: <Users size={22} />, title: "Staff & Board", desc: "The people behind Ferncliff", to: "/" },
-    { icon: <MapPin size={22} />, title: "Contact & Directions", desc: "Visit us outside Little Rock", to: "/" },
+    { icon: <Heart size={22} />, title: "Our Mission", desc: "Faith, nature, and community since 1937", to: "/about#mission" },
+    { icon: <Leaf size={22} />, title: "Sustainability", desc: "Arkansas's greenest non-profit", to: "/about#sustainability" },
+    { icon: <Users size={22} />, title: "Staff & Board", desc: "The people behind Ferncliff", to: "/about#staff" },
+    { icon: <MapPin size={22} />, title: "Contact & Directions", desc: "Visit us outside Little Rock", to: "/about#directions" },
   ],
 };
 
 const navItems = [
   { label: "Camp", mega: campMega, to: "/camp" },
   { label: "Retreats & Conferences", mega: retreatsMega, to: "/retreats" },
-  { label: "Nature School", mega: natureMega, to: "/" },
-  { label: "Outreach", mega: null as Mega | null, to: "/" },
-  { label: "About", mega: aboutMega, to: "/" },
+  { label: "Nature School", mega: natureMega, to: "/nature-school" },
+  { label: "Outreach", mega: null as Mega | null, to: "/outreach" },
+  { label: "About", mega: aboutMega, to: "/about" },
 ];
 
 export function Nav() {
@@ -120,15 +120,10 @@ export function Nav() {
         </div>
 
         <div className="hidden md:flex items-center gap-3 shrink-0">
-          <a
-            href="https://ferncliff.campbrainregistration.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={scrolled ? "btn btn-sm btn-teal" : "btn btn-sm btn-glass"}
-          >
+          <Link to="/camp/register" className={scrolled ? "btn btn-sm btn-teal" : "btn btn-sm btn-glass"}>
             Register
-          </a>
-          <a href="#giving" className="btn btn-sm btn-coral">Give</a>
+          </Link>
+          <Link to="/giving" className="btn btn-sm btn-coral">Give</Link>
         </div>
       </div>
     </nav>

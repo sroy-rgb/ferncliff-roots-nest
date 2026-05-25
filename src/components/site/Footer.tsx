@@ -1,9 +1,11 @@
+import { Link } from "@tanstack/react-router";
+
 const LOGO = "https://resources.ferncliff.org/hs-fs/hubfs/FRN.01_Logo-Color-wo.png?width=353&height=200";
 
-const cols = [
-  { title: "Explore", links: [["Camp", "#camp"], ["Retreats & Conferences", "#retreats"], ["Nature School", "#"], ["Outreach", "#"], ["Store", "https://ferncliffstore.org"]] },
-  { title: "Support", links: [["Ways to Give", "#giving"], ["Friends of Ferncliff", "#"], ["Transform Campaign", "#"], ["Volunteer", "#"]] },
-  { title: "About", links: [["Our Mission", "#"], ["Staff & Board", "#"], ["Blog & Stories", "#"], ["Jobs", "#"], ["Contact", "#"]] },
+const cols: { title: string; links: [string, string][] }[] = [
+  { title: "Explore", links: [["Camp", "/camp"], ["Retreats & Conferences", "/retreats"], ["Nature School", "/nature-school"], ["Outreach", "/outreach"], ["Store", "https://www.ferncliffstore.org/"]] },
+  { title: "Support", links: [["Ways to Give", "/giving"], ["Friends of Ferncliff", "/giving#friends"], ["Transform Campaign", "/giving#campaign"], ["Volunteer", "/outreach#volunteer"]] },
+  { title: "About", links: [["Our Mission", "/about#mission"], ["Staff & Board", "/about#staff"], ["Blog & Stories", "/stories"], ["Jobs", "/about#jobs"], ["Contact", "/about#directions"]] },
 ];
 
 export function Footer() {
@@ -25,25 +27,30 @@ export function Footer() {
               <ul className="space-y-2.5">
                 {col.links.map(([label, href]) => {
                   const external = href.startsWith("http");
+                  const baseStyle = "block text-[14px] transition-all";
+                  const onEnter = (e: React.MouseEvent<HTMLElement>) => {
+                    e.currentTarget.style.color = "rgba(255,255,255,0.9)";
+                    e.currentTarget.style.paddingLeft = "4px";
+                  };
+                  const onLeave = (e: React.MouseEvent<HTMLElement>) => {
+                    e.currentTarget.style.color = "rgba(255,255,255,0.5)";
+                    e.currentTarget.style.paddingLeft = "0";
+                  };
                   return (
                     <li key={label}>
-                      <a
-                        href={href}
-                        target={external ? "_blank" : undefined}
-                        rel={external ? "noopener noreferrer" : undefined}
-                        className="block text-[14px] transition-all"
-                        style={{ color: "rgba(255,255,255,0.5)" }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.color = "rgba(255,255,255,0.9)";
-                          e.currentTarget.style.paddingLeft = "4px";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.color = "rgba(255,255,255,0.5)";
-                          e.currentTarget.style.paddingLeft = "0";
-                        }}
-                      >
-                        {label}
-                      </a>
+                      {external ? (
+                        <a href={href} target="_blank" rel="noopener noreferrer" className={baseStyle}
+                          style={{ color: "rgba(255,255,255,0.5)" }}
+                          onMouseEnter={onEnter} onMouseLeave={onLeave}>
+                          {label}
+                        </a>
+                      ) : (
+                        <Link to={href} className={baseStyle}
+                          style={{ color: "rgba(255,255,255,0.5)" }}
+                          onMouseEnter={onEnter} onMouseLeave={onLeave}>
+                          {label}
+                        </Link>
+                      )}
                     </li>
                   );
                 })}
