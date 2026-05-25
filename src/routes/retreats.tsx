@@ -7,11 +7,12 @@ import { MobileBottomBar } from "@/components/site/MobileBottomBar";
 import { RetreatsSubNav } from "@/components/site/RetreatsSubNav";
 import { CampHero } from "@/components/site/CampHero";
 import {
-  ArrowRight, Bed, ForkKnife, Wifi, Presentation, Users, House, Tree, Shower,
+  ArrowRight, Bed, ForkKnife, WifiHigh, Presentation, Users, House, Tree, Shower,
   CookingPot, Armchair, ChalkboardTeacher, ShieldCheck, Campfire, Target,
   Sun, CloudRain, Leaf, Clock, Coffee, Boat, Fish, Mountains, TreeStructure,
   PaintBrush, Plant, Compass, Bathtub, Thermometer, Television, Wheelchair,
 } from "@phosphor-icons/react";
+const Wifi = WifiHigh;
 
 export const Route = createFileRoute("/retreats")({
   head: () => ({
