@@ -11,7 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RetreatsRouteImport } from './routes/retreats'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StoriesIndexRouteImport } from './routes/stories/index'
 import { Route as CampIndexRouteImport } from './routes/camp/index'
+import { Route as StoriesRebeccaSpoonerRouteImport } from './routes/stories/rebecca-spooner'
+import { Route as StoriesEmeliaLeeRouteImport } from './routes/stories/emelia-lee'
+import { Route as StoriesAnyoneCanMakeADifferenceRouteImport } from './routes/stories/anyone-can-make-a-difference'
 import { Route as CampSpecialtyRouteImport } from './routes/camp/specialty'
 import { Route as CampRegisterRouteImport } from './routes/camp/register'
 import { Route as CampOvernightRouteImport } from './routes/camp/overnight'
@@ -32,11 +36,32 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StoriesIndexRoute = StoriesIndexRouteImport.update({
+  id: '/stories/',
+  path: '/stories/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CampIndexRoute = CampIndexRouteImport.update({
   id: '/camp/',
   path: '/camp/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StoriesRebeccaSpoonerRoute = StoriesRebeccaSpoonerRouteImport.update({
+  id: '/stories/rebecca-spooner',
+  path: '/stories/rebecca-spooner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoriesEmeliaLeeRoute = StoriesEmeliaLeeRouteImport.update({
+  id: '/stories/emelia-lee',
+  path: '/stories/emelia-lee',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoriesAnyoneCanMakeADifferenceRoute =
+  StoriesAnyoneCanMakeADifferenceRouteImport.update({
+    id: '/stories/anyone-can-make-a-difference',
+    path: '/stories/anyone-can-make-a-difference',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CampSpecialtyRoute = CampSpecialtyRouteImport.update({
   id: '/camp/specialty',
   path: '/camp/specialty',
@@ -95,7 +120,11 @@ export interface FileRoutesByFullPath {
   '/camp/overnight': typeof CampOvernightRoute
   '/camp/register': typeof CampRegisterRoute
   '/camp/specialty': typeof CampSpecialtyRoute
+  '/stories/anyone-can-make-a-difference': typeof StoriesAnyoneCanMakeADifferenceRoute
+  '/stories/emelia-lee': typeof StoriesEmeliaLeeRoute
+  '/stories/rebecca-spooner': typeof StoriesRebeccaSpoonerRoute
   '/camp/': typeof CampIndexRoute
+  '/stories/': typeof StoriesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -109,7 +138,11 @@ export interface FileRoutesByTo {
   '/camp/overnight': typeof CampOvernightRoute
   '/camp/register': typeof CampRegisterRoute
   '/camp/specialty': typeof CampSpecialtyRoute
+  '/stories/anyone-can-make-a-difference': typeof StoriesAnyoneCanMakeADifferenceRoute
+  '/stories/emelia-lee': typeof StoriesEmeliaLeeRoute
+  '/stories/rebecca-spooner': typeof StoriesRebeccaSpoonerRoute
   '/camp': typeof CampIndexRoute
+  '/stories': typeof StoriesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -124,7 +157,11 @@ export interface FileRoutesById {
   '/camp/overnight': typeof CampOvernightRoute
   '/camp/register': typeof CampRegisterRoute
   '/camp/specialty': typeof CampSpecialtyRoute
+  '/stories/anyone-can-make-a-difference': typeof StoriesAnyoneCanMakeADifferenceRoute
+  '/stories/emelia-lee': typeof StoriesEmeliaLeeRoute
+  '/stories/rebecca-spooner': typeof StoriesRebeccaSpoonerRoute
   '/camp/': typeof CampIndexRoute
+  '/stories/': typeof StoriesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -140,7 +177,11 @@ export interface FileRouteTypes {
     | '/camp/overnight'
     | '/camp/register'
     | '/camp/specialty'
+    | '/stories/anyone-can-make-a-difference'
+    | '/stories/emelia-lee'
+    | '/stories/rebecca-spooner'
     | '/camp/'
+    | '/stories/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -154,7 +195,11 @@ export interface FileRouteTypes {
     | '/camp/overnight'
     | '/camp/register'
     | '/camp/specialty'
+    | '/stories/anyone-can-make-a-difference'
+    | '/stories/emelia-lee'
+    | '/stories/rebecca-spooner'
     | '/camp'
+    | '/stories'
   id:
     | '__root__'
     | '/'
@@ -168,7 +213,11 @@ export interface FileRouteTypes {
     | '/camp/overnight'
     | '/camp/register'
     | '/camp/specialty'
+    | '/stories/anyone-can-make-a-difference'
+    | '/stories/emelia-lee'
+    | '/stories/rebecca-spooner'
     | '/camp/'
+    | '/stories/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -183,7 +232,11 @@ export interface RootRouteChildren {
   CampOvernightRoute: typeof CampOvernightRoute
   CampRegisterRoute: typeof CampRegisterRoute
   CampSpecialtyRoute: typeof CampSpecialtyRoute
+  StoriesAnyoneCanMakeADifferenceRoute: typeof StoriesAnyoneCanMakeADifferenceRoute
+  StoriesEmeliaLeeRoute: typeof StoriesEmeliaLeeRoute
+  StoriesRebeccaSpoonerRoute: typeof StoriesRebeccaSpoonerRoute
   CampIndexRoute: typeof CampIndexRoute
+  StoriesIndexRoute: typeof StoriesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -202,11 +255,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/stories/': {
+      id: '/stories/'
+      path: '/stories'
+      fullPath: '/stories/'
+      preLoaderRoute: typeof StoriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/camp/': {
       id: '/camp/'
       path: '/camp'
       fullPath: '/camp/'
       preLoaderRoute: typeof CampIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stories/rebecca-spooner': {
+      id: '/stories/rebecca-spooner'
+      path: '/stories/rebecca-spooner'
+      fullPath: '/stories/rebecca-spooner'
+      preLoaderRoute: typeof StoriesRebeccaSpoonerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stories/emelia-lee': {
+      id: '/stories/emelia-lee'
+      path: '/stories/emelia-lee'
+      fullPath: '/stories/emelia-lee'
+      preLoaderRoute: typeof StoriesEmeliaLeeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stories/anyone-can-make-a-difference': {
+      id: '/stories/anyone-can-make-a-difference'
+      path: '/stories/anyone-can-make-a-difference'
+      fullPath: '/stories/anyone-can-make-a-difference'
+      preLoaderRoute: typeof StoriesAnyoneCanMakeADifferenceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/camp/specialty': {
@@ -287,7 +368,11 @@ const rootRouteChildren: RootRouteChildren = {
   CampOvernightRoute: CampOvernightRoute,
   CampRegisterRoute: CampRegisterRoute,
   CampSpecialtyRoute: CampSpecialtyRoute,
+  StoriesAnyoneCanMakeADifferenceRoute: StoriesAnyoneCanMakeADifferenceRoute,
+  StoriesEmeliaLeeRoute: StoriesEmeliaLeeRoute,
+  StoriesRebeccaSpoonerRoute: StoriesRebeccaSpoonerRoute,
   CampIndexRoute: CampIndexRoute,
+  StoriesIndexRoute: StoriesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
