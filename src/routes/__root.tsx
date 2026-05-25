@@ -11,6 +11,8 @@ import {
 import appCss from "../styles.css?url";
 import { AdminAuthProvider } from "@/components/admin/adminStore";
 import { AdminToggle } from "@/components/admin/AdminToggle";
+import { ContentStoreProvider } from "@/components/admin/contentStore";
+import { AdminViewingBar } from "@/components/admin/AdminViewingBar";
 
 function NotFoundComponent() {
   return (
@@ -123,8 +125,11 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <AdminAuthProvider>
-        <AdminToggle />
-        <Outlet />
+        <ContentStoreProvider>
+          <AdminViewingBar />
+          <AdminToggle />
+          <Outlet />
+        </ContentStoreProvider>
       </AdminAuthProvider>
     </QueryClientProvider>
   );
