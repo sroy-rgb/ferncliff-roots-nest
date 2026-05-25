@@ -15,10 +15,11 @@ const links = [
 export function CampSubNav() {
   return (
     <div
-      className="fixed left-0 right-0 z-[999] bg-offwhite"
+      className="fixed left-0 right-0 z-[999]"
       style={{
         top: 72,
-        borderBottom: "1px solid rgba(0,0,0,0.06)",
+        background: "#FFFDF9",
+        borderBottom: "1px solid #E8E2D8",
       }}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 overflow-x-auto">
@@ -28,7 +29,8 @@ export function CampSubNav() {
               key={l.to}
               to={l.to}
               activeOptions={{ exact: true }}
-              className="px-3 py-2 text-[13px] font-semibold text-text-muted transition-colors relative"
+              className="px-3 py-2 text-[13px] font-semibold transition-colors relative"
+              style={{ color: "var(--color-dark-warm)" }}
               activeProps={{
                 style: {
                   color: "var(--color-teal)",
