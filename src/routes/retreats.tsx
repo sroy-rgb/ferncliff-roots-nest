@@ -576,8 +576,4 @@ function Field({ label, required, children }: { label: string; required?: boolea
     </label>
   );
 }
-      <Footer />
-      <MobileBottomBar />
-    </div>
-  );
-}
+
