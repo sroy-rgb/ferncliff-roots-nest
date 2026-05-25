@@ -194,3 +194,15 @@
   50% { opacity: 1; }
   100% { top: 100%; opacity: 0; }
 }
+
+@keyframes caretBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+.animate-caret-bounce {
+  animation: caretBounce 1.8s ease-in-out infinite;
+}
+.group:hover .animate-caret-bounce {
+  animation: none;
+}
+
