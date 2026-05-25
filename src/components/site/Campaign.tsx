@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "@phosphor-icons/react";
+import { useContentStore } from "@/components/admin/contentStore";
 
 export function Campaign() {
   const ref = useRef<HTMLDivElement>(null);
+  const { homepage } = useContentStore();
+  const targetPct = Math.round((homepage.campaignRaised / homepage.campaignGoal) * 100);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -12,7 +15,7 @@ export function Campaign() {
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            setProgress(80);
+            setProgress(targetPct);
             io.disconnect();
           }
         });
@@ -21,7 +24,13 @@ export function Campaign() {
     );
     io.observe(ref.current);
     return () => io.disconnect();
-  }, []);
+  }, [targetPct]);
+
+  // Re-animate if admin updates value
+  useEffect(() => { setProgress(targetPct); }, [targetPct]);
+
+  const raisedM = (homepage.campaignRaised / 1_000_000).toFixed(2);
+  const goalM = (homepage.campaignGoal / 1_000_000).toFixed(1);
 
   return (
     <section className="bg-white py-16">
@@ -46,8 +55,8 @@ export function Campaign() {
           </div>
           <div className="flex justify-between text-[12px] text-text-muted font-semibold">
             <span>$0</span>
-            <span className="text-teal font-bold">80% of $7.6M goal raised</span>
-            <span>$7.6M</span>
+            <span className="text-teal font-bold">${raisedM}M raised · {targetPct}% of ${goalM}M goal</span>
+            <span>${goalM}M</span>
           </div>
         </div>
         <div className="shrink-0 md:text-right text-center">

@@ -37,6 +37,8 @@ const sections: NavSection[] = [
   ]},
 ];
 
+const SERIF = "'Cormorant Garamond', Georgia, serif";
+
 function findCrumb(path: string): { section?: string; page: string } {
   for (const s of sections) {
     for (const i of s.items) {
@@ -57,17 +59,18 @@ export function AdminLayout({ children, title }: { children: ReactNode; title?: 
   const pageTitle = title ?? crumb.page;
 
   return (
-    <div className="min-h-screen bg-[#F8F8F8] font-sans text-[#1A1A1A]" style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}>
+    <div className="min-h-screen bg-[#FAF8F5] text-[#2c2926]" style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}>
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-[#1A1A1A] text-white flex flex-col transition-transform ${mobileOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
+        className={`fixed inset-y-0 left-0 z-40 w-[260px] bg-[#2c2926] text-white flex flex-col transition-transform ${mobileOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
       >
         <div className="flex items-center justify-between px-5 py-5 border-b border-white/10">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-md bg-[#2B7A6F] flex items-center justify-center text-white text-sm font-bold">F</div>
-            <div>
-              <div className="text-sm font-semibold">Ferncliff</div>
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-md bg-[#2B7A6F] flex items-center justify-center text-white text-base font-semibold" style={{ fontFamily: SERIF }}>F</div>
+            <div className="leading-tight">
+              <div className="text-[15px]" style={{ fontFamily: SERIF, fontWeight: 500 }}>Ferncliff</div>
               <div className="text-[10px] uppercase tracking-wider text-white/50">CMS</div>
+              <a href="https://xtsworld.com" target="_blank" rel="noopener noreferrer" className="text-[9px] text-white/35 hover:text-white/60 transition">Powered by XTS</a>
             </div>
           </div>
           <button className="md:hidden text-white/70" onClick={() => setMobileOpen(false)} aria-label="Close menu"><X size={20} /></button>
@@ -80,16 +83,20 @@ export function AdminLayout({ children, title }: { children: ReactNode; title?: 
               <ul className="space-y-0.5">
                 {s.items.map((i) => {
                   const active = i.exact ? path === i.to : path === i.to || path.startsWith(i.to + "/");
+                  const isRoadmap = i.to === "/admin/roadmap";
+                  const activeColor = isRoadmap ? "#A78BFA" : "#7DD3C4";
+                  const activeBorder = isRoadmap ? "#6C3AED" : "#2B7A6F";
                   return (
                     <li key={i.to}>
                       <Link
                         to={i.to}
                         onClick={() => setMobileOpen(false)}
-                        className={`group flex items-center gap-3 pl-3 pr-3 py-2 rounded-md text-[13px] border-l-[3px] transition-colors ${
+                        className="group flex items-center gap-3 pl-3 pr-3 py-2 rounded-md text-[13px] border-l-[3px] transition-colors"
+                        style={
                           active
-                            ? "border-[#2B7A6F] bg-[#2B7A6F]/15 text-[#7DD3C4]"
-                            : "border-transparent text-white/70 hover:bg-white/5 hover:text-white"
-                        }`}
+                            ? { borderLeftColor: activeBorder, background: `${activeBorder}26`, color: activeColor }
+                            : { borderLeftColor: "transparent", color: "rgba(255,255,255,0.7)" }
+                        }
                       >
                         <i.Icon size={18} weight="regular" />
                         <span>{i.label}</span>
@@ -124,18 +131,18 @@ export function AdminLayout({ children, title }: { children: ReactNode; title?: 
       {/* Main */}
       <div className="md:pl-[260px]">
         {/* Topbar */}
-        <header className="h-14 bg-white border-b border-[#E5E5E5] flex items-center px-4 md:px-6 gap-3 sticky top-0 z-20">
+        <header className="h-14 bg-[#FFFDF9] border-b border-[#E8E2D8] flex items-center px-4 md:px-6 gap-3 sticky top-0 z-20">
           <button className="md:hidden" onClick={() => setMobileOpen(true)} aria-label="Open menu"><List size={22} /></button>
           <div className="flex-1 min-w-0">
-            <div className="text-[11px] text-[#888]">
+            <div className="text-[11px] text-[#8a857c]">
               <Link to="/admin" className="hover:text-[#2B7A6F]">Dashboard</Link>
               {crumb.section && <> <span className="mx-1">›</span> <span>{crumb.section}</span></>}
-              <span className="mx-1">›</span> <span className="text-[#1A1A1A]">{pageTitle}</span>
+              <span className="mx-1">›</span> <span className="text-[#2c2926]">{pageTitle}</span>
             </div>
-            <div className="text-[15px] font-semibold leading-tight">{pageTitle}</div>
+            <div className="text-[15px] leading-tight" style={{ fontFamily: SERIF, fontWeight: 500 }}>{pageTitle}</div>
           </div>
           <a
-            href="/"
+            href="/?fromAdmin=1"
             className="hidden sm:inline-flex items-center gap-2 px-3 h-9 rounded-full border border-[#2B7A6F] text-[#2B7A6F] text-[12px] font-medium hover:bg-[#2B7A6F] hover:text-white transition"
           >
             <Globe size={14} /> View Site
@@ -153,7 +160,7 @@ export function AdminLayout({ children, title }: { children: ReactNode; title?: 
 
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`bg-white border border-[#E5E5E5] rounded-xl shadow-[0_1px_2px_rgba(0,0,0,0.03)] ${className}`}>
+    <div className={`bg-[#FFFDF9] border border-[#E8E2D8] rounded-xl shadow-[0_1px_2px_rgba(44,41,38,0.04)] ${className}`}>
       {children}
     </div>
   );
@@ -163,13 +170,13 @@ export function StatCard({ value, label, sub, accent = "teal", arrow }: { value:
   const color = accent === "teal" ? "#2B7A6F" : "#C49A3C";
   return (
     <Card className="p-5">
-      <div className="text-[11px] uppercase tracking-wider text-[#888]">{label}</div>
+      <div className="text-[11px] uppercase tracking-wider text-[#8a857c]">{label}</div>
       <div className="mt-2 flex items-baseline gap-2">
-        <div className="text-2xl font-semibold" style={{ color }}>{value}</div>
+        <div className="text-[34px] leading-none" style={{ color, fontFamily: SERIF, fontWeight: 500 }}>{value}</div>
       </div>
       {sub && (
-        <div className="mt-2 text-[12px] text-[#666] flex items-center gap-1">
-          {arrow && <span className={arrow === "up" ? "text-green-600" : "text-red-600"}>{arrow === "up" ? "↑" : "↓"}</span>}
+        <div className="mt-2 text-[12px] text-[#6b665d] flex items-center gap-1">
+          {arrow && <span className={arrow === "up" ? "text-[#2B7A6F]" : "text-[#DC2626]"}>{arrow === "up" ? "↑" : "↓"}</span>}
           {sub}
         </div>
       )}
@@ -179,10 +186,10 @@ export function StatCard({ value, label, sub, accent = "teal", arrow }: { value:
 
 export function Pill({ children, color = "grey" }: { children: ReactNode; color?: "green" | "yellow" | "grey" | "red" | "teal" | "gold" | "purple" }) {
   const map: Record<string, string> = {
-    green: "bg-green-100 text-green-800",
-    yellow: "bg-yellow-100 text-yellow-800",
-    grey: "bg-gray-100 text-gray-700",
-    red: "bg-red-100 text-red-700",
+    green: "bg-[#2B7A6F]/12 text-[#236158]",
+    yellow: "bg-[#C49A3C]/15 text-[#8a6a26]",
+    grey: "bg-[#E8E2D8] text-[#6b665d]",
+    red: "bg-[#DC2626]/10 text-[#DC2626]",
     teal: "bg-[#2B7A6F]/10 text-[#2B7A6F]",
     gold: "bg-[#C49A3C]/15 text-[#8a6a26]",
     purple: "bg-[#6C3AED]/10 text-[#6C3AED]",
@@ -193,16 +200,22 @@ export function Pill({ children, color = "grey" }: { children: ReactNode; color?
 export function PageHeader({ title, action }: { title: string; action?: ReactNode }) {
   return (
     <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
-      <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
+      <h1 className="text-[32px] tracking-tight text-[#2c2926]" style={{ fontFamily: SERIF, fontWeight: 500 }}>{title}</h1>
       {action}
     </div>
+  );
+}
+
+export function SectionHeading({ children, className = "" }: { children: ReactNode; className?: string }) {
+  return (
+    <h2 className={`text-[20px] text-[#2c2926] ${className}`} style={{ fontFamily: SERIF, fontWeight: 500 }}>{children}</h2>
   );
 }
 
 export function Button({ children, variant = "primary", onClick, className = "", as = "button", href, type = "button" }: { children: ReactNode; variant?: "primary" | "outline" | "purple"; onClick?: () => void; className?: string; as?: "button" | "a"; href?: string; type?: "button" | "submit" }) {
   const styles = {
     primary: "bg-[#2B7A6F] text-white hover:bg-[#236158]",
-    outline: "border border-[#2B7A6F] text-[#2B7A6F] hover:bg-[#2B7A6F]/5",
+    outline: "border border-[#C49A3C] text-[#8a6a26] hover:bg-[#C49A3C]/10",
     purple: "border border-[#6C3AED] text-[#6C3AED] hover:bg-[#6C3AED]/5",
   }[variant];
   const cls = `inline-flex items-center gap-2 px-4 h-9 rounded-md text-[13px] font-medium transition ${styles} ${className}`;
@@ -223,7 +236,7 @@ export function Table({ headers, rows }: { headers: string[]; rows: ReactNode[][
     <div className="overflow-x-auto">
       <table className="w-full text-[13px]">
         <thead>
-          <tr className="text-left text-[#888] border-b border-[#E5E5E5]">
+          <tr className="text-left text-[#8a857c] border-b border-[#E8E2D8]">
             {headers.map((h, i) => (
               <th
                 key={h}
@@ -237,7 +250,7 @@ export function Table({ headers, rows }: { headers: string[]; rows: ReactNode[][
         </thead>
         <tbody>
           {sorted.map((r, i) => (
-            <tr key={i} className="border-b border-[#F0F0F0] hover:bg-[#F8F8F8] transition-colors">
+            <tr key={i} className="border-b border-[#F0EBE3] hover:bg-[#FAF6EE] transition-colors">
               {r.map((c, j) => <td key={j} className="px-4 py-3 align-middle">{c}</td>)}
             </tr>
           ))}
