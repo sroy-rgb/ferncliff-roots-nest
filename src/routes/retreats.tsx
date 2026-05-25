@@ -132,7 +132,7 @@ function RetreatsPage() {
             height="60vh"
           >
             <div className="flex flex-wrap gap-4 mt-2">
-              <a href="mailto:retreats@ferncliff.org" className="btn btn-teal">Inquire Now</a>
+              <a href="#inquire" className="btn btn-teal">Inquire Now</a>
               <a href="#brown-center" className="btn btn-outline">View Facilities</a>
             </div>
           </CampHero>
@@ -215,7 +215,7 @@ function RetreatsPage() {
               <div className="mt-16 text-center reveal">
                 <h3 style={{ fontSize: "clamp(24px, 3vw, 32px)" }}>Ready to plan your retreat?</h3>
                 <div className="flex flex-wrap gap-4 justify-center mt-6">
-                  <a href="mailto:retreats@ferncliff.org" className="btn btn-teal">Inquire Now</a>
+                  <a href="#inquire" className="btn btn-teal">Inquire Now</a>
                 </div>
                 <p className="text-text-muted text-[14px] mt-6">
                   <a href="tel:5018213063" className="text-gold font-semibold">(501) 821-3063</a> · <a href="mailto:retreats@ferncliff.org" className="text-gold font-semibold">retreats@ferncliff.org</a>
@@ -254,7 +254,7 @@ function RetreatsPage() {
                   <li>Two double beds (most rooms)</li>
                 </ul>
               </div>
-              <a href="mailto:retreats@ferncliff.org" className="btn btn-teal">Inquire About Brown Center</a>
+              <a href="#inquire" className="btn btn-teal">Inquire About Brown Center</a>
             </div>
           </div>
         </section>
@@ -387,7 +387,7 @@ function RetreatsPage() {
                 <p className="font-serif italic text-dark-warm" style={{ fontSize: "20px", lineHeight: 1.5 }}>"Our youth group has been coming to Ferncliff for years. The staff makes it so easy — we just show up and focus on our kids."</p>
                 <cite className="block mt-2 not-italic font-sans text-[12px] text-text-muted font-semibold">— Youth Pastor, Conway</cite>
               </blockquote>
-              <a href="mailto:retreats@ferncliff.org" className="btn btn-teal">Inquire Now</a>
+              <a href="#inquire" className="btn btn-teal">Inquire Now</a>
             </div>
           </div>
         </section>
