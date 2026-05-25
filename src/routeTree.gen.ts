@@ -10,33 +10,167 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CampIndexRouteImport } from './routes/camp/index'
+import { Route as CampSpecialtyRouteImport } from './routes/camp/specialty'
+import { Route as CampRegisterRouteImport } from './routes/camp/register'
+import { Route as CampOvernightRouteImport } from './routes/camp/overnight'
+import { Route as CampGalleryRouteImport } from './routes/camp/gallery'
+import { Route as CampFirstTimeRouteImport } from './routes/camp/first-time'
+import { Route as CampFamilyRouteImport } from './routes/camp/family'
+import { Route as CampDiscoveryRouteImport } from './routes/camp/discovery'
+import { Route as CampDayRouteImport } from './routes/camp/day'
+import { Route as CampDatesRouteImport } from './routes/camp/dates'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CampIndexRoute = CampIndexRouteImport.update({
+  id: '/camp/',
+  path: '/camp/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampSpecialtyRoute = CampSpecialtyRouteImport.update({
+  id: '/camp/specialty',
+  path: '/camp/specialty',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampRegisterRoute = CampRegisterRouteImport.update({
+  id: '/camp/register',
+  path: '/camp/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampOvernightRoute = CampOvernightRouteImport.update({
+  id: '/camp/overnight',
+  path: '/camp/overnight',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampGalleryRoute = CampGalleryRouteImport.update({
+  id: '/camp/gallery',
+  path: '/camp/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampFirstTimeRoute = CampFirstTimeRouteImport.update({
+  id: '/camp/first-time',
+  path: '/camp/first-time',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampFamilyRoute = CampFamilyRouteImport.update({
+  id: '/camp/family',
+  path: '/camp/family',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampDiscoveryRoute = CampDiscoveryRouteImport.update({
+  id: '/camp/discovery',
+  path: '/camp/discovery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampDayRoute = CampDayRouteImport.update({
+  id: '/camp/day',
+  path: '/camp/day',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampDatesRoute = CampDatesRouteImport.update({
+  id: '/camp/dates',
+  path: '/camp/dates',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/camp/dates': typeof CampDatesRoute
+  '/camp/day': typeof CampDayRoute
+  '/camp/discovery': typeof CampDiscoveryRoute
+  '/camp/family': typeof CampFamilyRoute
+  '/camp/first-time': typeof CampFirstTimeRoute
+  '/camp/gallery': typeof CampGalleryRoute
+  '/camp/overnight': typeof CampOvernightRoute
+  '/camp/register': typeof CampRegisterRoute
+  '/camp/specialty': typeof CampSpecialtyRoute
+  '/camp/': typeof CampIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/camp/dates': typeof CampDatesRoute
+  '/camp/day': typeof CampDayRoute
+  '/camp/discovery': typeof CampDiscoveryRoute
+  '/camp/family': typeof CampFamilyRoute
+  '/camp/first-time': typeof CampFirstTimeRoute
+  '/camp/gallery': typeof CampGalleryRoute
+  '/camp/overnight': typeof CampOvernightRoute
+  '/camp/register': typeof CampRegisterRoute
+  '/camp/specialty': typeof CampSpecialtyRoute
+  '/camp': typeof CampIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/camp/dates': typeof CampDatesRoute
+  '/camp/day': typeof CampDayRoute
+  '/camp/discovery': typeof CampDiscoveryRoute
+  '/camp/family': typeof CampFamilyRoute
+  '/camp/first-time': typeof CampFirstTimeRoute
+  '/camp/gallery': typeof CampGalleryRoute
+  '/camp/overnight': typeof CampOvernightRoute
+  '/camp/register': typeof CampRegisterRoute
+  '/camp/specialty': typeof CampSpecialtyRoute
+  '/camp/': typeof CampIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/camp/dates'
+    | '/camp/day'
+    | '/camp/discovery'
+    | '/camp/family'
+    | '/camp/first-time'
+    | '/camp/gallery'
+    | '/camp/overnight'
+    | '/camp/register'
+    | '/camp/specialty'
+    | '/camp/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/camp/dates'
+    | '/camp/day'
+    | '/camp/discovery'
+    | '/camp/family'
+    | '/camp/first-time'
+    | '/camp/gallery'
+    | '/camp/overnight'
+    | '/camp/register'
+    | '/camp/specialty'
+    | '/camp'
+  id:
+    | '__root__'
+    | '/'
+    | '/camp/dates'
+    | '/camp/day'
+    | '/camp/discovery'
+    | '/camp/family'
+    | '/camp/first-time'
+    | '/camp/gallery'
+    | '/camp/overnight'
+    | '/camp/register'
+    | '/camp/specialty'
+    | '/camp/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CampDatesRoute: typeof CampDatesRoute
+  CampDayRoute: typeof CampDayRoute
+  CampDiscoveryRoute: typeof CampDiscoveryRoute
+  CampFamilyRoute: typeof CampFamilyRoute
+  CampFirstTimeRoute: typeof CampFirstTimeRoute
+  CampGalleryRoute: typeof CampGalleryRoute
+  CampOvernightRoute: typeof CampOvernightRoute
+  CampRegisterRoute: typeof CampRegisterRoute
+  CampSpecialtyRoute: typeof CampSpecialtyRoute
+  CampIndexRoute: typeof CampIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +182,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/camp/': {
+      id: '/camp/'
+      path: '/camp'
+      fullPath: '/camp/'
+      preLoaderRoute: typeof CampIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/camp/specialty': {
+      id: '/camp/specialty'
+      path: '/camp/specialty'
+      fullPath: '/camp/specialty'
+      preLoaderRoute: typeof CampSpecialtyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/camp/register': {
+      id: '/camp/register'
+      path: '/camp/register'
+      fullPath: '/camp/register'
+      preLoaderRoute: typeof CampRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/camp/overnight': {
+      id: '/camp/overnight'
+      path: '/camp/overnight'
+      fullPath: '/camp/overnight'
+      preLoaderRoute: typeof CampOvernightRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/camp/gallery': {
+      id: '/camp/gallery'
+      path: '/camp/gallery'
+      fullPath: '/camp/gallery'
+      preLoaderRoute: typeof CampGalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/camp/first-time': {
+      id: '/camp/first-time'
+      path: '/camp/first-time'
+      fullPath: '/camp/first-time'
+      preLoaderRoute: typeof CampFirstTimeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/camp/family': {
+      id: '/camp/family'
+      path: '/camp/family'
+      fullPath: '/camp/family'
+      preLoaderRoute: typeof CampFamilyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/camp/discovery': {
+      id: '/camp/discovery'
+      path: '/camp/discovery'
+      fullPath: '/camp/discovery'
+      preLoaderRoute: typeof CampDiscoveryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/camp/day': {
+      id: '/camp/day'
+      path: '/camp/day'
+      fullPath: '/camp/day'
+      preLoaderRoute: typeof CampDayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/camp/dates': {
+      id: '/camp/dates'
+      path: '/camp/dates'
+      fullPath: '/camp/dates'
+      preLoaderRoute: typeof CampDatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CampDatesRoute: CampDatesRoute,
+  CampDayRoute: CampDayRoute,
+  CampDiscoveryRoute: CampDiscoveryRoute,
+  CampFamilyRoute: CampFamilyRoute,
+  CampFirstTimeRoute: CampFirstTimeRoute,
+  CampGalleryRoute: CampGalleryRoute,
+  CampOvernightRoute: CampOvernightRoute,
+  CampRegisterRoute: CampRegisterRoute,
+  CampSpecialtyRoute: CampSpecialtyRoute,
+  CampIndexRoute: CampIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
