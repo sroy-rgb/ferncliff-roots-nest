@@ -30,6 +30,7 @@ import { Route as CampFamilyRouteImport } from './routes/camp/family'
 import { Route as CampDiscoveryRouteImport } from './routes/camp/discovery'
 import { Route as CampDayRouteImport } from './routes/camp/day'
 import { Route as CampDatesRouteImport } from './routes/camp/dates'
+import { Route as AdminSeoRouteImport } from './routes/admin/seo'
 import { Route as AdminPagesRouteImport } from './routes/admin/pages'
 import { Route as AdminMediaRouteImport } from './routes/admin/media'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
@@ -144,6 +145,11 @@ const CampDatesRoute = CampDatesRouteImport.update({
   path: '/camp/dates',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminSeoRoute = AdminSeoRouteImport.update({
+  id: '/admin/seo',
+  path: '/admin/seo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminPagesRoute = AdminPagesRouteImport.update({
   id: '/admin/pages',
   path: '/admin/pages',
@@ -194,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/pages': typeof AdminPagesRoute
+  '/admin/seo': typeof AdminSeoRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
   '/camp/discovery': typeof CampDiscoveryRoute
@@ -224,6 +231,7 @@ export interface FileRoutesByTo {
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/pages': typeof AdminPagesRoute
+  '/admin/seo': typeof AdminSeoRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
   '/camp/discovery': typeof CampDiscoveryRoute
@@ -255,6 +263,7 @@ export interface FileRoutesById {
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/pages': typeof AdminPagesRoute
+  '/admin/seo': typeof AdminSeoRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
   '/camp/discovery': typeof CampDiscoveryRoute
@@ -287,6 +296,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/admin/media'
     | '/admin/pages'
+    | '/admin/seo'
     | '/camp/dates'
     | '/camp/day'
     | '/camp/discovery'
@@ -317,6 +327,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/admin/media'
     | '/admin/pages'
+    | '/admin/seo'
     | '/camp/dates'
     | '/camp/day'
     | '/camp/discovery'
@@ -347,6 +358,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/admin/media'
     | '/admin/pages'
+    | '/admin/seo'
     | '/camp/dates'
     | '/camp/day'
     | '/camp/discovery'
@@ -378,6 +390,7 @@ export interface RootRouteChildren {
   AdminLoginRoute: typeof AdminLoginRoute
   AdminMediaRoute: typeof AdminMediaRoute
   AdminPagesRoute: typeof AdminPagesRoute
+  AdminSeoRoute: typeof AdminSeoRoute
   CampDatesRoute: typeof CampDatesRoute
   CampDayRoute: typeof CampDayRoute
   CampDiscoveryRoute: typeof CampDiscoveryRoute
@@ -544,6 +557,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CampDatesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/seo': {
+      id: '/admin/seo'
+      path: '/admin/seo'
+      fullPath: '/admin/seo'
+      preLoaderRoute: typeof AdminSeoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/pages': {
       id: '/admin/pages'
       path: '/admin/pages'
@@ -610,6 +630,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminLoginRoute: AdminLoginRoute,
   AdminMediaRoute: AdminMediaRoute,
   AdminPagesRoute: AdminPagesRoute,
+  AdminSeoRoute: AdminSeoRoute,
   CampDatesRoute: CampDatesRoute,
   CampDayRoute: CampDayRoute,
   CampDiscoveryRoute: CampDiscoveryRoute,
