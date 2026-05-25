@@ -27,11 +27,11 @@ export const Route = createFileRoute("/retreats")({
 });
 
 const lodgingCards = [
-  { href: "#brown-center", img: "https://ferncliff.org/wp-content/uploads/2024/02/Brown-Center-2-scaled.jpg", title: "Brown Center", badge: "36 Rooms · Up to 150", desc: "Hotel-style rooms with private baths, climate control, and conference space." },
-  { href: "#belden", img: "https://ferncliff.org/wp-content/uploads/2024/02/Belden-Cabins-scaled.jpg", title: "Belden Cabins", badge: "12 Cabins · 12-16 each", desc: "Rustic cabins in a wooded setting, perfect for youth and camp-style groups." },
-  { href: "#retreat-house", img: "https://ferncliff.org/wp-content/uploads/2024/02/retreat-house-exterior-scaled.jpg", title: "Retreat House", badge: "5 Bedrooms · Up to 25", desc: "A self-contained home with full kitchen for small group retreats." },
-  { href: "#yurts", img: "https://ferncliff.org/wp-content/uploads/2024/02/yurts-scaled.jpg", title: "Yurts", badge: "Glamping", desc: "Unique glamping-style lodging between cabins and tent camping." },
-  { href: "#meeting-rooms", img: "https://ferncliff.org/wp-content/uploads/2024/02/evergreen-hall-scaled.jpg", title: "Williams Lodge", badge: "Meeting Space", desc: "Additional gathering space across our campus for retreats of any size." },
+  { href: "#brown-center", img: "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1200", title: "Brown Center", badge: "36 Rooms · Up to 150", desc: "Hotel-style rooms with private baths, climate control, and conference space." },
+  { href: "#belden", img: "https://images.pexels.com/photos/803975/pexels-photo-803975.jpeg?auto=compress&cs=tinysrgb&w=1200", title: "Belden Cabins", badge: "12 Cabins · 12-16 each", desc: "Rustic cabins in a wooded setting, perfect for youth and camp-style groups." },
+  { href: "#retreat-house", img: "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1200", title: "Retreat House", badge: "5 Bedrooms · Up to 25", desc: "A self-contained home with full kitchen for small group retreats." },
+  { href: "#yurts", img: "https://images.pexels.com/photos/2156881/pexels-photo-2156881.jpeg?auto=compress&cs=tinysrgb&w=1200", title: "Yurts", badge: "Glamping", desc: "Unique glamping-style lodging between cabins and tent camping." },
+  { href: "#meeting-rooms", img: "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=1200", title: "Williams Lodge", badge: "Meeting Space", desc: "Additional gathering space across our campus for retreats of any size." },
 ];
 
 function FeatureBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
@@ -44,10 +44,10 @@ function FeatureBadge({ icon, label }: { icon: React.ReactNode; label: string })
 
 function BrownCenterGallery() {
   const images = [
-    "https://ferncliff.org/wp-content/uploads/2024/02/Brown-Center-2-scaled.jpg",
-    "https://ferncliff.org/wp-content/uploads/2024/02/brown-center-room-scaled.jpg",
-    "https://ferncliff.org/wp-content/uploads/2024/02/BC-bathroom-scaled.jpg",
-    "https://ferncliff.org/wp-content/uploads/2024/02/brown-center-hallway-scaled.jpg",
+    "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/342800/pexels-photo-342800.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg?auto=compress&cs=tinysrgb&w=1200",
   ];
   const [active, setActive] = useState(0);
   return (
@@ -73,8 +73,8 @@ function BrownCenterGallery() {
 function BeldenGallery() {
   const [active, setActive] = useState(0);
   const images = [
-    "https://ferncliff.org/wp-content/uploads/2024/02/Belden-Cabins-scaled.jpg",
-    "https://ferncliff.org/wp-content/uploads/2024/02/Belden-Interior-scaled.jpg",
+    "https://images.pexels.com/photos/803975/pexels-photo-803975.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/2079249/pexels-photo-2079249.jpeg?auto=compress&cs=tinysrgb&w=1200",
   ];
   return (
     <div>
@@ -95,8 +95,8 @@ function BeldenGallery() {
 function RetreatHouseGallery() {
   const [active, setActive] = useState(0);
   const images = [
-    "https://ferncliff.org/wp-content/uploads/2024/02/retreat-house-exterior-scaled.jpg",
-    "https://ferncliff.org/wp-content/uploads/2024/02/retreat-house-interior-scaled.jpg",
+    "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200",
   ];
   return (
     <div>
@@ -314,7 +314,7 @@ function RetreatsPage() {
         <section id="yurts" className="py-[80px] md:py-[120px] bg-cream" style={{ scrollMarginTop: 130 }}>
           <div className="max-w-[900px] mx-auto px-8 text-center">
             <div className="rounded-[24px] overflow-hidden mb-8 reveal" style={{ boxShadow: "0 16px 48px rgba(44,41,38,0.15)" }}>
-              <img src="https://ferncliff.org/wp-content/uploads/2024/02/yurts-scaled.jpg" alt="Yurts" className="w-full object-cover" style={{ maxHeight: 400 }} />
+              <img src="https://images.pexels.com/photos/2156881/pexels-photo-2156881.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Yurts" className="w-full object-cover" style={{ maxHeight: 400 }} />
             </div>
             <div className="reveal">
               <div className="eyebrow text-teal mb-4">Glamping</div>
@@ -335,9 +335,9 @@ function RetreatsPage() {
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {[
-                { img: "https://ferncliff.org/wp-content/uploads/2024/02/glenn-meeting-room-scaled.jpg", title: "Glenn Meeting Room", desc: "Our largest meeting space, seating up to 150 theater-style or 100 classroom-style. Full AV setup, staging area, and breakout rooms nearby." },
-                { img: "https://ferncliff.org/wp-content/uploads/2024/02/evergreen-hall-scaled.jpg", title: "Evergreen Hall", desc: "A flexible mid-size meeting space for groups of 40–80. Natural light, configurable seating, and direct access to outdoor spaces." },
-                { img: "https://ferncliff.org/wp-content/uploads/2024/02/BC-meeting-room-scaled.jpg", title: "Brown Center Meeting Room", desc: "Intimate meeting room within the Brown Center, perfect for groups of 20–40. Adjacent to the Brown Center Lounge for informal breakouts." },
+                { img: "https://images.pexels.com/photos/159806/pexels-photo-159806.jpeg?auto=compress&cs=tinysrgb&w=1200", title: "Glenn Meeting Room", desc: "Our largest meeting space, seating up to 150 theater-style or 100 classroom-style. Full AV setup, staging area, and breakout rooms nearby." },
+                { img: "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=1200", title: "Evergreen Hall", desc: "A flexible mid-size meeting space for groups of 40–80. Natural light, configurable seating, and direct access to outdoor spaces." },
+                { img: "https://images.pexels.com/photos/1181434/pexels-photo-1181434.jpeg?auto=compress&cs=tinysrgb&w=1200", title: "Brown Center Meeting Room", desc: "Intimate meeting room within the Brown Center, perfect for groups of 20–40. Adjacent to the Brown Center Lounge for informal breakouts." },
               ].map((c) => (
                 <div key={c.title} className="reveal bg-white rounded-[20px] overflow-hidden" style={{ boxShadow: "0 8px 24px rgba(44,41,38,0.06)" }}>
                   <div className="h-[200px] overflow-hidden"><img src={c.img} alt={c.title} className="w-full h-full object-cover" /></div>
@@ -436,7 +436,7 @@ function RetreatsPage() {
               </div>
             </div>
             <div className="reveal-right order-1 md:order-2 rounded-[20px] overflow-hidden" style={{ boxShadow: "0 16px 48px rgba(44,41,38,0.15)" }}>
-              <img src="https://ferncliff.org/wp-content/uploads/2024/02/dining-hall-scaled.jpg" alt="Dining hall" className="w-full h-[480px] object-cover" />
+              <img src="https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Dining hall" className="w-full h-[480px] object-cover" />
             </div>
           </div>
         </section>
@@ -445,7 +445,7 @@ function RetreatsPage() {
         <section id="swimming" className="py-[80px] md:py-[120px] bg-cream" style={{ scrollMarginTop: 130 }}>
           <div className="max-w-[1200px] mx-auto px-8 grid md:grid-cols-2 gap-14 items-center">
             <div className="reveal-left rounded-[20px] overflow-hidden" style={{ boxShadow: "0 16px 48px rgba(44,41,38,0.15)" }}>
-              <img src="https://ferncliff.org/wp-content/uploads/2024/02/pool-scaled.jpg" alt="Pool" className="w-full h-[480px] object-cover" />
+              <img src="https://images.pexels.com/photos/261101/pexels-photo-261101.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Pool" className="w-full h-[480px] object-cover" />
             </div>
             <div className="reveal-right">
               <div className="eyebrow text-teal mb-4">Aquatics</div>
