@@ -23,10 +23,10 @@ const campMega: Mega = {
 const retreatsMega: Mega = {
   width: 520,
   items: [
-    { icon: <Bed size={22} />, title: "Lodging", desc: "Hotel rooms, retreat house, cabins", to: "/" },
-    { icon: <PresentationChart size={22} />, title: "Meeting Spaces", desc: "Flexible rooms for groups up to 150", to: "/" },
-    { icon: <ForkKnife size={22} />, title: "Meals & Dining", desc: "Fresh, family-style or buffet", to: "/" },
-    { icon: <PaperPlaneTilt size={22} />, title: "Plan Your Retreat", desc: "Talk to our hospitality team", to: "/" },
+    { icon: <Bed size={22} />, title: "Lodging", desc: "Hotel rooms, retreat house, cabins", to: "/retreats" },
+    { icon: <PresentationChart size={22} />, title: "Meeting Spaces", desc: "Flexible rooms for groups up to 150", to: "/retreats" },
+    { icon: <ForkKnife size={22} />, title: "Meals & Dining", desc: "Fresh, family-style or buffet", to: "/retreats" },
+    { icon: <PaperPlaneTilt size={22} />, title: "Plan Your Retreat", desc: "Talk to our hospitality team", to: "/retreats" },
   ],
   image: "https://images.pexels.com/photos/2526040/pexels-photo-2526040.jpeg?auto=compress&cs=tinysrgb&w=520",
 };
@@ -49,7 +49,7 @@ const aboutMega: Mega = {
 
 const navItems = [
   { label: "Camp", mega: campMega, to: "/camp" },
-  { label: "Retreats & Conferences", mega: retreatsMega, to: "/" },
+  { label: "Retreats & Conferences", mega: retreatsMega, to: "/retreats" },
   { label: "Nature School", mega: natureMega, to: "/" },
   { label: "Outreach", mega: null as Mega | null, to: "/" },
   { label: "About", mega: aboutMega, to: "/" },
