@@ -63,6 +63,7 @@ const paths: Path[] = [
 ];
 
 export function Hero() {
+  const { homepage } = useContentStore();
   return (
     <section className="relative min-h-screen flex items-end overflow-hidden pb-[200px] md:pb-[160px]">
       {/* Video bg */}
@@ -94,16 +95,13 @@ export function Hero() {
           className="text-white font-light leading-[1.08] mb-8"
           style={{ fontSize: "clamp(42px, 5.5vw, 68px)" }}
         >
-          Where faith, nature &{" "}
-          <em className="italic font-normal text-gold not-italic" style={{ fontStyle: "italic" }}>community</em>
-          <br />
-          come together
+          {homepage.heroTagline}
         </h1>
         <p
           className="font-light max-w-[460px] mb-10"
           style={{ color: "rgba(255,255,255,0.65)", fontSize: "17px" }}
         >
-          A place apart — for summer camp, retreats, nature education, and outreach — just outside Little Rock, Arkansas.
+          {homepage.heroSubtext} — just outside Little Rock, Arkansas.
         </p>
         <div className="flex flex-wrap gap-4">
           <Link to="/camp" className="btn btn-teal">Explore Camp</Link>
