@@ -139,9 +139,9 @@ function MegaMenu({ mega }: { mega: Mega }) {
       >
         <div className={`grid gap-2 ${mega.items.length > 2 && mega.width >= 520 ? "grid-cols-2" : "grid-cols-1"}`}>
           {mega.items.map((it) => (
-            <a
+            <Link
               key={it.title}
-              href="#"
+              to={it.to}
               className="flex items-start gap-3 p-3 rounded-[12px] hover:bg-[var(--color-teal-ghost)] transition-colors"
             >
               <span className="text-teal mt-0.5 shrink-0">{it.icon}</span>
@@ -149,7 +149,7 @@ function MegaMenu({ mega }: { mega: Mega }) {
                 <span className="block font-sans text-[14px] font-bold text-dark">{it.title}</span>
                 <span className="block text-[12px] text-text-muted leading-snug mt-0.5">{it.desc}</span>
               </span>
-            </a>
+            </Link>
           ))}
         </div>
         {mega.image && (
