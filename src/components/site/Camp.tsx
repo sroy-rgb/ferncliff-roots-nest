@@ -1,4 +1,5 @@
 import { Sun, Users, ShieldCheck, Tree, Backpack, ArrowRight } from "@phosphor-icons/react";
+import { Link } from "@tanstack/react-router";
 
 export function Camp() {
   return (
