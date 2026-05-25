@@ -30,6 +30,7 @@ import { Route as CampFamilyRouteImport } from './routes/camp/family'
 import { Route as CampDiscoveryRouteImport } from './routes/camp/discovery'
 import { Route as CampDayRouteImport } from './routes/camp/day'
 import { Route as CampDatesRouteImport } from './routes/camp/dates'
+import { Route as AdminSubscribersRouteImport } from './routes/admin/subscribers'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminSeoRouteImport } from './routes/admin/seo'
 import { Route as AdminRoadmapRouteImport } from './routes/admin/roadmap'
@@ -150,6 +151,11 @@ const CampDatesRoute = CampDatesRouteImport.update({
   path: '/camp/dates',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminSubscribersRoute = AdminSubscribersRouteImport.update({
+  id: '/admin/subscribers',
+  path: '/admin/subscribers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
   id: '/admin/settings',
   path: '/admin/settings',
@@ -236,6 +242,7 @@ export interface FileRoutesByFullPath {
   '/admin/roadmap': typeof AdminRoadmapRoute
   '/admin/seo': typeof AdminSeoRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/subscribers': typeof AdminSubscribersRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
   '/camp/discovery': typeof CampDiscoveryRoute
@@ -272,6 +279,7 @@ export interface FileRoutesByTo {
   '/admin/roadmap': typeof AdminRoadmapRoute
   '/admin/seo': typeof AdminSeoRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/subscribers': typeof AdminSubscribersRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
   '/camp/discovery': typeof CampDiscoveryRoute
@@ -309,6 +317,7 @@ export interface FileRoutesById {
   '/admin/roadmap': typeof AdminRoadmapRoute
   '/admin/seo': typeof AdminSeoRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/subscribers': typeof AdminSubscribersRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
   '/camp/discovery': typeof CampDiscoveryRoute
@@ -347,6 +356,7 @@ export interface FileRouteTypes {
     | '/admin/roadmap'
     | '/admin/seo'
     | '/admin/settings'
+    | '/admin/subscribers'
     | '/camp/dates'
     | '/camp/day'
     | '/camp/discovery'
@@ -383,6 +393,7 @@ export interface FileRouteTypes {
     | '/admin/roadmap'
     | '/admin/seo'
     | '/admin/settings'
+    | '/admin/subscribers'
     | '/camp/dates'
     | '/camp/day'
     | '/camp/discovery'
@@ -419,6 +430,7 @@ export interface FileRouteTypes {
     | '/admin/roadmap'
     | '/admin/seo'
     | '/admin/settings'
+    | '/admin/subscribers'
     | '/camp/dates'
     | '/camp/day'
     | '/camp/discovery'
@@ -456,6 +468,7 @@ export interface RootRouteChildren {
   AdminRoadmapRoute: typeof AdminRoadmapRoute
   AdminSeoRoute: typeof AdminSeoRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminSubscribersRoute: typeof AdminSubscribersRoute
   CampDatesRoute: typeof CampDatesRoute
   CampDayRoute: typeof CampDayRoute
   CampDiscoveryRoute: typeof CampDiscoveryRoute
@@ -622,6 +635,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CampDatesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/subscribers': {
+      id: '/admin/subscribers'
+      path: '/admin/subscribers'
+      fullPath: '/admin/subscribers'
+      preLoaderRoute: typeof AdminSubscribersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/settings': {
       id: '/admin/settings'
       path: '/admin/settings'
@@ -736,6 +756,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoadmapRoute: AdminRoadmapRoute,
   AdminSeoRoute: AdminSeoRoute,
   AdminSettingsRoute: AdminSettingsRoute,
+  AdminSubscribersRoute: AdminSubscribersRoute,
   CampDatesRoute: CampDatesRoute,
   CampDayRoute: CampDayRoute,
   CampDiscoveryRoute: CampDiscoveryRoute,
