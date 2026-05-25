@@ -32,6 +32,7 @@ import { Route as CampDayRouteImport } from './routes/camp/day'
 import { Route as CampDatesRouteImport } from './routes/camp/dates'
 import { Route as AdminPagesRouteImport } from './routes/admin/pages'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminBlogRouteImport } from './routes/admin/blog'
 
 const RetreatsRoute = RetreatsRouteImport.update({
   id: '/retreats',
@@ -149,6 +150,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminBlogRoute = AdminBlogRouteImport.update({
+  id: '/admin/blog',
+  path: '/admin/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -157,6 +163,7 @@ export interface FileRoutesByFullPath {
   '/nature-school': typeof NatureSchoolRoute
   '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
+  '/admin/blog': typeof AdminBlogRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/pages': typeof AdminPagesRoute
   '/camp/dates': typeof CampDatesRoute
@@ -182,6 +189,7 @@ export interface FileRoutesByTo {
   '/nature-school': typeof NatureSchoolRoute
   '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
+  '/admin/blog': typeof AdminBlogRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/pages': typeof AdminPagesRoute
   '/camp/dates': typeof CampDatesRoute
@@ -208,6 +216,7 @@ export interface FileRoutesById {
   '/nature-school': typeof NatureSchoolRoute
   '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
+  '/admin/blog': typeof AdminBlogRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/pages': typeof AdminPagesRoute
   '/camp/dates': typeof CampDatesRoute
@@ -235,6 +244,7 @@ export interface FileRouteTypes {
     | '/nature-school'
     | '/outreach'
     | '/retreats'
+    | '/admin/blog'
     | '/admin/login'
     | '/admin/pages'
     | '/camp/dates'
@@ -260,6 +270,7 @@ export interface FileRouteTypes {
     | '/nature-school'
     | '/outreach'
     | '/retreats'
+    | '/admin/blog'
     | '/admin/login'
     | '/admin/pages'
     | '/camp/dates'
@@ -285,6 +296,7 @@ export interface FileRouteTypes {
     | '/nature-school'
     | '/outreach'
     | '/retreats'
+    | '/admin/blog'
     | '/admin/login'
     | '/admin/pages'
     | '/camp/dates'
@@ -311,6 +323,7 @@ export interface RootRouteChildren {
   NatureSchoolRoute: typeof NatureSchoolRoute
   OutreachRoute: typeof OutreachRoute
   RetreatsRoute: typeof RetreatsRoute
+  AdminBlogRoute: typeof AdminBlogRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminPagesRoute: typeof AdminPagesRoute
   CampDatesRoute: typeof CampDatesRoute
@@ -493,6 +506,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/blog': {
+      id: '/admin/blog'
+      path: '/admin/blog'
+      fullPath: '/admin/blog'
+      preLoaderRoute: typeof AdminBlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -503,6 +523,7 @@ const rootRouteChildren: RootRouteChildren = {
   NatureSchoolRoute: NatureSchoolRoute,
   OutreachRoute: OutreachRoute,
   RetreatsRoute: RetreatsRoute,
+  AdminBlogRoute: AdminBlogRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminPagesRoute: AdminPagesRoute,
   CampDatesRoute: CampDatesRoute,
