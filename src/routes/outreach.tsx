@@ -7,7 +7,7 @@ import { MobileBottomBar } from "@/components/site/MobileBottomBar";
 import { AnchorSubNav } from "@/components/site/AnchorSubNav";
 import { CampHero, HeroEm } from "@/components/site/CampHero";
 import { SectionIntro, Hw } from "@/components/site/SectionIntro";
-import { FirstAid, UsersThree, Package, Bowl, Plant, HandHeart } from "@phosphor-icons/react";
+import { FirstAid, UsersThree, Package, BowlFood, Plant, HandHeart } from "@phosphor-icons/react";
 
 export const Route = createFileRoute("/outreach")({
   head: () => ({
@@ -88,7 +88,7 @@ function OutreachPage() {
         <Split id="hunger" eyebrow="Rise Against Hunger" title={<>Meal <Hw>packaging events</Hw></>} reverse bg="bg-cream"
           imgs={["https://images.pexels.com/photos/6995242/pexels-photo-6995242.jpeg?auto=compress&cs=tinysrgb&w=900"]}
           desc="Ferncliff hosts Rise Against Hunger meal packaging events, bringing together volunteers to package nutritious meals for communities facing food insecurity around the world."
-          icon={<Bowl size={28} />}
+          icon={<BowlFood size={28} />}
         />
 
         <Split id="farmstead" eyebrow="Farmstead" title={<>Growing <Hw>sustainably</Hw></>}
