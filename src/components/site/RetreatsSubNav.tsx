@@ -15,8 +15,8 @@ const links = [
 export function RetreatsSubNav() {
   return (
     <div
-      className="fixed left-0 right-0 z-[999] bg-offwhite"
-      style={{ top: 72, borderBottom: "1px solid rgba(0,0,0,0.06)" }}
+      className="fixed left-0 right-0 z-[999]"
+      style={{ top: 72, background: "#FFFDF9", borderBottom: "1px solid #E8E2D8" }}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 overflow-x-auto">
         <div className="flex items-center gap-1 h-[48px] whitespace-nowrap">
@@ -24,7 +24,8 @@ export function RetreatsSubNav() {
             <a
               key={l.href}
               href={l.href}
-              className="px-3 py-2 text-[13px] font-semibold text-text-muted hover:text-teal transition-colors"
+              className="px-3 py-2 text-[13px] font-semibold hover:text-teal transition-colors"
+              style={{ color: "var(--color-dark-warm)" }}
             >
               {l.label}
             </a>
