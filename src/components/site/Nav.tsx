@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   MoonStars, Sun, Compass, Backpack, Bed, PresentationChart,
-  ForkKnife, PaperPlaneTilt, Tree, Heart, Leaf, Users, MapPin,
+  ForkKnife, PaperPlaneTilt, Tree, Heart, Leaf, Users, MapPin, CaretDown,
 } from "@phosphor-icons/react";
+
 
 const LOGO = "https://resources.ferncliff.org/hs-fs/hubfs/FRN.01_Logo-Color-wo.png?width=353&height=200";
 
@@ -88,7 +89,7 @@ export function Nav() {
             <div key={item.label} className="group relative">
               <Link
                 to={item.to}
-                className="px-3 py-2 text-[14px] font-medium rounded-lg transition-colors inline-block"
+                className="px-3 py-2 text-[14px] font-medium rounded-lg transition-colors inline-flex items-center gap-1.5"
                 style={{
                   color: scrolled ? "var(--color-dark-warm)" : "rgba(255,255,255,0.85)",
                 }}
@@ -102,9 +103,18 @@ export function Nav() {
                 }}
               >
                 {item.label}
+                {item.mega && (
+                  <CaretDown
+                    size={12}
+                    weight="bold"
+                    className="transition-transform duration-300 ease-out group-hover:rotate-180"
+                    style={{ color: "var(--color-gold)" }}
+                  />
+                )}
               </Link>
               {item.mega && <MegaMenu mega={item.mega} />}
             </div>
+
           ))}
         </div>
 
