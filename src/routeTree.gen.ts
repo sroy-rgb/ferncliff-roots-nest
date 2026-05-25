@@ -17,6 +17,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StoriesIndexRouteImport } from './routes/stories/index'
 import { Route as CampIndexRouteImport } from './routes/camp/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as StoriesRebeccaSpoonerRouteImport } from './routes/stories/rebecca-spooner'
 import { Route as StoriesEmeliaLeeRouteImport } from './routes/stories/emelia-lee'
 import { Route as StoriesAnyoneCanMakeADifferenceRouteImport } from './routes/stories/anyone-can-make-a-difference'
@@ -69,6 +70,11 @@ const StoriesIndexRoute = StoriesIndexRouteImport.update({
 const CampIndexRoute = CampIndexRouteImport.update({
   id: '/camp/',
   path: '/camp/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StoriesRebeccaSpoonerRoute = StoriesRebeccaSpoonerRouteImport.update({
@@ -158,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/stories/anyone-can-make-a-difference': typeof StoriesAnyoneCanMakeADifferenceRoute
   '/stories/emelia-lee': typeof StoriesEmeliaLeeRoute
   '/stories/rebecca-spooner': typeof StoriesRebeccaSpoonerRoute
+  '/admin/': typeof AdminIndexRoute
   '/camp/': typeof CampIndexRoute
   '/stories/': typeof StoriesIndexRoute
 }
@@ -181,6 +188,7 @@ export interface FileRoutesByTo {
   '/stories/anyone-can-make-a-difference': typeof StoriesAnyoneCanMakeADifferenceRoute
   '/stories/emelia-lee': typeof StoriesEmeliaLeeRoute
   '/stories/rebecca-spooner': typeof StoriesRebeccaSpoonerRoute
+  '/admin': typeof AdminIndexRoute
   '/camp': typeof CampIndexRoute
   '/stories': typeof StoriesIndexRoute
 }
@@ -205,6 +213,7 @@ export interface FileRoutesById {
   '/stories/anyone-can-make-a-difference': typeof StoriesAnyoneCanMakeADifferenceRoute
   '/stories/emelia-lee': typeof StoriesEmeliaLeeRoute
   '/stories/rebecca-spooner': typeof StoriesRebeccaSpoonerRoute
+  '/admin/': typeof AdminIndexRoute
   '/camp/': typeof CampIndexRoute
   '/stories/': typeof StoriesIndexRoute
 }
@@ -230,6 +239,7 @@ export interface FileRouteTypes {
     | '/stories/anyone-can-make-a-difference'
     | '/stories/emelia-lee'
     | '/stories/rebecca-spooner'
+    | '/admin/'
     | '/camp/'
     | '/stories/'
   fileRoutesByTo: FileRoutesByTo
@@ -253,6 +263,7 @@ export interface FileRouteTypes {
     | '/stories/anyone-can-make-a-difference'
     | '/stories/emelia-lee'
     | '/stories/rebecca-spooner'
+    | '/admin'
     | '/camp'
     | '/stories'
   id:
@@ -276,6 +287,7 @@ export interface FileRouteTypes {
     | '/stories/anyone-can-make-a-difference'
     | '/stories/emelia-lee'
     | '/stories/rebecca-spooner'
+    | '/admin/'
     | '/camp/'
     | '/stories/'
   fileRoutesById: FileRoutesById
@@ -300,6 +312,7 @@ export interface RootRouteChildren {
   StoriesAnyoneCanMakeADifferenceRoute: typeof StoriesAnyoneCanMakeADifferenceRoute
   StoriesEmeliaLeeRoute: typeof StoriesEmeliaLeeRoute
   StoriesRebeccaSpoonerRoute: typeof StoriesRebeccaSpoonerRoute
+  AdminIndexRoute: typeof AdminIndexRoute
   CampIndexRoute: typeof CampIndexRoute
   StoriesIndexRoute: typeof StoriesIndexRoute
 }
@@ -360,6 +373,13 @@ declare module '@tanstack/react-router' {
       path: '/camp'
       fullPath: '/camp/'
       preLoaderRoute: typeof CampIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/stories/rebecca-spooner': {
@@ -476,6 +496,7 @@ const rootRouteChildren: RootRouteChildren = {
   StoriesAnyoneCanMakeADifferenceRoute: StoriesAnyoneCanMakeADifferenceRoute,
   StoriesEmeliaLeeRoute: StoriesEmeliaLeeRoute,
   StoriesRebeccaSpoonerRoute: StoriesRebeccaSpoonerRoute,
+  AdminIndexRoute: AdminIndexRoute,
   CampIndexRoute: CampIndexRoute,
   StoriesIndexRoute: StoriesIndexRoute,
 }
