@@ -120,7 +120,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <AdminAuthProvider>
+        <AdminToggle />
+        <Outlet />
+      </AdminAuthProvider>
     </QueryClientProvider>
   );
 }
