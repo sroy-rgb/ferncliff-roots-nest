@@ -1,10 +1,11 @@
+import { Link } from "@tanstack/react-router";
 import { FirstAid, UsersThree, Package, HandHeart } from "@phosphor-icons/react";
 
 const items = [
-  { icon: <FirstAid size={32} />, title: "Disaster Assistance", desc: "National-level relief hub for Presbyterian Church USA" },
-  { icon: <UsersThree size={32} />, title: "Mission Teams", desc: "Year-round service for groups of all sizes" },
-  { icon: <Package size={32} />, title: "Sharing The Goods", desc: "Product redistribution at 80-90% discounts" },
-  { icon: <HandHeart size={32} />, title: "Volunteer", desc: "Join our community of service" },
+  { icon: <FirstAid size={32} />, title: "Disaster Assistance", desc: "National-level relief hub for Presbyterian Church USA", href: "/outreach#disaster" },
+  { icon: <UsersThree size={32} />, title: "Mission Teams", desc: "Year-round service for groups of all sizes", href: "/outreach#mission" },
+  { icon: <Package size={32} />, title: "Sharing The Goods", desc: "Product redistribution at 80-90% discounts", href: "/outreach#sharing" },
+  { icon: <HandHeart size={32} />, title: "Volunteer", desc: "Join our community of service", href: "/outreach#volunteer" },
 ];
 
 export function Outreach() {
@@ -23,9 +24,10 @@ export function Outreach() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {items.map((it) => (
-            <div
+            <Link
               key={it.title}
-              className="reveal relative bg-white rounded-[20px] pt-9 px-6 pb-7 text-center overflow-hidden transition-all duration-300 hover:-translate-y-1.5 group"
+              to={it.href}
+              className="reveal relative bg-white rounded-[20px] pt-9 px-6 pb-7 text-center overflow-hidden transition-all duration-300 hover:-translate-y-1.5 group block"
               onMouseEnter={(e) => (e.currentTarget.style.boxShadow = "0 8px 32px rgba(44,41,38,0.08)")}
               onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
             >
@@ -33,12 +35,12 @@ export function Outreach() {
               <div className="flex justify-center text-teal mb-4">{it.icon}</div>
               <h4 className="font-sans text-[16px] font-bold text-dark mb-1.5">{it.title}</h4>
               <p className="text-[13px] text-text-muted leading-relaxed">{it.desc}</p>
-            </div>
+            </Link>
           ))}
         </div>
 
         <div className="text-center mt-10 reveal">
-          <a href="#" className="btn btn-teal">Explore Outreach Programs</a>
+          <Link to="/outreach" className="btn btn-teal">Explore Outreach Programs</Link>
         </div>
       </div>
     </section>

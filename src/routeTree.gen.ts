@@ -10,6 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RetreatsRouteImport } from './routes/retreats'
+import { Route as OutreachRouteImport } from './routes/outreach'
+import { Route as NatureSchoolRouteImport } from './routes/nature-school'
+import { Route as GivingRouteImport } from './routes/giving'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StoriesIndexRouteImport } from './routes/stories/index'
 import { Route as CampIndexRouteImport } from './routes/camp/index'
@@ -29,6 +33,26 @@ import { Route as CampDatesRouteImport } from './routes/camp/dates'
 const RetreatsRoute = RetreatsRouteImport.update({
   id: '/retreats',
   path: '/retreats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OutreachRoute = OutreachRouteImport.update({
+  id: '/outreach',
+  path: '/outreach',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NatureSchoolRoute = NatureSchoolRouteImport.update({
+  id: '/nature-school',
+  path: '/nature-school',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GivingRoute = GivingRouteImport.update({
+  id: '/giving',
+  path: '/giving',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -110,6 +134,10 @@ const CampDatesRoute = CampDatesRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/giving': typeof GivingRoute
+  '/nature-school': typeof NatureSchoolRoute
+  '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
@@ -128,6 +156,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/giving': typeof GivingRoute
+  '/nature-school': typeof NatureSchoolRoute
+  '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
@@ -147,6 +179,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/giving': typeof GivingRoute
+  '/nature-school': typeof NatureSchoolRoute
+  '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
@@ -167,6 +203,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/giving'
+    | '/nature-school'
+    | '/outreach'
     | '/retreats'
     | '/camp/dates'
     | '/camp/day'
@@ -185,6 +225,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
+    | '/giving'
+    | '/nature-school'
+    | '/outreach'
     | '/retreats'
     | '/camp/dates'
     | '/camp/day'
@@ -203,6 +247,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/giving'
+    | '/nature-school'
+    | '/outreach'
     | '/retreats'
     | '/camp/dates'
     | '/camp/day'
@@ -222,6 +270,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  GivingRoute: typeof GivingRoute
+  NatureSchoolRoute: typeof NatureSchoolRoute
+  OutreachRoute: typeof OutreachRoute
   RetreatsRoute: typeof RetreatsRoute
   CampDatesRoute: typeof CampDatesRoute
   CampDayRoute: typeof CampDayRoute
@@ -246,6 +298,34 @@ declare module '@tanstack/react-router' {
       path: '/retreats'
       fullPath: '/retreats'
       preLoaderRoute: typeof RetreatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/outreach': {
+      id: '/outreach'
+      path: '/outreach'
+      fullPath: '/outreach'
+      preLoaderRoute: typeof OutreachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nature-school': {
+      id: '/nature-school'
+      path: '/nature-school'
+      fullPath: '/nature-school'
+      preLoaderRoute: typeof NatureSchoolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/giving': {
+      id: '/giving'
+      path: '/giving'
+      fullPath: '/giving'
+      preLoaderRoute: typeof GivingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -358,6 +438,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  GivingRoute: GivingRoute,
+  NatureSchoolRoute: NatureSchoolRoute,
+  OutreachRoute: OutreachRoute,
   RetreatsRoute: RetreatsRoute,
   CampDatesRoute: CampDatesRoute,
   CampDayRoute: CampDayRoute,

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import {
   Campfire, Buildings, Leaf, HandHeart, ArrowRight, ArrowSquareOut,
   PaperPlaneTilt, Heart,
@@ -7,7 +8,7 @@ import {
 const POSTER = "https://images.pexels.com/photos/1083342/pexels-photo-1083342.jpeg?auto=compress&cs=tinysrgb&w=1920";
 const VIDEO = "https://videos.pexels.com/video-files/1448735/1448735-hd_1920_1080_30fps.mp4";
 
-type SubLink = { label: string };
+type SubLink = { label: string; href: string };
 type Path = {
   icon: React.ReactNode;
   title: string;
@@ -21,29 +22,42 @@ const paths: Path[] = [
     icon: <Campfire size={22} />,
     title: "Summer Camp",
     desc: "Day & overnight camps, Pre-K – 12th grade",
-    subs: [{ label: "Overnight Camp" }, { label: "Day Camp" }, { label: "First-Time Campers" }],
-    cta: { label: "Register Now", icon: <ArrowSquareOut size={14} weight="bold" />, href: "https://ferncliff.campbrainregistration.com/", external: true },
+    subs: [
+      { label: "Overnight Camp", href: "/camp#overnight" },
+      { label: "Day Camp", href: "/camp#daycamp" },
+      { label: "First-Time Campers", href: "/camp#first-time" },
+    ],
+    cta: { label: "Register Now", icon: <ArrowSquareOut size={14} weight="bold" />, href: "/camp/register" },
   },
   {
     icon: <Buildings size={22} />,
     title: "Retreats & Conferences",
     desc: "Groups up to 150 with full lodging & meals",
-    subs: [{ label: "View Lodging" }, { label: "Meeting Spaces" }],
-    cta: { label: "Inquire Now", icon: <PaperPlaneTilt size={14} weight="bold" />, href: "#" },
+    subs: [
+      { label: "View Lodging", href: "/retreats#brown-center" },
+      { label: "Meeting Spaces", href: "/retreats#meeting-rooms" },
+    ],
+    cta: { label: "Inquire Now", icon: <PaperPlaneTilt size={14} weight="bold" />, href: "/retreats#inquire" },
   },
   {
     icon: <Leaf size={22} />,
     title: "Nature School",
     desc: "Arkansas's first nature preschool",
-    subs: [{ label: "Nature Preschool" }, { label: "Wildcraft Programs" }],
-    cta: { label: "Learn More", icon: <ArrowRight size={14} weight="bold" />, href: "#" },
+    subs: [
+      { label: "Nature Preschool", href: "/nature-school#preschool" },
+      { label: "Wildcraft Programs", href: "/nature-school#wildcraft" },
+    ],
+    cta: { label: "Learn More", icon: <ArrowRight size={14} weight="bold" />, href: "/nature-school" },
   },
   {
     icon: <HandHeart size={22} />,
     title: "Support Ferncliff",
     desc: "Give, volunteer, or join our mission",
-    subs: [{ label: "Make a Gift" }, { label: "Volunteer" }],
-    cta: { label: "Give Today", icon: <Heart size={14} weight="bold" />, href: "#giving" },
+    subs: [
+      { label: "Make a Gift", href: "/giving" },
+      { label: "Volunteer", href: "/outreach#volunteer" },
+    ],
+    cta: { label: "Give Today", icon: <Heart size={14} weight="bold" />, href: "/giving" },
   },
 ];
 
@@ -91,8 +105,8 @@ export function Hero() {
           A place apart — for summer camp, retreats, nature education, and outreach — just outside Little Rock, Arkansas.
         </p>
         <div className="flex flex-wrap gap-4">
-          <a href="#camp" className="btn btn-teal">Explore Camp</a>
-          <a href="#retreats" className="btn btn-outline">Plan a Retreat</a>
+          <Link to="/camp" className="btn btn-teal">Explore Camp</Link>
+          <Link to="/retreats" className="btn btn-outline">Plan a Retreat</Link>
         </div>
       </div>
 
@@ -161,9 +175,9 @@ function PathItem({ path, isLast }: { path: Path; isLast: boolean }) {
       >
         <div className="border-t border-white/10 pt-3 space-y-1.5">
           {path.subs.map((s) => (
-            <a
+            <Link
               key={s.label}
-              href="#"
+              to={s.href}
               className="flex items-center gap-2 text-[13px] transition-all"
               style={{ color: "rgba(255,255,255,0.7)" }}
               onMouseEnter={(e) => {
@@ -176,16 +190,17 @@ function PathItem({ path, isLast }: { path: Path; isLast: boolean }) {
               }}
             >
               <ArrowRight size={12} /> {s.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href={path.cta.href}
-            target={path.cta.external ? "_blank" : undefined}
-            rel={path.cta.external ? "noopener noreferrer" : undefined}
-            className="mt-3 inline-flex items-center gap-1.5 text-gold text-[13px] font-bold"
-          >
-            {path.cta.label} {path.cta.icon}
-          </a>
+          {path.cta.external ? (
+            <a href={path.cta.href} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-gold text-[13px] font-bold">
+              {path.cta.label} {path.cta.icon}
+            </a>
+          ) : (
+            <Link to={path.cta.href} className="mt-3 inline-flex items-center gap-1.5 text-gold text-[13px] font-bold">
+              {path.cta.label} {path.cta.icon}
+            </Link>
+          )}
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "@phosphor-icons/react";
 
 export function Campaign() {
@@ -50,8 +51,8 @@ export function Campaign() {
           </div>
         </div>
         <div className="shrink-0 md:text-right text-center">
-          <a href="#" className="btn btn-gold-outline block mb-3">Learn About the Campaign</a>
-          <a href="#" className="link-arrow inline-flex">Support This Campaign <ArrowRight size={14} weight="bold" /></a>
+          <Link to="/giving#campaign" className="btn btn-gold-outline block mb-3">Learn About the Campaign</Link>
+          <Link to="/giving" className="link-arrow inline-flex">Support This Campaign <ArrowRight size={14} weight="bold" /></Link>
         </div>
       </div>
     </section>
