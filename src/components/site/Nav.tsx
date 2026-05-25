@@ -1,0 +1,161 @@
+import { useEffect, useState } from "react";
+import {
+  MoonStars, Sun, Compass, Backpack, Bed, PresentationChart,
+  ForkKnife, PaperPlaneTilt, Tree, Heart, Leaf, Users, MapPin,
+} from "@phosphor-icons/react";
+
+const LOGO = "https://resources.ferncliff.org/hs-fs/hubfs/FRN.01_Logo-Color-wo.png?width=353&height=200";
+
+type MegaItem = { icon: React.ReactNode; title: string; desc: string };
+type Mega = { items: MegaItem[]; image?: string; width: number };
+
+const campMega: Mega = {
+  width: 520,
+  items: [
+    { icon: <MoonStars size={22} />, title: "Overnight Camp", desc: "Multi-day immersive experiences, grades 1–12" },
+    { icon: <Sun size={22} />, title: "Day Camp", desc: "Full-day programs for younger campers" },
+    { icon: <Compass size={22} />, title: "Specialty Camps", desc: "Adventure, arts, leadership & more" },
+    { icon: <Backpack size={22} />, title: "First-Time Campers", desc: "Everything you need to feel confident" },
+  ],
+  image: "https://images.pexels.com/photos/9303534/pexels-photo-9303534.jpeg?auto=compress&cs=tinysrgb&w=520",
+};
+const retreatsMega: Mega = {
+  width: 520,
+  items: [
+    { icon: <Bed size={22} />, title: "Lodging", desc: "Hotel rooms, retreat house, cabins" },
+    { icon: <PresentationChart size={22} />, title: "Meeting Spaces", desc: "Flexible rooms for groups up to 150" },
+    { icon: <ForkKnife size={22} />, title: "Meals & Dining", desc: "Fresh, family-style or buffet" },
+    { icon: <PaperPlaneTilt size={22} />, title: "Plan Your Retreat", desc: "Talk to our hospitality team" },
+  ],
+  image: "https://images.pexels.com/photos/2526040/pexels-photo-2526040.jpeg?auto=compress&cs=tinysrgb&w=520",
+};
+const natureMega: Mega = {
+  width: 380,
+  items: [
+    { icon: <Tree size={22} />, title: "Nature Preschool", desc: "Forest kindergarten, ages 3–5" },
+    { icon: <Compass size={22} />, title: "Wildcraft & Homeschool", desc: "Programs for older learners" },
+  ],
+};
+const aboutMega: Mega = {
+  width: 380,
+  items: [
+    { icon: <Heart size={22} />, title: "Our Mission", desc: "Faith, nature, and community since 1937" },
+    { icon: <Leaf size={22} />, title: "Sustainability", desc: "Arkansas's greenest non-profit" },
+    { icon: <Users size={22} />, title: "Staff & Board", desc: "The people behind Ferncliff" },
+    { icon: <MapPin size={22} />, title: "Contact & Directions", desc: "Visit us outside Little Rock" },
+  ],
+};
+
+const navItems = [
+  { label: "Camp", mega: campMega },
+  { label: "Retreats & Conferences", mega: retreatsMega },
+  { label: "Nature School", mega: natureMega },
+  { label: "Outreach", mega: null as Mega | null },
+  { label: "About", mega: aboutMega },
+];
+
+export function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <nav
+      className="fixed top-0 left-0 right-0 h-[72px] z-[1000] transition-all duration-300"
+      style={{
+        background: scrolled ? "rgba(253,252,250,0.97)" : "transparent",
+        backdropFilter: scrolled ? "blur(20px)" : "none",
+        boxShadow: scrolled ? "0 1px 0 rgba(0,0,0,0.06)" : "none",
+      }}
+    >
+      <div className="h-full max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between gap-6">
+        <a href="/" className="flex items-center shrink-0">
+          <img
+            src={LOGO}
+            alt="Ferncliff"
+            className="h-12 w-auto transition-all"
+            style={{ filter: scrolled ? "none" : "brightness(0) invert(1)" }}
+          />
+        </a>
+
+        <div className="hidden md:flex items-center gap-1">
+          {navItems.map((item) => (
+            <div key={item.label} className="group relative">
+              <button
+                className="px-3 py-2 text-[14px] font-medium rounded-lg transition-colors"
+                style={{
+                  color: scrolled ? "var(--color-dark-warm)" : "rgba(255,255,255,0.85)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = scrolled ? "var(--color-teal-ghost)" : "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.color = scrolled ? "var(--color-teal)" : "#fff";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = scrolled ? "var(--color-dark-warm)" : "rgba(255,255,255,0.85)";
+                }}
+              >
+                {item.label}
+              </button>
+              {item.mega && <MegaMenu mega={item.mega} />}
+            </div>
+          ))}
+        </div>
+
+        <div className="hidden md:flex items-center gap-3 shrink-0">
+          <a
+            href="https://ferncliff.campbrainregistration.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={scrolled ? "btn btn-sm btn-teal" : "btn btn-sm btn-glass"}
+          >
+            Register
+          </a>
+          <a href="#giving" className="btn btn-sm btn-coral">Give</a>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+function MegaMenu({ mega }: { mega: Mega }) {
+  return (
+    <div
+      className="absolute left-1/2 top-full pt-3 pointer-events-none opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:translate-x-[-50%] translate-x-[-50%] translate-y-2 group-hover:translate-y-0 transition-all duration-[350ms] ease-out"
+      style={{ width: mega.width }}
+    >
+      <div
+        className="bg-white rounded-[20px] p-7 border"
+        style={{
+          boxShadow: "0 16px 48px rgba(44,41,38,0.12)",
+          borderColor: "rgba(0,0,0,0.04)",
+        }}
+      >
+        <div className={`grid gap-2 ${mega.items.length > 2 && mega.width >= 520 ? "grid-cols-2" : "grid-cols-1"}`}>
+          {mega.items.map((it) => (
+            <a
+              key={it.title}
+              href="#"
+              className="flex items-start gap-3 p-3 rounded-[12px] hover:bg-[var(--color-teal-ghost)] transition-colors"
+            >
+              <span className="text-teal mt-0.5 shrink-0">{it.icon}</span>
+              <span className="block">
+                <span className="block font-sans text-[14px] font-bold text-dark">{it.title}</span>
+                <span className="block text-[12px] text-text-muted leading-snug mt-0.5">{it.desc}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+        {mega.image && (
+          <div className="mt-4 h-[120px] rounded-[12px] overflow-hidden">
+            <img src={mega.image} alt="" className="w-full h-full object-cover" />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
