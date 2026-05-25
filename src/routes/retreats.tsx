@@ -6,6 +6,7 @@ import { Footer } from "@/components/site/Footer";
 import { MobileBottomBar } from "@/components/site/MobileBottomBar";
 import { RetreatsSubNav } from "@/components/site/RetreatsSubNav";
 import { CampHero } from "@/components/site/CampHero";
+import { useContentStore } from "@/components/admin/contentStore";
 import {
   ArrowRight, Bed, ForkKnife, WifiHigh, Presentation, Users, House, Tree, Shower,
   CookingPot, Armchair, ChalkboardTeacher, ShieldCheck, Campfire, Target,
