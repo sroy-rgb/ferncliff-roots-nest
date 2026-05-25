@@ -9,6 +9,8 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { AdminAuthProvider } from "@/components/admin/adminStore";
+import { AdminToggle } from "@/components/admin/AdminToggle";
 
 function NotFoundComponent() {
   return (
@@ -120,7 +122,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <AdminAuthProvider>
+        <AdminToggle />
+        <Outlet />
+      </AdminAuthProvider>
     </QueryClientProvider>
   );
 }

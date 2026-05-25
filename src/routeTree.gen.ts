@@ -17,6 +17,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StoriesIndexRouteImport } from './routes/stories/index'
 import { Route as CampIndexRouteImport } from './routes/camp/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as StoriesRebeccaSpoonerRouteImport } from './routes/stories/rebecca-spooner'
 import { Route as StoriesEmeliaLeeRouteImport } from './routes/stories/emelia-lee'
 import { Route as StoriesAnyoneCanMakeADifferenceRouteImport } from './routes/stories/anyone-can-make-a-difference'
@@ -29,6 +30,22 @@ import { Route as CampFamilyRouteImport } from './routes/camp/family'
 import { Route as CampDiscoveryRouteImport } from './routes/camp/discovery'
 import { Route as CampDayRouteImport } from './routes/camp/day'
 import { Route as CampDatesRouteImport } from './routes/camp/dates'
+import { Route as AdminVolunteersRouteImport } from './routes/admin/volunteers'
+import { Route as AdminUsersRouteImport } from './routes/admin/users'
+import { Route as AdminSubscribersRouteImport } from './routes/admin/subscribers'
+import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
+import { Route as AdminSeoRouteImport } from './routes/admin/seo'
+import { Route as AdminRoadmapRouteImport } from './routes/admin/roadmap'
+import { Route as AdminRetreatsRouteImport } from './routes/admin/retreats'
+import { Route as AdminPagesRouteImport } from './routes/admin/pages'
+import { Route as AdminOutreachRouteImport } from './routes/admin/outreach'
+import { Route as AdminNatureRouteImport } from './routes/admin/nature'
+import { Route as AdminMediaRouteImport } from './routes/admin/media'
+import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminInquiriesRouteImport } from './routes/admin/inquiries'
+import { Route as AdminGivingRouteImport } from './routes/admin/giving'
+import { Route as AdminCampRouteImport } from './routes/admin/camp'
+import { Route as AdminBlogRouteImport } from './routes/admin/blog'
 
 const RetreatsRoute = RetreatsRouteImport.update({
   id: '/retreats',
@@ -68,6 +85,11 @@ const StoriesIndexRoute = StoriesIndexRouteImport.update({
 const CampIndexRoute = CampIndexRouteImport.update({
   id: '/camp/',
   path: '/camp/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StoriesRebeccaSpoonerRoute = StoriesRebeccaSpoonerRouteImport.update({
@@ -131,6 +153,86 @@ const CampDatesRoute = CampDatesRouteImport.update({
   path: '/camp/dates',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminVolunteersRoute = AdminVolunteersRouteImport.update({
+  id: '/admin/volunteers',
+  path: '/admin/volunteers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/admin/users',
+  path: '/admin/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSubscribersRoute = AdminSubscribersRouteImport.update({
+  id: '/admin/subscribers',
+  path: '/admin/subscribers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/admin/settings',
+  path: '/admin/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSeoRoute = AdminSeoRouteImport.update({
+  id: '/admin/seo',
+  path: '/admin/seo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoadmapRoute = AdminRoadmapRouteImport.update({
+  id: '/admin/roadmap',
+  path: '/admin/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRetreatsRoute = AdminRetreatsRouteImport.update({
+  id: '/admin/retreats',
+  path: '/admin/retreats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPagesRoute = AdminPagesRouteImport.update({
+  id: '/admin/pages',
+  path: '/admin/pages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminOutreachRoute = AdminOutreachRouteImport.update({
+  id: '/admin/outreach',
+  path: '/admin/outreach',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminNatureRoute = AdminNatureRouteImport.update({
+  id: '/admin/nature',
+  path: '/admin/nature',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminMediaRoute = AdminMediaRouteImport.update({
+  id: '/admin/media',
+  path: '/admin/media',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminInquiriesRoute = AdminInquiriesRouteImport.update({
+  id: '/admin/inquiries',
+  path: '/admin/inquiries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminGivingRoute = AdminGivingRouteImport.update({
+  id: '/admin/giving',
+  path: '/admin/giving',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCampRoute = AdminCampRouteImport.update({
+  id: '/admin/camp',
+  path: '/admin/camp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminBlogRoute = AdminBlogRouteImport.update({
+  id: '/admin/blog',
+  path: '/admin/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -139,6 +241,22 @@ export interface FileRoutesByFullPath {
   '/nature-school': typeof NatureSchoolRoute
   '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
+  '/admin/blog': typeof AdminBlogRoute
+  '/admin/camp': typeof AdminCampRoute
+  '/admin/giving': typeof AdminGivingRoute
+  '/admin/inquiries': typeof AdminInquiriesRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/nature': typeof AdminNatureRoute
+  '/admin/outreach': typeof AdminOutreachRoute
+  '/admin/pages': typeof AdminPagesRoute
+  '/admin/retreats': typeof AdminRetreatsRoute
+  '/admin/roadmap': typeof AdminRoadmapRoute
+  '/admin/seo': typeof AdminSeoRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/subscribers': typeof AdminSubscribersRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/volunteers': typeof AdminVolunteersRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
   '/camp/discovery': typeof CampDiscoveryRoute
@@ -151,6 +269,7 @@ export interface FileRoutesByFullPath {
   '/stories/anyone-can-make-a-difference': typeof StoriesAnyoneCanMakeADifferenceRoute
   '/stories/emelia-lee': typeof StoriesEmeliaLeeRoute
   '/stories/rebecca-spooner': typeof StoriesRebeccaSpoonerRoute
+  '/admin/': typeof AdminIndexRoute
   '/camp/': typeof CampIndexRoute
   '/stories/': typeof StoriesIndexRoute
 }
@@ -161,6 +280,22 @@ export interface FileRoutesByTo {
   '/nature-school': typeof NatureSchoolRoute
   '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
+  '/admin/blog': typeof AdminBlogRoute
+  '/admin/camp': typeof AdminCampRoute
+  '/admin/giving': typeof AdminGivingRoute
+  '/admin/inquiries': typeof AdminInquiriesRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/nature': typeof AdminNatureRoute
+  '/admin/outreach': typeof AdminOutreachRoute
+  '/admin/pages': typeof AdminPagesRoute
+  '/admin/retreats': typeof AdminRetreatsRoute
+  '/admin/roadmap': typeof AdminRoadmapRoute
+  '/admin/seo': typeof AdminSeoRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/subscribers': typeof AdminSubscribersRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/volunteers': typeof AdminVolunteersRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
   '/camp/discovery': typeof CampDiscoveryRoute
@@ -173,6 +308,7 @@ export interface FileRoutesByTo {
   '/stories/anyone-can-make-a-difference': typeof StoriesAnyoneCanMakeADifferenceRoute
   '/stories/emelia-lee': typeof StoriesEmeliaLeeRoute
   '/stories/rebecca-spooner': typeof StoriesRebeccaSpoonerRoute
+  '/admin': typeof AdminIndexRoute
   '/camp': typeof CampIndexRoute
   '/stories': typeof StoriesIndexRoute
 }
@@ -184,6 +320,22 @@ export interface FileRoutesById {
   '/nature-school': typeof NatureSchoolRoute
   '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
+  '/admin/blog': typeof AdminBlogRoute
+  '/admin/camp': typeof AdminCampRoute
+  '/admin/giving': typeof AdminGivingRoute
+  '/admin/inquiries': typeof AdminInquiriesRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/nature': typeof AdminNatureRoute
+  '/admin/outreach': typeof AdminOutreachRoute
+  '/admin/pages': typeof AdminPagesRoute
+  '/admin/retreats': typeof AdminRetreatsRoute
+  '/admin/roadmap': typeof AdminRoadmapRoute
+  '/admin/seo': typeof AdminSeoRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/subscribers': typeof AdminSubscribersRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/volunteers': typeof AdminVolunteersRoute
   '/camp/dates': typeof CampDatesRoute
   '/camp/day': typeof CampDayRoute
   '/camp/discovery': typeof CampDiscoveryRoute
@@ -196,6 +348,7 @@ export interface FileRoutesById {
   '/stories/anyone-can-make-a-difference': typeof StoriesAnyoneCanMakeADifferenceRoute
   '/stories/emelia-lee': typeof StoriesEmeliaLeeRoute
   '/stories/rebecca-spooner': typeof StoriesRebeccaSpoonerRoute
+  '/admin/': typeof AdminIndexRoute
   '/camp/': typeof CampIndexRoute
   '/stories/': typeof StoriesIndexRoute
 }
@@ -208,6 +361,22 @@ export interface FileRouteTypes {
     | '/nature-school'
     | '/outreach'
     | '/retreats'
+    | '/admin/blog'
+    | '/admin/camp'
+    | '/admin/giving'
+    | '/admin/inquiries'
+    | '/admin/login'
+    | '/admin/media'
+    | '/admin/nature'
+    | '/admin/outreach'
+    | '/admin/pages'
+    | '/admin/retreats'
+    | '/admin/roadmap'
+    | '/admin/seo'
+    | '/admin/settings'
+    | '/admin/subscribers'
+    | '/admin/users'
+    | '/admin/volunteers'
     | '/camp/dates'
     | '/camp/day'
     | '/camp/discovery'
@@ -220,6 +389,7 @@ export interface FileRouteTypes {
     | '/stories/anyone-can-make-a-difference'
     | '/stories/emelia-lee'
     | '/stories/rebecca-spooner'
+    | '/admin/'
     | '/camp/'
     | '/stories/'
   fileRoutesByTo: FileRoutesByTo
@@ -230,6 +400,22 @@ export interface FileRouteTypes {
     | '/nature-school'
     | '/outreach'
     | '/retreats'
+    | '/admin/blog'
+    | '/admin/camp'
+    | '/admin/giving'
+    | '/admin/inquiries'
+    | '/admin/login'
+    | '/admin/media'
+    | '/admin/nature'
+    | '/admin/outreach'
+    | '/admin/pages'
+    | '/admin/retreats'
+    | '/admin/roadmap'
+    | '/admin/seo'
+    | '/admin/settings'
+    | '/admin/subscribers'
+    | '/admin/users'
+    | '/admin/volunteers'
     | '/camp/dates'
     | '/camp/day'
     | '/camp/discovery'
@@ -242,6 +428,7 @@ export interface FileRouteTypes {
     | '/stories/anyone-can-make-a-difference'
     | '/stories/emelia-lee'
     | '/stories/rebecca-spooner'
+    | '/admin'
     | '/camp'
     | '/stories'
   id:
@@ -252,6 +439,22 @@ export interface FileRouteTypes {
     | '/nature-school'
     | '/outreach'
     | '/retreats'
+    | '/admin/blog'
+    | '/admin/camp'
+    | '/admin/giving'
+    | '/admin/inquiries'
+    | '/admin/login'
+    | '/admin/media'
+    | '/admin/nature'
+    | '/admin/outreach'
+    | '/admin/pages'
+    | '/admin/retreats'
+    | '/admin/roadmap'
+    | '/admin/seo'
+    | '/admin/settings'
+    | '/admin/subscribers'
+    | '/admin/users'
+    | '/admin/volunteers'
     | '/camp/dates'
     | '/camp/day'
     | '/camp/discovery'
@@ -264,6 +467,7 @@ export interface FileRouteTypes {
     | '/stories/anyone-can-make-a-difference'
     | '/stories/emelia-lee'
     | '/stories/rebecca-spooner'
+    | '/admin/'
     | '/camp/'
     | '/stories/'
   fileRoutesById: FileRoutesById
@@ -275,6 +479,22 @@ export interface RootRouteChildren {
   NatureSchoolRoute: typeof NatureSchoolRoute
   OutreachRoute: typeof OutreachRoute
   RetreatsRoute: typeof RetreatsRoute
+  AdminBlogRoute: typeof AdminBlogRoute
+  AdminCampRoute: typeof AdminCampRoute
+  AdminGivingRoute: typeof AdminGivingRoute
+  AdminInquiriesRoute: typeof AdminInquiriesRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminMediaRoute: typeof AdminMediaRoute
+  AdminNatureRoute: typeof AdminNatureRoute
+  AdminOutreachRoute: typeof AdminOutreachRoute
+  AdminPagesRoute: typeof AdminPagesRoute
+  AdminRetreatsRoute: typeof AdminRetreatsRoute
+  AdminRoadmapRoute: typeof AdminRoadmapRoute
+  AdminSeoRoute: typeof AdminSeoRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminSubscribersRoute: typeof AdminSubscribersRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminVolunteersRoute: typeof AdminVolunteersRoute
   CampDatesRoute: typeof CampDatesRoute
   CampDayRoute: typeof CampDayRoute
   CampDiscoveryRoute: typeof CampDiscoveryRoute
@@ -287,6 +507,7 @@ export interface RootRouteChildren {
   StoriesAnyoneCanMakeADifferenceRoute: typeof StoriesAnyoneCanMakeADifferenceRoute
   StoriesEmeliaLeeRoute: typeof StoriesEmeliaLeeRoute
   StoriesRebeccaSpoonerRoute: typeof StoriesRebeccaSpoonerRoute
+  AdminIndexRoute: typeof AdminIndexRoute
   CampIndexRoute: typeof CampIndexRoute
   StoriesIndexRoute: typeof StoriesIndexRoute
 }
@@ -347,6 +568,13 @@ declare module '@tanstack/react-router' {
       path: '/camp'
       fullPath: '/camp/'
       preLoaderRoute: typeof CampIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/stories/rebecca-spooner': {
@@ -433,6 +661,118 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CampDatesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/volunteers': {
+      id: '/admin/volunteers'
+      path: '/admin/volunteers'
+      fullPath: '/admin/volunteers'
+      preLoaderRoute: typeof AdminVolunteersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/admin/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/subscribers': {
+      id: '/admin/subscribers'
+      path: '/admin/subscribers'
+      fullPath: '/admin/subscribers'
+      preLoaderRoute: typeof AdminSubscribersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/admin/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/seo': {
+      id: '/admin/seo'
+      path: '/admin/seo'
+      fullPath: '/admin/seo'
+      preLoaderRoute: typeof AdminSeoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/roadmap': {
+      id: '/admin/roadmap'
+      path: '/admin/roadmap'
+      fullPath: '/admin/roadmap'
+      preLoaderRoute: typeof AdminRoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/retreats': {
+      id: '/admin/retreats'
+      path: '/admin/retreats'
+      fullPath: '/admin/retreats'
+      preLoaderRoute: typeof AdminRetreatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/pages': {
+      id: '/admin/pages'
+      path: '/admin/pages'
+      fullPath: '/admin/pages'
+      preLoaderRoute: typeof AdminPagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/outreach': {
+      id: '/admin/outreach'
+      path: '/admin/outreach'
+      fullPath: '/admin/outreach'
+      preLoaderRoute: typeof AdminOutreachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/nature': {
+      id: '/admin/nature'
+      path: '/admin/nature'
+      fullPath: '/admin/nature'
+      preLoaderRoute: typeof AdminNatureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/media': {
+      id: '/admin/media'
+      path: '/admin/media'
+      fullPath: '/admin/media'
+      preLoaderRoute: typeof AdminMediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/inquiries': {
+      id: '/admin/inquiries'
+      path: '/admin/inquiries'
+      fullPath: '/admin/inquiries'
+      preLoaderRoute: typeof AdminInquiriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/giving': {
+      id: '/admin/giving'
+      path: '/admin/giving'
+      fullPath: '/admin/giving'
+      preLoaderRoute: typeof AdminGivingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/camp': {
+      id: '/admin/camp'
+      path: '/admin/camp'
+      fullPath: '/admin/camp'
+      preLoaderRoute: typeof AdminCampRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/blog': {
+      id: '/admin/blog'
+      path: '/admin/blog'
+      fullPath: '/admin/blog'
+      preLoaderRoute: typeof AdminBlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -443,6 +783,22 @@ const rootRouteChildren: RootRouteChildren = {
   NatureSchoolRoute: NatureSchoolRoute,
   OutreachRoute: OutreachRoute,
   RetreatsRoute: RetreatsRoute,
+  AdminBlogRoute: AdminBlogRoute,
+  AdminCampRoute: AdminCampRoute,
+  AdminGivingRoute: AdminGivingRoute,
+  AdminInquiriesRoute: AdminInquiriesRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminMediaRoute: AdminMediaRoute,
+  AdminNatureRoute: AdminNatureRoute,
+  AdminOutreachRoute: AdminOutreachRoute,
+  AdminPagesRoute: AdminPagesRoute,
+  AdminRetreatsRoute: AdminRetreatsRoute,
+  AdminRoadmapRoute: AdminRoadmapRoute,
+  AdminSeoRoute: AdminSeoRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminSubscribersRoute: AdminSubscribersRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminVolunteersRoute: AdminVolunteersRoute,
   CampDatesRoute: CampDatesRoute,
   CampDayRoute: CampDayRoute,
   CampDiscoveryRoute: CampDiscoveryRoute,
@@ -455,6 +811,7 @@ const rootRouteChildren: RootRouteChildren = {
   StoriesAnyoneCanMakeADifferenceRoute: StoriesAnyoneCanMakeADifferenceRoute,
   StoriesEmeliaLeeRoute: StoriesEmeliaLeeRoute,
   StoriesRebeccaSpoonerRoute: StoriesRebeccaSpoonerRoute,
+  AdminIndexRoute: AdminIndexRoute,
   CampIndexRoute: CampIndexRoute,
   StoriesIndexRoute: StoriesIndexRoute,
 }
