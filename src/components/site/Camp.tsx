@@ -73,17 +73,12 @@ export function Camp() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Link to="/camp" className="btn btn-teal">
+              <Link to="/camp/register" className="btn btn-teal">
+                Register for Camp
+              </Link>
+              <Link to="/camp" className="btn btn-outline">
                 Explore Camp
               </Link>
-              <a
-                href="https://ferncliff.campbrainregistration.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-outline"
-              >
-                Register
-              </a>
             </div>
           </div>
         </div>

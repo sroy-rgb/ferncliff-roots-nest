@@ -1,6 +1,7 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Leaf, Lightning, CalendarCheck } from "@phosphor-icons/react";
 
-type Card = { img: string; alt: string; badge: string; title: string; text: string; link: string };
+type Card = { img: string; alt: string; badge: string; title: string; text: string; link: string; href: string };
 const cards: Card[] = [
   {
     img: "https://images.pexels.com/photos/2526040/pexels-photo-2526040.jpeg?auto=compress&cs=tinysrgb&w=700",
@@ -9,6 +10,7 @@ const cards: Card[] = [
     title: "Brown Center",
     text: "36 hotel-style rooms with private bathrooms, lake views, and WiFi. Perfect for conferences and adult retreats.",
     link: "Tour the Rooms",
+    href: "/retreats#brown-center",
   },
   {
     img: "https://images.pexels.com/photos/5887849/pexels-photo-5887849.jpeg?auto=compress&cs=tinysrgb&w=700",
@@ -17,6 +19,7 @@ const cards: Card[] = [
     title: "Retreat House",
     text: "5 bedrooms, full kitchen, dining room, and two living areas — ideal for intimate gatherings of up to 25 guests.",
     link: "Explore",
+    href: "/retreats#retreat-house",
   },
   {
     img: "https://images.pexels.com/photos/1092183/pexels-photo-1092183.jpeg?auto=compress&cs=tinysrgb&w=700",
@@ -25,6 +28,7 @@ const cards: Card[] = [
     title: "Belden Pond Cabins",
     text: "12 cabins in a wooded setting near the lake — perfect for youth retreats and camp-style group experiences.",
     link: "View Cabins",
+    href: "/retreats#belden",
   },
 ];
 
@@ -64,7 +68,7 @@ export function Retreats() {
                 <div className="p-7">
                   <h3 className="font-sans text-[18px] font-bold text-dark mb-2">{c.title}</h3>
                   <p className="text-[14px] text-text-muted leading-relaxed mb-3.5">{c.text}</p>
-                  <a href="#" className="link-arrow">{c.link} <ArrowRight size={14} weight="bold" /></a>
+                  <Link to={c.href} className="link-arrow">{c.link} <ArrowRight size={14} weight="bold" /></Link>
                 </div>
               </article>
             ))}
@@ -94,7 +98,7 @@ export function Retreats() {
           </div>
 
           <div className="text-center mt-12 reveal">
-            <a href="#" className="btn btn-teal">Inquire About Your Retreat</a>
+            <Link to="/retreats#inquire" className="btn btn-teal">Inquire About Your Retreat</Link>
           </div>
         </div>
       </section>

@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Tree, Star, Baby, ArrowRight } from "@phosphor-icons/react";
 
 export function NatureSchool() {
@@ -53,8 +54,8 @@ export function NatureSchool() {
               ))}
             </div>
             <div className="flex flex-wrap items-center gap-4">
-              <a href="#" className="btn btn-teal">Explore Nature School</a>
-              <a href="#" className="link-arrow">Wildcraft Programs <ArrowRight size={14} weight="bold" /></a>
+              <Link to="/nature-school" className="btn btn-teal">Explore Nature School</Link>
+              <Link to="/nature-school#wildcraft" className="link-arrow">Wildcraft Programs <ArrowRight size={14} weight="bold" /></Link>
             </div>
           </div>
         </div>

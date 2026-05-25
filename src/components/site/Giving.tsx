@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { Lock, ShieldCheck, EyeSlash } from "@phosphor-icons/react";
 
 const amounts = [25, 50, 100, 250, 500, 1000];
@@ -37,8 +38,8 @@ export function Giving() {
             ))}
           </div>
           <div className="flex flex-wrap gap-4">
-            <a href="#" className="btn btn-coral">Give Today</a>
-            <a href="#" className="btn btn-outline">Join Friends of Ferncliff</a>
+            <Link to="/giving" className="btn btn-coral">Give Today</Link>
+            <Link to="/giving#friends" className="btn btn-outline">Join Friends of Ferncliff</Link>
           </div>
         </div>
 
