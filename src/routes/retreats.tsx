@@ -491,25 +491,91 @@ function RetreatsPage() {
           </div>
         </section>
 
-        {/* FINAL CTA */}
-        <section className="py-[80px] md:py-[120px] bg-offwhite">
-          <div className="max-w-[1100px] mx-auto px-6">
-            <div className="bg-teal-ghost rounded-[28px] p-10 md:p-16 text-center reveal">
-              <h2 style={{ fontSize: "clamp(32px, 4vw, 48px)" }} className="mb-4">Ready to plan your retreat?</h2>
-              <p className="text-text-muted max-w-[600px] mx-auto mb-8">
-                Our team will help you find the right space, plan your meals, and coordinate activities for your group.
-              </p>
-              <div className="flex flex-wrap gap-4 justify-center">
-                <a href="mailto:retreats@ferncliff.org" className="btn btn-teal">Inquire Now</a>
-                <a href="tel:5018213063" className="btn btn-gold-outline">Call (501) 821-3063</a>
-              </div>
-              <p className="text-text-muted text-[14px] mt-6">
-                <a href="mailto:info@ferncliff.org" className="text-gold font-semibold">info@ferncliff.org</a>
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* INQUIRY FORM */}
+        <RetreatInquiryForm />
       </main>
+      <Footer />
+      <MobileBottomBar />
+    </div>
+  );
+}
+
+function RetreatInquiryForm() {
+  const { addInquiry } = useContentStore();
+  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({ org: "", contact: "", email: "", guests: 20, dates: "", type: "Church Retreat", message: "" });
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    addInquiry({
+      org: form.org, contact: form.contact, email: form.email,
+      guests: Number(form.guests) || 0, dates: form.dates, type: form.type, message: form.message,
+    });
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 4000);
+    setForm({ org: "", contact: "", email: "", guests: 20, dates: "", type: "Church Retreat", message: "" });
+  };
+
+  return (
+    <section id="inquire" className="py-[80px] md:py-[120px] bg-offwhite">
+      <div className="max-w-[900px] mx-auto px-6">
+        <div className="bg-teal-ghost rounded-[28px] p-10 md:p-16 reveal">
+          <div className="text-center mb-8">
+            <div className="eyebrow text-teal mb-3">Plan Your Retreat</div>
+            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 40px)" }} className="mb-3">Ready to plan your retreat?</h2>
+            <p className="text-text-muted max-w-[560px] mx-auto">Tell us about your group and we'll be in touch within one business day.</p>
+          </div>
+          {submitted && (
+            <div className="mb-6 px-5 py-4 rounded-xl text-[14px]" style={{ background: "rgba(43,122,111,0.10)", color: "#236158", border: "1px solid rgba(43,122,111,0.25)" }}>
+              Thank you — your inquiry has been received. Our team will reach out shortly.
+            </div>
+          )}
+          <form onSubmit={onSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Field label="Organization" required>
+              <input required value={form.org} onChange={(e) => setForm({ ...form, org: e.target.value })} className="inp" />
+            </Field>
+            <Field label="Contact Name" required>
+              <input required value={form.contact} onChange={(e) => setForm({ ...form, contact: e.target.value })} className="inp" />
+            </Field>
+            <Field label="Email" required>
+              <input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="inp" />
+            </Field>
+            <Field label="Estimated Guests">
+              <input type="number" min={1} value={form.guests} onChange={(e) => setForm({ ...form, guests: Number(e.target.value) })} className="inp" />
+            </Field>
+            <Field label="Preferred Dates">
+              <input value={form.dates} onChange={(e) => setForm({ ...form, dates: e.target.value })} placeholder="e.g. Oct 2026" className="inp" />
+            </Field>
+            <Field label="Retreat Type">
+              <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className="inp">
+                <option>Church Retreat</option><option>Youth Retreat</option><option>Corporate</option><option>Family</option><option>Other</option>
+              </select>
+            </Field>
+            <div className="md:col-span-2">
+              <Field label="Tell us more">
+                <textarea rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="inp resize-none" />
+              </Field>
+            </div>
+            <div className="md:col-span-2 flex flex-wrap items-center gap-4 justify-between">
+              <p className="text-[13px] text-text-muted">Or reach us at <a href="mailto:retreats@ferncliff.org" className="text-gold font-semibold">retreats@ferncliff.org</a> · (501) 821-3063</p>
+              <button type="submit" className="btn btn-teal">Send Inquiry</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <style>{`.inp{width:100%;height:42px;padding:0 14px;border-radius:10px;border:1px solid rgba(44,41,38,0.15);background:#FFFDF9;font-size:14px;color:#2c2926;font-family:inherit}.inp:focus{outline:none;border-color:#2B7A6F}textarea.inp{height:auto;padding:12px 14px}`}</style>
+    </section>
+  );
+}
+
+function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
+  return (
+    <label className="block">
+      <span className="block text-[12px] font-semibold uppercase tracking-wider text-text-muted mb-1.5">{label}{required && <span className="text-coral"> *</span>}</span>
+      {children}
+    </label>
+  );
+}
       <Footer />
       <MobileBottomBar />
     </div>
