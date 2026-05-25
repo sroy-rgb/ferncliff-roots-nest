@@ -33,6 +33,7 @@ import { Route as CampDatesRouteImport } from './routes/camp/dates'
 import { Route as AdminPagesRouteImport } from './routes/admin/pages'
 import { Route as AdminMediaRouteImport } from './routes/admin/media'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminCampRouteImport } from './routes/admin/camp'
 import { Route as AdminBlogRouteImport } from './routes/admin/blog'
 
 const RetreatsRoute = RetreatsRouteImport.update({
@@ -156,6 +157,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminCampRoute = AdminCampRouteImport.update({
+  id: '/admin/camp',
+  path: '/admin/camp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminBlogRoute = AdminBlogRouteImport.update({
   id: '/admin/blog',
   path: '/admin/blog',
@@ -170,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
   '/admin/blog': typeof AdminBlogRoute
+  '/admin/camp': typeof AdminCampRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/pages': typeof AdminPagesRoute
@@ -197,6 +204,7 @@ export interface FileRoutesByTo {
   '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
   '/admin/blog': typeof AdminBlogRoute
+  '/admin/camp': typeof AdminCampRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/pages': typeof AdminPagesRoute
@@ -225,6 +233,7 @@ export interface FileRoutesById {
   '/outreach': typeof OutreachRoute
   '/retreats': typeof RetreatsRoute
   '/admin/blog': typeof AdminBlogRoute
+  '/admin/camp': typeof AdminCampRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/pages': typeof AdminPagesRoute
@@ -254,6 +263,7 @@ export interface FileRouteTypes {
     | '/outreach'
     | '/retreats'
     | '/admin/blog'
+    | '/admin/camp'
     | '/admin/login'
     | '/admin/media'
     | '/admin/pages'
@@ -281,6 +291,7 @@ export interface FileRouteTypes {
     | '/outreach'
     | '/retreats'
     | '/admin/blog'
+    | '/admin/camp'
     | '/admin/login'
     | '/admin/media'
     | '/admin/pages'
@@ -308,6 +319,7 @@ export interface FileRouteTypes {
     | '/outreach'
     | '/retreats'
     | '/admin/blog'
+    | '/admin/camp'
     | '/admin/login'
     | '/admin/media'
     | '/admin/pages'
@@ -336,6 +348,7 @@ export interface RootRouteChildren {
   OutreachRoute: typeof OutreachRoute
   RetreatsRoute: typeof RetreatsRoute
   AdminBlogRoute: typeof AdminBlogRoute
+  AdminCampRoute: typeof AdminCampRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminMediaRoute: typeof AdminMediaRoute
   AdminPagesRoute: typeof AdminPagesRoute
@@ -526,6 +539,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/camp': {
+      id: '/admin/camp'
+      path: '/admin/camp'
+      fullPath: '/admin/camp'
+      preLoaderRoute: typeof AdminCampRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/blog': {
       id: '/admin/blog'
       path: '/admin/blog'
@@ -544,6 +564,7 @@ const rootRouteChildren: RootRouteChildren = {
   OutreachRoute: OutreachRoute,
   RetreatsRoute: RetreatsRoute,
   AdminBlogRoute: AdminBlogRoute,
+  AdminCampRoute: AdminCampRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminMediaRoute: AdminMediaRoute,
   AdminPagesRoute: AdminPagesRoute,
@@ -566,3 +587,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
