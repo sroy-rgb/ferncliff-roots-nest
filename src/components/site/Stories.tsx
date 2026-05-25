@@ -1,4 +1,5 @@
 import { ArrowRight } from "@phosphor-icons/react";
+import { Link } from "@tanstack/react-router";
 
 export function Stories() {
   return (
@@ -11,7 +12,7 @@ export function Stories() {
               Lives changed at <span className="hw">Ferncliff</span>
             </h2>
           </div>
-          <a href="#" className="link-arrow">All Stories <ArrowRight size={14} weight="bold" /></a>
+          <Link to="/stories" className="link-arrow">All Stories <ArrowRight size={14} weight="bold" /></Link>
         </div>
 
         <div
@@ -19,7 +20,8 @@ export function Stories() {
           style={{ gridTemplateColumns: "minmax(0,1.2fr) minmax(0,0.8fr) minmax(0,1fr)", gridTemplateRows: "auto auto" }}
         >
           {/* Featured */}
-          <article
+          <Link
+            to="/stories/emelia-lee"
             className="reveal relative bg-white rounded-[20px] overflow-hidden group cursor-pointer transition-all duration-[400ms] hover:-translate-y-1 col-span-3 md:col-span-1 row-span-1 md:row-span-2"
             style={{ boxShadow: "0 2px 16px rgba(44,41,38,0.06)" }}
           >
@@ -45,9 +47,10 @@ export function Stories() {
                 When Emelia's family began looking for a preschool, her mom was searching for a place that felt different...
               </p>
             </div>
-          </article>
+          </Link>
 
           <StoryCard
+            to="/stories/rebecca-spooner"
             img="https://images.pexels.com/photos/4971042/pexels-photo-4971042.jpeg?auto=compress&cs=tinysrgb&w=600"
             alt="Parents lifting their daughter joyfully outdoors"
             tag="Support"
@@ -58,6 +61,7 @@ export function Stories() {
           />
           <div className="hidden md:block" />
           <StoryCard
+            to="/stories/anyone-can-make-a-difference"
             img="https://images.pexels.com/photos/30563253/pexels-photo-30563253.jpeg?auto=compress&cs=tinysrgb&w=600"
             alt="Campsite"
             tag="Giving"
@@ -74,13 +78,14 @@ export function Stories() {
 }
 
 function StoryCard({
-  img, alt, tag, tagBg, tagColor, tagColorHex, title, text,
+  to, img, alt, tag, tagBg, tagColor, tagColorHex, title, text,
 }: {
-  img: string; alt: string; tag: string; tagBg: string; tagColor: string; tagColorHex?: string; title: string; text: string;
+  to: string; img: string; alt: string; tag: string; tagBg: string; tagColor: string; tagColorHex?: string; title: string; text: string;
 }) {
   return (
-    <article
-      className="reveal bg-white rounded-[20px] overflow-hidden group cursor-pointer transition-all duration-[400ms] hover:-translate-y-1"
+    <Link
+      to={to}
+      className="reveal bg-white rounded-[20px] overflow-hidden group cursor-pointer transition-all duration-[400ms] hover:-translate-y-1 block"
       style={{ boxShadow: "0 2px 16px rgba(44,41,38,0.06)" }}
     >
       <div className="h-[200px] overflow-hidden">
@@ -96,6 +101,7 @@ function StoryCard({
         <h3 className="font-sans text-[16px] font-bold text-dark mb-1.5 leading-snug">{title}</h3>
         <p className="text-[13px] text-text-muted">{text}</p>
       </div>
-    </article>
+    </Link>
   );
 }
+
