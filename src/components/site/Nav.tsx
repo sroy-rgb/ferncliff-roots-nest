@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
+import { useAdminAuth } from "@/components/admin/adminStore";
 import {
   MoonStars, Sun, Compass, Backpack, Bed, PresentationChart,
   ForkKnife, PaperPlaneTilt, Tree, Heart, Leaf, Users, MapPin, CaretDown,
 } from "@phosphor-icons/react";
+
 
 
 const LOGO = "https://resources.ferncliff.org/hs-fs/hubfs/FRN.01_Logo-Color-wo.png?width=353&height=200";
@@ -59,6 +61,8 @@ const navItems = [
 export function Nav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHome = pathname === "/";
+  const { loggedIn } = useAdminAuth();
+  const adminBarOffset = loggedIn ? 36 : 0;
   const [scrolledRaw, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -71,14 +75,16 @@ export function Nav() {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 h-[72px] z-[1000] transition-all duration-300"
+      className="fixed left-0 right-0 h-[72px] z-[1000] transition-all duration-300"
       style={{
+        top: adminBarOffset,
         background: scrolled ? "#FFFDF9" : "transparent",
         backdropFilter: scrolled && isHome ? "blur(20px)" : "none",
         boxShadow: scrolled ? "0 1px 0 #E8E2D8" : "none",
         borderBottom: scrolled && !isHome ? "1px solid #E8E2D8" : "none",
       }}
     >
+
       <div className="h-full max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between gap-6">
         <a href="/" className="flex items-center shrink-0">
           <img
