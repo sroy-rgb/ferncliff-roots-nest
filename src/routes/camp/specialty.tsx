@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CampLayout } from "@/components/site/CampLayout";
-import { CampHero } from "@/components/site/CampHero";
-import { Drop, MoonStars } from "@phosphor-icons/react";
+import { CampHero, HeroEm } from "@/components/site/CampHero";
+import { SectionIntro, Hw } from "@/components/site/SectionIntro";
 
 export const Route = createFileRoute("/camp/specialty")({
   head: () => ({
@@ -17,20 +17,20 @@ export const Route = createFileRoute("/camp/specialty")({
 
 const camps = [
   {
-    icon: <Drop size={32} />,
+    tag: "Water Adventure",
+    tagBg: "#d4eefa",
+    tagColor: "#1a6b8a",
     title: "Hydro Water Camp",
-    meta: "Grades 4–8 · 5 days, 4 nights",
-    dates: "July 19–23",
-    desc: "A water-focused camp week with expanded lake and pool activities. Canoeing, paddleboarding, swim challenges, water games, and aquatic ecology — perfect for campers who can't get enough of the water.",
-    tiers: ["$595", "$475", "$350"],
+    body: "A water-focused camp week with expanded lake and pool activities — canoeing, kayaking, swimming games, water slides, and more. All the classic camp fun with extra time on the water.",
+    meta: "Grades: 3rd–12th · Duration: Full week",
   },
   {
-    icon: <MoonStars size={32} />,
+    tag: "After Dark",
+    tagBg: "#e8e0f0",
+    tagColor: "#6b4c8a",
     title: "Night Owl Camp",
-    meta: "Grades 6–12 · 5 days, 4 nights",
-    dates: "July 26–30",
-    desc: "Late-night programming, stargazing, campfire cooking, night hikes, and unique evening activities. Sleep in late, stay up by the fire — a camp week designed for the nocturnally inclined.",
-    tiers: ["$625", "$495", "$365"],
+    body: "Late-night programming, stargazing, campfire cooking, night hikes, and unique evening activities. Sleep in and stay up late — a totally different camp rhythm.",
+    meta: "Grades: 6th–12th · Duration: Full week",
   },
 ];
 
@@ -40,35 +40,52 @@ function SpecialtyPage() {
       <CampHero
         image="https://images.pexels.com/photos/5622131/pexels-photo-5622131.jpeg?auto=compress&cs=tinysrgb&w=1920"
         eyebrow="Specialty Camps"
-        title="Specialty Camps"
-        subtitle="Theme-based experiences for adventurous campers."
-      />
+        title={<>For the <HeroEm>adventurous</HeroEm> camper</>}
+        subtitle="Theme-based camp weeks designed for older campers who want a more focused experience."
+      >
+        <Link to="/camp/register" className="btn btn-teal">Register Now</Link>
+      </CampHero>
 
-      <section className="py-[80px] md:py-[120px] bg-offwhite">
-        <div className="max-w-[1100px] mx-auto px-8 space-y-8">
-          {camps.map((c) => (
-            <div key={c.title} className="bg-white rounded-[20px] p-8 grid grid-cols-1 md:grid-cols-[80px_1fr] gap-6 reveal" style={{ boxShadow: "0 8px 24px rgba(44,41,38,0.06)" }}>
-              <div className="text-teal">{c.icon}</div>
-              <div>
-                <h3 className="text-[28px] mb-1">{c.title}</h3>
-                <p className="text-teal font-bold text-[13px] uppercase tracking-[2px] mb-3">{c.meta}</p>
-                <p className="text-text-body mb-4">{c.desc}</p>
-                <div className="bg-cream rounded-[12px] p-4 mb-5">
-                  <div className="text-[11px] uppercase tracking-[2px] font-bold text-gold mb-1">Dates</div>
-                  <p className="text-[14px] text-dark-warm">{c.dates}</p>
-                </div>
-                <div className="grid grid-cols-3 gap-3 mb-5">
-                  {["Tier 1", "Tier 2", "Tier 3"].map((label, idx) => (
-                    <div key={label} className="bg-cream rounded-[12px] p-4 text-center">
-                      <div className="text-[11px] uppercase tracking-[1px] font-bold text-text-muted mb-1">{label}</div>
-                      <div className="font-serif text-teal text-[24px]">{c.tiers[idx]}</div>
-                    </div>
-                  ))}
-                </div>
+      <section className="py-[100px] bg-cream">
+        <div className="max-w-[1100px] mx-auto px-8">
+          <SectionIntro
+            eyebrow="Specialty Camps"
+            title={<>For the <Hw>adventurous</Hw> camper</>}
+            subtitle="Theme-based weeks for older campers who want a more focused experience."
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {camps.map((c) => (
+              <div
+                key={c.title}
+                className="bg-white rounded-[28px] p-9 reveal"
+                style={{ boxShadow: "0 8px 32px rgba(44,41,38,0.06)" }}
+              >
+                <span
+                  className="inline-block text-[11px] font-bold uppercase tracking-[2px] px-3 py-1 rounded-full mb-4"
+                  style={{ background: c.tagBg, color: c.tagColor }}
+                >
+                  {c.tag}
+                </span>
+                <h3 style={{ fontSize: 28, marginBottom: 12 }}>{c.title}</h3>
+                <p className="text-[15px] text-text-body mb-3">{c.body}</p>
+                <p className="text-[14px] text-text-muted mb-5"><strong>{c.meta}</strong></p>
                 <Link to="/camp/register" className="btn btn-teal btn-sm">Register for {c.title}</Link>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-[100px] bg-offwhite text-center">
+        <div className="max-w-[700px] mx-auto px-8 reveal">
+          <div className="rounded-[28px] px-10 py-12" style={{ background: "var(--color-teal-ghost)" }}>
+            <h3 style={{ fontSize: "clamp(26px, 3vw, 32px)", marginBottom: 12 }}>
+              Looking for something <Hw>different?</Hw>
+            </h3>
+            <p className="text-text-muted mb-7">More specialty weeks are added each season. Get on our list to hear first.</p>
+            <Link to="/camp/register" className="btn btn-teal">Register Now</Link>
+          </div>
         </div>
       </section>
     </CampLayout>
