@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { CampLayout } from "@/components/site/CampLayout";
-import { CampHero } from "@/components/site/CampHero";
+import { CampHero, HeroEm } from "@/components/site/CampHero";
+import { SectionIntro, Hw } from "@/components/site/SectionIntro";
 import { Eye, X, ArrowLeft, ArrowRight } from "@phosphor-icons/react";
 
 export const Route = createFileRoute("/camp/gallery")({
