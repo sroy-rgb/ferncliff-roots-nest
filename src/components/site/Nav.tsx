@@ -107,10 +107,11 @@ export function Nav() {
                   <CaretDown
                     size={12}
                     weight="bold"
-                    className="transition-transform duration-300 ease-out group-hover:rotate-180"
-                    style={{ color: "var(--color-gold)" }}
+                    className="transition-transform duration-300 ease-out group-hover:rotate-180 animate-caret-bounce"
+                    style={{ color: scrolled ? "var(--color-gold)" : "#ffffff" }}
                   />
                 )}
+
               </Link>
               {item.mega && <MegaMenu mega={item.mega} />}
             </div>
