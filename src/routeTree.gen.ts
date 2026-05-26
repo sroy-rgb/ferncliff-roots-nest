@@ -37,6 +37,7 @@ import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminSeoRouteImport } from './routes/admin/seo'
 import { Route as AdminRoadmapRouteImport } from './routes/admin/roadmap'
 import { Route as AdminRetreatsRouteImport } from './routes/admin/retreats'
+import { Route as AdminRegistrationsRouteImport } from './routes/admin/registrations'
 import { Route as AdminPagesRouteImport } from './routes/admin/pages'
 import { Route as AdminOutreachRouteImport } from './routes/admin/outreach'
 import { Route as AdminNatureRouteImport } from './routes/admin/nature'
@@ -188,6 +189,11 @@ const AdminRetreatsRoute = AdminRetreatsRouteImport.update({
   path: '/admin/retreats',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRegistrationsRoute = AdminRegistrationsRouteImport.update({
+  id: '/admin/registrations',
+  path: '/admin/registrations',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminPagesRoute = AdminPagesRouteImport.update({
   id: '/admin/pages',
   path: '/admin/pages',
@@ -250,6 +256,7 @@ export interface FileRoutesByFullPath {
   '/admin/nature': typeof AdminNatureRoute
   '/admin/outreach': typeof AdminOutreachRoute
   '/admin/pages': typeof AdminPagesRoute
+  '/admin/registrations': typeof AdminRegistrationsRoute
   '/admin/retreats': typeof AdminRetreatsRoute
   '/admin/roadmap': typeof AdminRoadmapRoute
   '/admin/seo': typeof AdminSeoRoute
@@ -289,6 +296,7 @@ export interface FileRoutesByTo {
   '/admin/nature': typeof AdminNatureRoute
   '/admin/outreach': typeof AdminOutreachRoute
   '/admin/pages': typeof AdminPagesRoute
+  '/admin/registrations': typeof AdminRegistrationsRoute
   '/admin/retreats': typeof AdminRetreatsRoute
   '/admin/roadmap': typeof AdminRoadmapRoute
   '/admin/seo': typeof AdminSeoRoute
@@ -329,6 +337,7 @@ export interface FileRoutesById {
   '/admin/nature': typeof AdminNatureRoute
   '/admin/outreach': typeof AdminOutreachRoute
   '/admin/pages': typeof AdminPagesRoute
+  '/admin/registrations': typeof AdminRegistrationsRoute
   '/admin/retreats': typeof AdminRetreatsRoute
   '/admin/roadmap': typeof AdminRoadmapRoute
   '/admin/seo': typeof AdminSeoRoute
@@ -370,6 +379,7 @@ export interface FileRouteTypes {
     | '/admin/nature'
     | '/admin/outreach'
     | '/admin/pages'
+    | '/admin/registrations'
     | '/admin/retreats'
     | '/admin/roadmap'
     | '/admin/seo'
@@ -409,6 +419,7 @@ export interface FileRouteTypes {
     | '/admin/nature'
     | '/admin/outreach'
     | '/admin/pages'
+    | '/admin/registrations'
     | '/admin/retreats'
     | '/admin/roadmap'
     | '/admin/seo'
@@ -448,6 +459,7 @@ export interface FileRouteTypes {
     | '/admin/nature'
     | '/admin/outreach'
     | '/admin/pages'
+    | '/admin/registrations'
     | '/admin/retreats'
     | '/admin/roadmap'
     | '/admin/seo'
@@ -488,6 +500,7 @@ export interface RootRouteChildren {
   AdminNatureRoute: typeof AdminNatureRoute
   AdminOutreachRoute: typeof AdminOutreachRoute
   AdminPagesRoute: typeof AdminPagesRoute
+  AdminRegistrationsRoute: typeof AdminRegistrationsRoute
   AdminRetreatsRoute: typeof AdminRetreatsRoute
   AdminRoadmapRoute: typeof AdminRoadmapRoute
   AdminSeoRoute: typeof AdminSeoRoute
@@ -710,6 +723,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRetreatsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/registrations': {
+      id: '/admin/registrations'
+      path: '/admin/registrations'
+      fullPath: '/admin/registrations'
+      preLoaderRoute: typeof AdminRegistrationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/pages': {
       id: '/admin/pages'
       path: '/admin/pages'
@@ -792,6 +812,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminNatureRoute: AdminNatureRoute,
   AdminOutreachRoute: AdminOutreachRoute,
   AdminPagesRoute: AdminPagesRoute,
+  AdminRegistrationsRoute: AdminRegistrationsRoute,
   AdminRetreatsRoute: AdminRetreatsRoute,
   AdminRoadmapRoute: AdminRoadmapRoute,
   AdminSeoRoute: AdminSeoRoute,
