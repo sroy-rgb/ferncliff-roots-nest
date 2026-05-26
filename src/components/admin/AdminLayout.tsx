@@ -167,11 +167,14 @@ export function Card({ children, className = "" }: { children: ReactNode; classN
   );
 }
 
-export function StatCard({ value, label, sub, accent = "teal", arrow }: { value: string; label: string; sub?: string; accent?: "teal" | "gold"; arrow?: "up" | "down" }) {
+export function StatCard({ value, label, sub, accent = "teal", arrow, to }: { value: string; label: string; sub?: string; accent?: "teal" | "gold"; arrow?: "up" | "down"; to?: string }) {
   const color = accent === "teal" ? "#2B7A6F" : "#C49A3C";
-  return (
-    <Card className="p-5">
-      <div className="text-[11px] uppercase tracking-wider text-[#8a857c]">{label}</div>
+  const inner = (
+    <Card className={`p-5 h-full ${to ? "transition-all hover:shadow-[0_4px_16px_rgba(44,41,38,0.08)] hover:-translate-y-0.5 hover:border-[#2B7A6F]/40 cursor-pointer group" : ""}`}>
+      <div className="flex items-center justify-between">
+        <div className="text-[11px] uppercase tracking-wider text-[#8a857c]">{label}</div>
+        {to && <span className="text-[#8a857c] group-hover:text-[#2B7A6F] transition-colors text-[14px]">→</span>}
+      </div>
       <div className="mt-2 flex items-baseline gap-2">
         <div className="text-[34px] leading-none" style={{ color, fontFamily: SERIF, fontWeight: 500 }}>{value}</div>
       </div>
@@ -183,6 +186,8 @@ export function StatCard({ value, label, sub, accent = "teal", arrow }: { value:
       )}
     </Card>
   );
+  if (to) return <Link to={to} className="block">{inner}</Link>;
+  return inner;
 }
 
 export function Pill({ children, color = "grey" }: { children: ReactNode; color?: "green" | "yellow" | "grey" | "red" | "teal" | "gold" | "purple" }) {
