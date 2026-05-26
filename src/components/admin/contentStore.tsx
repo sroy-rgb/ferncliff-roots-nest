@@ -175,6 +175,8 @@ const initial: State = {
     { id: 4, text: "Retreat inquiry — First Presbyterian, 45 guests", dot: "#2B7A6F", time: "Yesterday", ts: Date.now() - 86400_000 },
     { id: 5, text: "Volunteer application — Mission Teams", dot: "#C49A3C", time: "2 days ago", ts: Date.now() - 172800_000 },
   ],
+  registrations: [],
+  volunteerRequests: [],
 };
 
 const ContentCtx = createContext<Ctx | null>(null);
