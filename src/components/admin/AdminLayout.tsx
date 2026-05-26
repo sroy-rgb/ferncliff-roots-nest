@@ -3,7 +3,7 @@ import { useState, type ReactNode } from "react";
 import {
   House, Files, Article, Images, Campfire, Buildings, Leaf, HandHeart,
   Heart, Envelope, ChatsCircle, UsersThree, UserGear, ChartLine, Sparkle,
-  Gear, Globe, List, X, SignOut,
+  Gear, Globe, List, X, SignOut, ClipboardText,
 } from "@phosphor-icons/react";
 import { useAdminAuth } from "./adminStore";
 
