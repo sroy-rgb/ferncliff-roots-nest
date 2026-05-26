@@ -7,7 +7,8 @@ import { MobileBottomBar } from "@/components/site/MobileBottomBar";
 import { AnchorSubNav } from "@/components/site/AnchorSubNav";
 import { CampHero, HeroEm } from "@/components/site/CampHero";
 import { SectionIntro, Hw } from "@/components/site/SectionIntro";
-import { Heart, ArrowsClockwise, Handshake, Lock, ShieldCheck, EyeSlash, ArrowRight } from "@phosphor-icons/react";
+import { Heart, ArrowsClockwise, Handshake, Lock, ShieldCheck, EyeSlash, ArrowRight, CheckCircle } from "@phosphor-icons/react";
+import { useContentStore } from "@/components/admin/contentStore";
 
 export const Route = createFileRoute("/giving")({
   head: () => ({
