@@ -41,7 +41,7 @@ export function Giving() {
           </div>
           <div className="flex flex-wrap gap-4">
             <button onClick={() => setOpen(true)} className="btn btn-coral">Give Today</button>
-            <Link to="/giving" search={{}} hash="friends" className="btn btn-outline">Join Friends of Ferncliff</Link>
+            <Link to="/giving" className="btn btn-outline">Join Friends of Ferncliff</Link>
           </div>
         </div>
 
