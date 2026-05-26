@@ -34,9 +34,11 @@ function DashboardPage() {
     return () => clearInterval(t);
   }, []);
 
-  const totalReg = campSessions.reduce((s, c) => s + c.registered, 0) + registrations.length;
+  const totalReg = registrations.length;
   const monthDonations = donations.reduce((s, d) => s + d.amount, 0);
+  const totalInquiries = inquiries.length;
   const pendingInquiries = inquiries.filter((i) => i.status === "new").length;
+  const totalVolunteers = volunteerRequests.length;
   const newVolunteers = volunteerRequests.filter((v) => v.status === "new").length;
   const newRegs = registrations.filter((r) => r.status === "new").length;
 
@@ -60,10 +62,11 @@ function DashboardPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <StatCard to="/admin/registrations" accent="teal" value={String(totalReg)} label="Total Registrations" sub={`${newRegs} new · click to manage`} arrow={newRegs > 0 ? "up" : undefined} />
-        <StatCard to="/admin/inquiries" accent="gold" value={String(pendingInquiries)} label="Pending Inquiries" sub={`${inquiries.length} total · click to resolve`} />
-        <StatCard to="/admin/volunteers" accent="teal" value={String(newVolunteers)} label="New Volunteer Requests" sub={`${volunteerRequests.length} total · click to assign`} arrow={newVolunteers > 0 ? "up" : undefined} />
+        <StatCard to="/admin/inquiries" accent="gold" value={String(totalInquiries)} label="Retreat Inquiries" sub={`${pendingInquiries} pending · click to resolve`} />
+        <StatCard to="/admin/volunteers" accent="teal" value={String(totalVolunteers)} label="Volunteer Requests" sub={`${newVolunteers} new · click to assign`} arrow={newVolunteers > 0 ? "up" : undefined} />
         <StatCard to="/admin/giving" accent="gold" value={fmtMoney(monthDonations)} label="Donations This Month" sub={`${donations.length} gifts · click to view`} arrow="up" />
       </div>
+
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
         <Card className="p-5">
