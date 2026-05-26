@@ -93,6 +93,33 @@ export type VolunteerRequest = {
   received: string;
 };
 
+export type Enrollment = {
+  id: number;
+  childName: string;
+  childAge: number;
+  parentName: string;
+  email: string;
+  phone: string;
+  program: string;
+  startDate: string;
+  notes?: string;
+  status: "new" | "confirmed" | "waitlist" | "cancelled";
+  receivedISO: string;
+  received: string;
+};
+
+export type GeneralInquiry = {
+  id: number;
+  name: string;
+  email: string;
+  source: string;
+  subject: string;
+  message: string;
+  status: "pending" | "acknowledged" | "resolved";
+  receivedISO: string;
+  received: string;
+};
+
 type State = {
   homepage: Homepage;
   pages: PageEntry[];
@@ -103,6 +130,8 @@ type State = {
   activity: ActivityEvent[];
   registrations: Registration[];
   volunteerRequests: VolunteerRequest[];
+  enrollments: Enrollment[];
+  generalInquiries: GeneralInquiry[];
 };
 
 type Ctx = State & {
@@ -115,6 +144,11 @@ type Ctx = State & {
   setRegistrationStatus: (id: number, status: Registration["status"]) => void;
   addVolunteerRequest: (v: Omit<VolunteerRequest, "id" | "received" | "receivedISO" | "status">) => void;
   setVolunteerStatus: (id: number, status: VolunteerRequest["status"]) => void;
+  addEnrollment: (e: Omit<Enrollment, "id" | "received" | "receivedISO" | "status">) => void;
+  setEnrollmentStatus: (id: number, status: Enrollment["status"]) => void;
+  addGeneralInquiry: (g: Omit<GeneralInquiry, "id" | "received" | "receivedISO" | "status">) => void;
+  setGeneralInquiryStatus: (id: number, status: GeneralInquiry["status"]) => void;
+  addDonation: (d: Omit<Donation, "id" | "date">) => void;
   pushActivity: (text: string, dot?: string) => void;
 };
 
