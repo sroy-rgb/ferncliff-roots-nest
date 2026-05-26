@@ -59,10 +59,10 @@ function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <StatCard accent="teal" value={String(totalReg)} label="Total Registrations" sub={`${newRegs} new this session`} arrow={newRegs > 0 ? "up" : undefined} />
-        <StatCard accent="gold" value={String(pendingInquiries)} label="Pending Inquiries" sub={`${inquiries.length} total in queue`} />
-        <StatCard accent="teal" value={String(newVolunteers)} label="New Volunteer Requests" sub={`${volunteerRequests.length} total`} arrow={newVolunteers > 0 ? "up" : undefined} />
-        <StatCard accent="gold" value={fmtMoney(monthDonations)} label="Donations This Month" sub="+8% vs last month" arrow="up" />
+        <StatCard to="/admin/registrations" accent="teal" value={String(totalReg)} label="Total Registrations" sub={`${newRegs} new · click to manage`} arrow={newRegs > 0 ? "up" : undefined} />
+        <StatCard to="/admin/inquiries" accent="gold" value={String(pendingInquiries)} label="Pending Inquiries" sub={`${inquiries.length} total · click to resolve`} />
+        <StatCard to="/admin/volunteers" accent="teal" value={String(newVolunteers)} label="New Volunteer Requests" sub={`${volunteerRequests.length} total · click to assign`} arrow={newVolunteers > 0 ? "up" : undefined} />
+        <StatCard to="/admin/giving" accent="gold" value={fmtMoney(monthDonations)} label="Donations This Month" sub={`${donations.length} gifts · click to view`} arrow="up" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
