@@ -67,6 +67,32 @@ export type Homepage = {
   campaignGoal: number;
 };
 
+export type Registration = {
+  id: number;
+  camperName: string;
+  parentName: string;
+  email: string;
+  phone: string;
+  session: string;
+  campType: string;
+  age: number;
+  notes?: string;
+  status: "new" | "confirmed" | "waitlist" | "cancelled";
+  receivedISO: string;
+  received: string;
+};
+
+export type VolunteerRequest = {
+  id: number;
+  name: string;
+  email: string;
+  interest: string;
+  message?: string;
+  status: "new" | "acknowledged" | "in-progress" | "resolved";
+  receivedISO: string;
+  received: string;
+};
+
 type State = {
   homepage: Homepage;
   pages: PageEntry[];
@@ -75,6 +101,8 @@ type State = {
   inquiries: Inquiry[];
   donations: Donation[];
   activity: ActivityEvent[];
+  registrations: Registration[];
+  volunteerRequests: VolunteerRequest[];
 };
 
 type Ctx = State & {
@@ -83,6 +111,10 @@ type Ctx = State & {
   setBlogStatus: (id: number, status: BlogPost["status"]) => void;
   addInquiry: (i: Omit<Inquiry, "id" | "received" | "status">) => void;
   setInquiryStatus: (id: number, status: Inquiry["status"]) => void;
+  addRegistration: (r: Omit<Registration, "id" | "received" | "receivedISO" | "status">) => void;
+  setRegistrationStatus: (id: number, status: Registration["status"]) => void;
+  addVolunteerRequest: (v: Omit<VolunteerRequest, "id" | "received" | "receivedISO" | "status">) => void;
+  setVolunteerStatus: (id: number, status: VolunteerRequest["status"]) => void;
   pushActivity: (text: string, dot?: string) => void;
 };
 
@@ -143,6 +175,8 @@ const initial: State = {
     { id: 4, text: "Retreat inquiry — First Presbyterian, 45 guests", dot: "#2B7A6F", time: "Yesterday", ts: Date.now() - 86400_000 },
     { id: 5, text: "Volunteer application — Mission Teams", dot: "#C49A3C", time: "2 days ago", ts: Date.now() - 172800_000 },
   ],
+  registrations: [],
+  volunteerRequests: [],
 };
 
 const ContentCtx = createContext<Ctx | null>(null);
@@ -226,8 +260,68 @@ export function ContentStoreProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const fmtTime = (d: Date) => d.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+
+  const addRegistration: Ctx["addRegistration"] = useCallback((r) => {
+    setState((s) => {
+      const now = new Date();
+      const reg: Registration = { ...r, id: ++nextInquiryId, status: "new", receivedISO: now.toISOString(), received: fmtTime(now) };
+      return {
+        ...s,
+        registrations: [reg, ...s.registrations],
+        activity: [
+          { id: ++nextActivityId, text: `New camp registration — ${r.camperName} · ${r.session}`, dot: "#2B7A6F", time: "Just now", ts: Date.now() },
+          ...s.activity,
+        ],
+      };
+    });
+  }, []);
+
+  const setRegistrationStatus = useCallback((id: number, status: Registration["status"]) => {
+    setState((s) => {
+      const next = s.registrations.map((r) => (r.id === id ? { ...r, status } : r));
+      const reg = next.find((r) => r.id === id);
+      return {
+        ...s,
+        registrations: next,
+        activity: reg
+          ? [{ id: ++nextActivityId, text: `Registration ${status} — ${reg.camperName}`, dot: "#2B7A6F", time: "Just now", ts: Date.now() }, ...s.activity]
+          : s.activity,
+      };
+    });
+  }, []);
+
+  const addVolunteerRequest: Ctx["addVolunteerRequest"] = useCallback((v) => {
+    setState((s) => {
+      const now = new Date();
+      const vol: VolunteerRequest = { ...v, id: ++nextInquiryId, status: "new", receivedISO: now.toISOString(), received: fmtTime(now) };
+      return {
+        ...s,
+        volunteerRequests: [vol, ...s.volunteerRequests],
+        activity: [
+          { id: ++nextActivityId, text: `Volunteer request — ${v.name} · ${v.interest}`, dot: "#C49A3C", time: "Just now", ts: Date.now() },
+          ...s.activity,
+        ],
+      };
+    });
+  }, []);
+
+  const setVolunteerStatus = useCallback((id: number, status: VolunteerRequest["status"]) => {
+    setState((s) => {
+      const next = s.volunteerRequests.map((v) => (v.id === id ? { ...v, status } : v));
+      const vol = next.find((v) => v.id === id);
+      return {
+        ...s,
+        volunteerRequests: next,
+        activity: vol
+          ? [{ id: ++nextActivityId, text: `Volunteer ${status} — ${vol.name}`, dot: "#C49A3C", time: "Just now", ts: Date.now() }, ...s.activity]
+          : s.activity,
+      };
+    });
+  }, []);
+
   return (
-    <ContentCtx.Provider value={{ ...state, updateHomepage, updatePage, setBlogStatus, addInquiry, setInquiryStatus, pushActivity }}>
+    <ContentCtx.Provider value={{ ...state, updateHomepage, updatePage, setBlogStatus, addInquiry, setInquiryStatus, addRegistration, setRegistrationStatus, addVolunteerRequest, setVolunteerStatus, pushActivity }}>
       {children}
     </ContentCtx.Provider>
   );
