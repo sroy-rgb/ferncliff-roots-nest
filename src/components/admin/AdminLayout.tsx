@@ -28,7 +28,7 @@ const sections: NavSection[] = [
     { to: "/admin/giving", label: "Donations & Giving", Icon: Heart },
     { to: "/admin/subscribers", label: "Email Subscribers", Icon: Envelope },
     { to: "/admin/inquiries", label: "Inquiries & Forms", Icon: ChatsCircle },
-    { to: "/admin/volunteers", label: "Volunteer Applications", Icon: UsersThree },
+    { to: "/admin/volunteers", label: "Volunteer Requests", Icon: UsersThree },
   ]},
   { label: "System", items: [
     { to: "/admin/users", label: "Users & Roles", Icon: UserGear },
