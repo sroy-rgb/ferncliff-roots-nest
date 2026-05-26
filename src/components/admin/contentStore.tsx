@@ -93,6 +93,33 @@ export type VolunteerRequest = {
   received: string;
 };
 
+export type Enrollment = {
+  id: number;
+  childName: string;
+  childAge: number;
+  parentName: string;
+  email: string;
+  phone: string;
+  program: string;
+  startDate: string;
+  notes?: string;
+  status: "new" | "confirmed" | "waitlist" | "cancelled";
+  receivedISO: string;
+  received: string;
+};
+
+export type GeneralInquiry = {
+  id: number;
+  name: string;
+  email: string;
+  source: string;
+  subject: string;
+  message: string;
+  status: "pending" | "acknowledged" | "resolved";
+  receivedISO: string;
+  received: string;
+};
+
 type State = {
   homepage: Homepage;
   pages: PageEntry[];
@@ -103,6 +130,8 @@ type State = {
   activity: ActivityEvent[];
   registrations: Registration[];
   volunteerRequests: VolunteerRequest[];
+  enrollments: Enrollment[];
+  generalInquiries: GeneralInquiry[];
 };
 
 type Ctx = State & {
@@ -115,6 +144,11 @@ type Ctx = State & {
   setRegistrationStatus: (id: number, status: Registration["status"]) => void;
   addVolunteerRequest: (v: Omit<VolunteerRequest, "id" | "received" | "receivedISO" | "status">) => void;
   setVolunteerStatus: (id: number, status: VolunteerRequest["status"]) => void;
+  addEnrollment: (e: Omit<Enrollment, "id" | "received" | "receivedISO" | "status">) => void;
+  setEnrollmentStatus: (id: number, status: Enrollment["status"]) => void;
+  addGeneralInquiry: (g: Omit<GeneralInquiry, "id" | "received" | "receivedISO" | "status">) => void;
+  setGeneralInquiryStatus: (id: number, status: GeneralInquiry["status"]) => void;
+  addDonation: (d: Omit<Donation, "id" | "date">) => void;
   pushActivity: (text: string, dot?: string) => void;
 };
 
@@ -188,6 +222,17 @@ const initial: State = {
     { id: 303, name: "Megan Carter", email: "megan.carter@example.com", interest: "Nature School Helper", message: "Retired teacher, available Tues/Thurs mornings.", status: "new", receivedISO: new Date(Date.now() - 5_400_000).toISOString(), received: "May 26, 7:48 AM" },
     { id: 304, name: "David Nguyen", email: "dnguyen@example.com", interest: "Retreat Hospitality", status: "resolved", receivedISO: new Date(Date.now() - 432_000_000).toISOString(), received: "May 21, 3:00 PM" },
   ],
+  enrollments: [
+    { id: 401, childName: "Mia Foster", childAge: 4, parentName: "Allison Foster", email: "allison.f@example.com", phone: "(501) 555-0144", program: "Nature Preschool", startDate: "Sep 2026", status: "confirmed", receivedISO: new Date(Date.now() - 172_800_000).toISOString(), received: "May 24, 9:00 AM" },
+    { id: 402, childName: "Owen Hayes", childAge: 5, parentName: "Jeremy Hayes", email: "j.hayes@example.com", phone: "(479) 555-0177", program: "Nature Preschool", startDate: "Sep 2026", notes: "Returning sibling", status: "new", receivedISO: new Date(Date.now() - 7_200_000).toISOString(), received: "May 26, 7:42 AM" },
+    { id: 403, childName: "Lila Greene", childAge: 7, parentName: "Tara Greene", email: "tara.g@example.com", phone: "(501) 555-0193", program: "Wildcraft", startDate: "Aug 2026", status: "waitlist", receivedISO: new Date(Date.now() - 259_200_000).toISOString(), received: "May 23, 1:18 PM" },
+  ],
+  generalInquiries: [
+    { id: 501, name: "Patricia Long", email: "p.long@example.com", source: "Contact", subject: "Facility tour request", message: "Would love to tour the campus for an upcoming women's retreat.", status: "pending", receivedISO: new Date(Date.now() - 3_600_000).toISOString(), received: "May 26, 8:00 AM" },
+    { id: 502, name: "Brian Walsh", email: "brian.w@example.com", source: "Give", subject: "Question about monthly giving", message: "Can I change my recurring gift amount?", status: "acknowledged", receivedISO: new Date(Date.now() - 86_400_000).toISOString(), received: "May 25, 11:20 AM" },
+    { id: 503, name: "Sara Kim", email: "sara.k@example.com", source: "Volunteer", subject: "Group volunteer slot", message: "Our youth group has 12 people available July 15.", status: "pending", receivedISO: new Date(Date.now() - 18_000_000).toISOString(), received: "May 26, 3:00 AM" },
+  ],
+
 };
 
 const ContentCtx = createContext<Ctx | null>(null);
@@ -331,8 +376,86 @@ export function ContentStoreProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const addEnrollment: Ctx["addEnrollment"] = useCallback((e) => {
+    setState((s) => {
+      const now = new Date();
+      const enr: Enrollment = { ...e, id: ++nextInquiryId, status: "new", receivedISO: now.toISOString(), received: fmtTime(now) };
+      return {
+        ...s,
+        enrollments: [enr, ...s.enrollments],
+        activity: [
+          { id: ++nextActivityId, text: `New enrollment — ${e.childName} · ${e.program}`, dot: "#2B7A6F", time: "Just now", ts: Date.now() },
+          ...s.activity,
+        ],
+      };
+    });
+  }, []);
+
+  const setEnrollmentStatus = useCallback((id: number, status: Enrollment["status"]) => {
+    setState((s) => {
+      const next = s.enrollments.map((e) => (e.id === id ? { ...e, status } : e));
+      const enr = next.find((e) => e.id === id);
+      return {
+        ...s,
+        enrollments: next,
+        activity: enr
+          ? [{ id: ++nextActivityId, text: `Enrollment ${status} — ${enr.childName}`, dot: "#2B7A6F", time: "Just now", ts: Date.now() }, ...s.activity]
+          : s.activity,
+      };
+    });
+  }, []);
+
+  const addGeneralInquiry: Ctx["addGeneralInquiry"] = useCallback((g) => {
+    setState((s) => {
+      const now = new Date();
+      const gi: GeneralInquiry = { ...g, id: ++nextInquiryId, status: "pending", receivedISO: now.toISOString(), received: fmtTime(now) };
+      return {
+        ...s,
+        generalInquiries: [gi, ...s.generalInquiries],
+        activity: [
+          { id: ++nextActivityId, text: `Inquiry — ${g.name} · ${g.source}`, dot: "#C49A3C", time: "Just now", ts: Date.now() },
+          ...s.activity,
+        ],
+      };
+    });
+  }, []);
+
+  const setGeneralInquiryStatus = useCallback((id: number, status: GeneralInquiry["status"]) => {
+    setState((s) => ({
+      ...s,
+      generalInquiries: s.generalInquiries.map((g) => (g.id === id ? { ...g, status } : g)),
+    }));
+  }, []);
+
+  const addDonation: Ctx["addDonation"] = useCallback((d) => {
+    setState((s) => {
+      const now = new Date();
+      const date = now.toLocaleString("en-US", { month: "short", day: "numeric" });
+      const don: Donation = { ...d, id: ++nextInquiryId, date };
+      return {
+        ...s,
+        donations: [don, ...s.donations],
+        homepage: { ...s.homepage, campaignRaised: s.homepage.campaignRaised + d.amount },
+        activity: [
+          { id: ++nextActivityId, text: `Donation received — $${d.amount.toLocaleString()} · ${d.campaign}`, dot: "#C49A3C", time: "Just now", ts: Date.now() },
+          ...s.activity,
+        ],
+      };
+    });
+  }, []);
+
   return (
-    <ContentCtx.Provider value={{ ...state, updateHomepage, updatePage, setBlogStatus, addInquiry, setInquiryStatus, addRegistration, setRegistrationStatus, addVolunteerRequest, setVolunteerStatus, pushActivity }}>
+    <ContentCtx.Provider value={{
+      ...state,
+      updateHomepage, updatePage, setBlogStatus,
+      addInquiry, setInquiryStatus,
+      addRegistration, setRegistrationStatus,
+      addVolunteerRequest, setVolunteerStatus,
+      addEnrollment, setEnrollmentStatus,
+      addGeneralInquiry, setGeneralInquiryStatus,
+      addDonation,
+      pushActivity,
+    }}>
       {children}
     </ContentCtx.Provider>
   );

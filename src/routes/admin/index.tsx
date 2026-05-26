@@ -26,7 +26,7 @@ function timeAgo(ts: number, now: number) {
 }
 
 function DashboardPage() {
-  const { campSessions, donations, inquiries, activity, registrations, volunteerRequests } = useContentStore();
+  const { campSessions, donations, inquiries, activity, registrations, volunteerRequests, enrollments, generalInquiries } = useContentStore();
   // Auto-refresh tick to keep counters/relative times live
   const [now, setNow] = useState(Date.now());
   useEffect(() => {
@@ -60,11 +60,13 @@ function DashboardPage() {
         <div className="text-[11px] text-[#8a857c]">Updated {timeAgo(now - 1000, now)}</div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <StatCard to="/admin/registrations" accent="teal" value={String(totalReg)} label="Total Registrations" sub={`${newRegs} new · click to manage`} arrow={newRegs > 0 ? "up" : undefined} />
-        <StatCard to="/admin/inquiries" accent="gold" value={String(totalInquiries)} label="Retreat Inquiries" sub={`${pendingInquiries} pending · click to resolve`} />
-        <StatCard to="/admin/volunteers" accent="teal" value={String(totalVolunteers)} label="Volunteer Requests" sub={`${newVolunteers} new · click to assign`} arrow={newVolunteers > 0 ? "up" : undefined} />
-        <StatCard to="/admin/giving" accent="gold" value={fmtMoney(monthDonations)} label="Donations This Month" sub={`${donations.length} gifts · click to view`} arrow="up" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
+        <StatCard to="/admin/registrations" accent="teal" value={String(totalReg)} label="Registrations" sub={`${newRegs} new`} arrow={newRegs > 0 ? "up" : undefined} />
+        <StatCard to="/admin/enrollments" accent="gold" value={String(enrollments.length)} label="Enrollments" sub={`${enrollments.filter((e) => e.status === "new").length} new`} arrow={enrollments.some((e) => e.status === "new") ? "up" : undefined} />
+        <StatCard to="/admin/inquiries" accent="gold" value={String(totalInquiries + generalInquiries.length)} label="Inquiries" sub={`${pendingInquiries + generalInquiries.filter((g) => g.status === "pending").length} pending`} />
+        <StatCard to="/admin/volunteers" accent="teal" value={String(totalVolunteers)} label="Volunteer Requests" sub={`${newVolunteers} new`} arrow={newVolunteers > 0 ? "up" : undefined} />
+        <StatCard to="/admin/giving" accent="gold" value={fmtMoney(monthDonations)} label="Donations This Month" sub={`${donations.length} gifts · ${donations.filter((d) => d.type === "Monthly").length} monthly`} arrow="up" />
+        <StatCard to="/admin/giving" accent="teal" value={String(donations.filter((d) => d.type === "One-time").length)} label="One-Time Gifts" sub="this month" />
       </div>
 
 

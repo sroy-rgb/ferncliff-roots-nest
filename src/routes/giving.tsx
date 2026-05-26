@@ -7,7 +7,8 @@ import { MobileBottomBar } from "@/components/site/MobileBottomBar";
 import { AnchorSubNav } from "@/components/site/AnchorSubNav";
 import { CampHero, HeroEm } from "@/components/site/CampHero";
 import { SectionIntro, Hw } from "@/components/site/SectionIntro";
-import { Heart, ArrowsClockwise, Handshake, Lock, ShieldCheck, EyeSlash, ArrowRight } from "@phosphor-icons/react";
+import { Heart, ArrowsClockwise, Handshake, Lock, ShieldCheck, EyeSlash, ArrowRight, CheckCircle } from "@phosphor-icons/react";
+import { useContentStore } from "@/components/admin/contentStore";
 
 export const Route = createFileRoute("/giving")({
   head: () => ({
@@ -149,16 +150,44 @@ function GivingPage() {
 }
 
 function DonationCard() {
+  const { addDonation } = useContentStore();
   const [freq, setFreq] = useState<"one" | "monthly">("one");
   const [amt, setAmt] = useState(50);
+  const [donor, setDonor] = useState({ name: "", email: "", campaign: "General" });
+  const [done, setDone] = useState(false);
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    addDonation({
+      donor: donor.name.trim() || "Anonymous",
+      amount: amt,
+      type: freq === "one" ? "One-time" : "Monthly",
+      campaign: donor.campaign,
+    });
+    setDone(true);
+  };
+
+  if (done) {
+    return (
+      <div className="bg-white rounded-[28px] p-8 md:p-10 text-center" style={{ boxShadow: "0 16px 48px rgba(44,41,38,0.12)" }}>
+        <div className="text-teal flex justify-center mb-4"><CheckCircle size={52} weight="fill" /></div>
+        <h3 className="font-serif text-dark mb-2" style={{ fontSize: 24 }}>Thank you!</h3>
+        <p className="text-text-muted text-[14px] mb-5">
+          Your {freq === "monthly" ? "monthly" : "one-time"} gift of <strong>${amt.toLocaleString()}</strong> to {donor.campaign} has been recorded.
+        </p>
+        <button className="btn btn-teal" onClick={() => { setDone(false); setDonor({ name: "", email: "", campaign: "General" }); }}>Give Again</button>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-white rounded-[28px] p-8 md:p-10" style={{ boxShadow: "0 16px 48px rgba(44,41,38,0.12)" }}>
+    <form onSubmit={submit} className="bg-white rounded-[28px] p-8 md:p-10" style={{ boxShadow: "0 16px 48px rgba(44,41,38,0.12)" }}>
       <h3 className="font-serif text-dark mb-1.5" style={{ fontSize: 26 }}>Make your gift</h3>
       <p className="text-[13px] text-text-muted mb-6">Secure · You never leave ferncliff.org</p>
 
       <div className="flex gap-1 p-1 rounded-full mb-5 bg-cream-warm">
         {(["one", "monthly"] as const).map((k) => (
-          <button key={k} onClick={() => setFreq(k)} className="flex-1 py-2.5 rounded-full text-[13px] font-bold transition-colors"
+          <button type="button" key={k} onClick={() => setFreq(k)} className="flex-1 py-2.5 rounded-full text-[13px] font-bold transition-colors"
             style={{ background: freq === k ? "var(--color-teal)" : "transparent", color: freq === k ? "#fff" : "var(--color-text-muted)" }}>
             {k === "one" ? "One-Time" : "Monthly"}
           </button>
@@ -167,7 +196,7 @@ function DonationCard() {
 
       <div className="grid grid-cols-3 gap-2.5 mb-5">
         {amounts.map((a) => (
-          <button key={a} onClick={() => setAmt(a)} className="py-3.5 rounded-[12px] font-serif transition-colors"
+          <button type="button" key={a} onClick={() => setAmt(a)} className="py-3.5 rounded-[12px] font-serif transition-colors"
             style={{
               background: amt === a ? "var(--color-teal)" : "var(--color-offwhite)",
               color: amt === a ? "#fff" : "var(--color-dark-warm)",
@@ -179,7 +208,18 @@ function DonationCard() {
         ))}
       </div>
 
-      <button className="w-full py-4 rounded-full bg-coral text-white font-sans font-bold transition-all hover:-translate-y-0.5"
+      <div className="grid grid-cols-1 gap-2.5 mb-4">
+        <input required placeholder="Your name" value={donor.name} onChange={(e) => setDonor({ ...donor, name: e.target.value })} className="px-4 py-2.5 rounded-[10px] text-[14px] bg-offwhite" style={{ border: "1px solid rgba(0,0,0,0.08)" }} />
+        <input required type="email" placeholder="Email" value={donor.email} onChange={(e) => setDonor({ ...donor, email: e.target.value })} className="px-4 py-2.5 rounded-[10px] text-[14px] bg-offwhite" style={{ border: "1px solid rgba(0,0,0,0.08)" }} />
+        <select value={donor.campaign} onChange={(e) => setDonor({ ...donor, campaign: e.target.value })} className="px-4 py-2.5 rounded-[10px] text-[14px] bg-offwhite" style={{ border: "1px solid rgba(0,0,0,0.08)" }}>
+          <option>General</option>
+          <option>Friends of Ferncliff</option>
+          <option>Transform Campaign</option>
+          <option>Camp Scholarships</option>
+        </select>
+      </div>
+
+      <button type="submit" className="w-full py-4 rounded-full bg-coral text-white font-sans font-bold transition-all hover:-translate-y-0.5"
         style={{ fontSize: 16, boxShadow: "0 4px 20px rgba(201,107,60,0.3)" }}>
         Donate ${amt}{freq === "monthly" ? "/mo" : ""} →
       </button>
@@ -189,7 +229,7 @@ function DonationCard() {
           <span key={i} className="flex items-center gap-1 text-[11px] text-text-muted">{icon} {label as string}</span>
         ))}
       </div>
-    </div>
+    </form>
   );
 }
 

@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Lock, ShieldCheck, EyeSlash } from "@phosphor-icons/react";
+import { DonationModal } from "./DonationModal";
 
 const amounts = [25, 50, 100, 250, 500, 1000];
 
 export function Giving() {
   const [freq, setFreq] = useState<"one" | "monthly">("one");
   const [amt, setAmt] = useState(50);
+  const [open, setOpen] = useState(false);
 
   return (
     <section id="giving" className="relative min-h-[70vh] flex items-center overflow-hidden">
@@ -38,8 +40,8 @@ export function Giving() {
             ))}
           </div>
           <div className="flex flex-wrap gap-4">
-            <Link to="/giving" className="btn btn-coral">Give Today</Link>
-            <Link to="/giving#friends" className="btn btn-outline">Join Friends of Ferncliff</Link>
+            <button onClick={() => setOpen(true)} className="btn btn-coral">Give Today</button>
+            <Link to="/giving" className="btn btn-outline">Join Friends of Ferncliff</Link>
           </div>
         </div>
 
@@ -92,6 +94,7 @@ export function Giving() {
           </div>
 
           <button
+            onClick={() => setOpen(true)}
             className="w-full py-4 rounded-full bg-coral text-white font-sans font-bold transition-all hover:-translate-y-0.5"
             style={{ fontSize: "16px", boxShadow: "0 4px 20px rgba(201,107,60,0.3)" }}
           >
@@ -111,6 +114,7 @@ export function Giving() {
           </div>
         </div>
       </div>
+      <DonationModal open={open} onClose={() => setOpen(false)} />
     </section>
   );
 }

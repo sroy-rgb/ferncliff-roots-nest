@@ -9,8 +9,8 @@ export const Route = createFileRoute("/admin/inquiries")({
 });
 
 function InquiriesPage() {
-  const { inquiries, setInquiryStatus } = useContentStore();
-  const [tab, setTab] = useState<"retreat" | "camp" | "general">("retreat");
+  const { inquiries, setInquiryStatus, generalInquiries, setGeneralInquiryStatus } = useContentStore();
+  const [tab, setTab] = useState<"retreat" | "general">("retreat");
 
   return (
     <AdminLayout title="Inquiries">
@@ -18,8 +18,7 @@ function InquiriesPage() {
       <div className="flex gap-1 mb-6 border-b border-[#E8E2D8]">
         {[
           { key: "retreat", label: "Retreat Inquiries", count: inquiries.length },
-          { key: "camp", label: "Camp Questions", count: 5 },
-          { key: "general", label: "General", count: 4 },
+          { key: "general", label: "General", count: generalInquiries.length },
         ].map((t) => (
           <button
             key={t.key}
@@ -38,8 +37,29 @@ function InquiriesPage() {
           ))}
         </div>
       )}
-      {tab !== "retreat" && (
-        <Card className="p-10 text-center text-[#8a857c] text-[13px]">No items to display.</Card>
+      {tab === "general" && (
+        <div className="space-y-3">
+          {generalInquiries.length === 0 ? (
+            <Card className="p-10 text-center text-[#8a857c] text-[13px]">No general inquiries yet.</Card>
+          ) : generalInquiries.map((g) => (
+            <Card key={g.id} className="p-5">
+              <div className="flex justify-between items-start mb-2 flex-wrap gap-2">
+                <div>
+                  <div className="font-semibold text-[15px]">{g.subject}</div>
+                  <div className="text-[12px] text-[#6b665d]">{g.name} · {g.email} · <span className="text-[#2B7A6F]">via {g.source}</span></div>
+                </div>
+                <div className="text-[11px] text-[#8a857c]">{g.received}</div>
+              </div>
+              <div className="text-[13px] text-[#3a3631] mb-3">{g.message}</div>
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <select value={g.status} onChange={(e) => setGeneralInquiryStatus(g.id, e.target.value as any)} className="h-8 px-2 rounded-md border border-[#E8E2D8] bg-[#FFFDF9] text-[12px]">
+                  <option value="pending">Pending</option><option value="acknowledged">Acknowledged</option><option value="resolved">Resolved</option>
+                </select>
+                <Pill color={g.status === "pending" ? "yellow" : g.status === "acknowledged" ? "gold" : "green"}>{g.status}</Pill>
+              </div>
+            </Card>
+          ))}
+        </div>
       )}
     </AdminLayout>
   );

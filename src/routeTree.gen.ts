@@ -45,6 +45,7 @@ import { Route as AdminMediaRouteImport } from './routes/admin/media'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminInquiriesRouteImport } from './routes/admin/inquiries'
 import { Route as AdminGivingRouteImport } from './routes/admin/giving'
+import { Route as AdminEnrollmentsRouteImport } from './routes/admin/enrollments'
 import { Route as AdminCampRouteImport } from './routes/admin/camp'
 import { Route as AdminBlogRouteImport } from './routes/admin/blog'
 
@@ -229,6 +230,11 @@ const AdminGivingRoute = AdminGivingRouteImport.update({
   path: '/admin/giving',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminEnrollmentsRoute = AdminEnrollmentsRouteImport.update({
+  id: '/admin/enrollments',
+  path: '/admin/enrollments',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminCampRoute = AdminCampRouteImport.update({
   id: '/admin/camp',
   path: '/admin/camp',
@@ -249,6 +255,7 @@ export interface FileRoutesByFullPath {
   '/retreats': typeof RetreatsRoute
   '/admin/blog': typeof AdminBlogRoute
   '/admin/camp': typeof AdminCampRoute
+  '/admin/enrollments': typeof AdminEnrollmentsRoute
   '/admin/giving': typeof AdminGivingRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/login': typeof AdminLoginRoute
@@ -289,6 +296,7 @@ export interface FileRoutesByTo {
   '/retreats': typeof RetreatsRoute
   '/admin/blog': typeof AdminBlogRoute
   '/admin/camp': typeof AdminCampRoute
+  '/admin/enrollments': typeof AdminEnrollmentsRoute
   '/admin/giving': typeof AdminGivingRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/login': typeof AdminLoginRoute
@@ -330,6 +338,7 @@ export interface FileRoutesById {
   '/retreats': typeof RetreatsRoute
   '/admin/blog': typeof AdminBlogRoute
   '/admin/camp': typeof AdminCampRoute
+  '/admin/enrollments': typeof AdminEnrollmentsRoute
   '/admin/giving': typeof AdminGivingRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/login': typeof AdminLoginRoute
@@ -372,6 +381,7 @@ export interface FileRouteTypes {
     | '/retreats'
     | '/admin/blog'
     | '/admin/camp'
+    | '/admin/enrollments'
     | '/admin/giving'
     | '/admin/inquiries'
     | '/admin/login'
@@ -412,6 +422,7 @@ export interface FileRouteTypes {
     | '/retreats'
     | '/admin/blog'
     | '/admin/camp'
+    | '/admin/enrollments'
     | '/admin/giving'
     | '/admin/inquiries'
     | '/admin/login'
@@ -452,6 +463,7 @@ export interface FileRouteTypes {
     | '/retreats'
     | '/admin/blog'
     | '/admin/camp'
+    | '/admin/enrollments'
     | '/admin/giving'
     | '/admin/inquiries'
     | '/admin/login'
@@ -493,6 +505,7 @@ export interface RootRouteChildren {
   RetreatsRoute: typeof RetreatsRoute
   AdminBlogRoute: typeof AdminBlogRoute
   AdminCampRoute: typeof AdminCampRoute
+  AdminEnrollmentsRoute: typeof AdminEnrollmentsRoute
   AdminGivingRoute: typeof AdminGivingRoute
   AdminInquiriesRoute: typeof AdminInquiriesRoute
   AdminLoginRoute: typeof AdminLoginRoute
@@ -779,6 +792,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminGivingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/enrollments': {
+      id: '/admin/enrollments'
+      path: '/admin/enrollments'
+      fullPath: '/admin/enrollments'
+      preLoaderRoute: typeof AdminEnrollmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/camp': {
       id: '/admin/camp'
       path: '/admin/camp'
@@ -805,6 +825,7 @@ const rootRouteChildren: RootRouteChildren = {
   RetreatsRoute: RetreatsRoute,
   AdminBlogRoute: AdminBlogRoute,
   AdminCampRoute: AdminCampRoute,
+  AdminEnrollmentsRoute: AdminEnrollmentsRoute,
   AdminGivingRoute: AdminGivingRoute,
   AdminInquiriesRoute: AdminInquiriesRoute,
   AdminLoginRoute: AdminLoginRoute,
