@@ -163,22 +163,36 @@ function Split({ id, eyebrow, title, imgs, desc, reverse, quote, icon, bg = "bg-
 }
 
 function VolunteerForm() {
+  const { addVolunteerRequest } = useContentStore();
   const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", interest: "Disaster Response", message: "" });
+  const change = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+    setForm((f) => ({ ...f, [k]: e.target.value }));
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    addVolunteerRequest({
+      name: form.name.trim(),
+      email: form.email.trim(),
+      interest: form.interest,
+      message: form.message.trim() || undefined,
+    });
+    setSubmitted(true);
+  };
   return submitted ? (
     <div className="text-center py-8 bg-white rounded-[16px]">
       <p className="font-serif text-teal" style={{ fontSize: 22 }}>Thank you!</p>
       <p className="text-text-muted text-[14px] mt-2">Our outreach team will be in touch within a few days.</p>
     </div>
   ) : (
-    <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <Input label="Name" name="name" required />
-      <Input label="Email" name="email" type="email" required />
+    <form onSubmit={onSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <Input label="Name" name="name" required value={form.name} onChange={change("name")} />
+      <Input label="Email" name="email" type="email" required value={form.email} onChange={change("email")} />
       <div className="md:col-span-2">
-        <Select label="Interest Area" name="interest" options={["Disaster Response", "Mission Teams", "Sharing The Goods", "Rise Against Hunger", "Farmstead", "General"]} />
+        <Select label="Interest Area" name="interest" value={form.interest} onChange={change("interest")} options={["Disaster Response", "Mission Teams", "Sharing The Goods", "Rise Against Hunger", "Farmstead", "General"]} />
       </div>
       <div className="md:col-span-2">
         <label className="block text-[12px] font-bold uppercase mb-2 text-dark-warm" style={{ letterSpacing: "1px" }}>Message</label>
-        <textarea name="message" rows={4} className="w-full bg-white rounded-[10px] px-4 py-3 text-[14px]" style={{ border: "1px solid rgba(0,0,0,0.1)" }} />
+        <textarea name="message" rows={4} value={form.message} onChange={change("message")} className="w-full bg-white rounded-[10px] px-4 py-3 text-[14px]" style={{ border: "1px solid rgba(0,0,0,0.1)" }} />
       </div>
       <div className="md:col-span-2 text-center mt-2">
         <button type="submit" className="btn btn-teal">Send Message</button>
@@ -187,20 +201,20 @@ function VolunteerForm() {
   );
 }
 
-function Input({ label, name, type = "text", required }: { label: string; name: string; type?: string; required?: boolean }) {
+function Input({ label, name, type = "text", required, value, onChange }: { label: string; name: string; type?: string; required?: boolean; value?: string; onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void }) {
   return (
     <div>
       <label className="block text-[12px] font-bold uppercase mb-2 text-dark-warm" style={{ letterSpacing: "1px" }}>{label}</label>
-      <input name={name} type={type} required={required} className="w-full bg-white rounded-[10px] px-4 py-3 text-[14px]" style={{ border: "1px solid rgba(0,0,0,0.1)" }} />
+      <input name={name} type={type} required={required} value={value} onChange={onChange} className="w-full bg-white rounded-[10px] px-4 py-3 text-[14px]" style={{ border: "1px solid rgba(0,0,0,0.1)" }} />
     </div>
   );
 }
 
-function Select({ label, name, options }: { label: string; name: string; options: string[] }) {
+function Select({ label, name, options, value, onChange }: { label: string; name: string; options: string[]; value?: string; onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void }) {
   return (
     <div>
       <label className="block text-[12px] font-bold uppercase mb-2 text-dark-warm" style={{ letterSpacing: "1px" }}>{label}</label>
-      <select name={name} className="w-full bg-white rounded-[10px] px-4 py-3 text-[14px]" style={{ border: "1px solid rgba(0,0,0,0.1)" }}>
+      <select name={name} value={value} onChange={onChange} className="w-full bg-white rounded-[10px] px-4 py-3 text-[14px]" style={{ border: "1px solid rgba(0,0,0,0.1)" }}>
         {options.map((o) => <option key={o}>{o}</option>)}
       </select>
     </div>
