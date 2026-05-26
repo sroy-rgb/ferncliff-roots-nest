@@ -8,6 +8,7 @@ import { AnchorSubNav } from "@/components/site/AnchorSubNav";
 import { CampHero, HeroEm } from "@/components/site/CampHero";
 import { SectionIntro, Hw } from "@/components/site/SectionIntro";
 import { FirstAid, UsersThree, Package, BowlFood, Plant, HandHeart } from "@phosphor-icons/react";
+import { useContentStore } from "@/components/admin/contentStore";
 
 export const Route = createFileRoute("/outreach")({
   head: () => ({
