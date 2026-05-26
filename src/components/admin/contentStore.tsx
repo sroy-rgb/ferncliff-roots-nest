@@ -376,8 +376,86 @@ export function ContentStoreProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const addEnrollment: Ctx["addEnrollment"] = useCallback((e) => {
+    setState((s) => {
+      const now = new Date();
+      const enr: Enrollment = { ...e, id: ++nextInquiryId, status: "new", receivedISO: now.toISOString(), received: fmtTime(now) };
+      return {
+        ...s,
+        enrollments: [enr, ...s.enrollments],
+        activity: [
+          { id: ++nextActivityId, text: `New enrollment — ${e.childName} · ${e.program}`, dot: "#2B7A6F", time: "Just now", ts: Date.now() },
+          ...s.activity,
+        ],
+      };
+    });
+  }, []);
+
+  const setEnrollmentStatus = useCallback((id: number, status: Enrollment["status"]) => {
+    setState((s) => {
+      const next = s.enrollments.map((e) => (e.id === id ? { ...e, status } : e));
+      const enr = next.find((e) => e.id === id);
+      return {
+        ...s,
+        enrollments: next,
+        activity: enr
+          ? [{ id: ++nextActivityId, text: `Enrollment ${status} — ${enr.childName}`, dot: "#2B7A6F", time: "Just now", ts: Date.now() }, ...s.activity]
+          : s.activity,
+      };
+    });
+  }, []);
+
+  const addGeneralInquiry: Ctx["addGeneralInquiry"] = useCallback((g) => {
+    setState((s) => {
+      const now = new Date();
+      const gi: GeneralInquiry = { ...g, id: ++nextInquiryId, status: "pending", receivedISO: now.toISOString(), received: fmtTime(now) };
+      return {
+        ...s,
+        generalInquiries: [gi, ...s.generalInquiries],
+        activity: [
+          { id: ++nextActivityId, text: `Inquiry — ${g.name} · ${g.source}`, dot: "#C49A3C", time: "Just now", ts: Date.now() },
+          ...s.activity,
+        ],
+      };
+    });
+  }, []);
+
+  const setGeneralInquiryStatus = useCallback((id: number, status: GeneralInquiry["status"]) => {
+    setState((s) => ({
+      ...s,
+      generalInquiries: s.generalInquiries.map((g) => (g.id === id ? { ...g, status } : g)),
+    }));
+  }, []);
+
+  const addDonation: Ctx["addDonation"] = useCallback((d) => {
+    setState((s) => {
+      const now = new Date();
+      const date = now.toLocaleString("en-US", { month: "short", day: "numeric" });
+      const don: Donation = { ...d, id: ++nextInquiryId, date };
+      return {
+        ...s,
+        donations: [don, ...s.donations],
+        homepage: { ...s.homepage, campaignRaised: s.homepage.campaignRaised + d.amount },
+        activity: [
+          { id: ++nextActivityId, text: `Donation received — $${d.amount.toLocaleString()} · ${d.campaign}`, dot: "#C49A3C", time: "Just now", ts: Date.now() },
+          ...s.activity,
+        ],
+      };
+    });
+  }, []);
+
   return (
-    <ContentCtx.Provider value={{ ...state, updateHomepage, updatePage, setBlogStatus, addInquiry, setInquiryStatus, addRegistration, setRegistrationStatus, addVolunteerRequest, setVolunteerStatus, pushActivity }}>
+    <ContentCtx.Provider value={{
+      ...state,
+      updateHomepage, updatePage, setBlogStatus,
+      addInquiry, setInquiryStatus,
+      addRegistration, setRegistrationStatus,
+      addVolunteerRequest, setVolunteerStatus,
+      addEnrollment, setEnrollmentStatus,
+      addGeneralInquiry, setGeneralInquiryStatus,
+      addDonation,
+      pushActivity,
+    }}>
       {children}
     </ContentCtx.Provider>
   );
