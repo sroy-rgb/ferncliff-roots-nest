@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Lock, ShieldCheck, EyeSlash } from "@phosphor-icons/react";
+import { DonationModal } from "./DonationModal";
 
 const amounts = [25, 50, 100, 250, 500, 1000];
 
 export function Giving() {
   const [freq, setFreq] = useState<"one" | "monthly">("one");
   const [amt, setAmt] = useState(50);
+  const [open, setOpen] = useState(false);
 
   return (
     <section id="giving" className="relative min-h-[70vh] flex items-center overflow-hidden">
