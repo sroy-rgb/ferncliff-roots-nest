@@ -175,8 +175,19 @@ const initial: State = {
     { id: 4, text: "Retreat inquiry — First Presbyterian, 45 guests", dot: "#2B7A6F", time: "Yesterday", ts: Date.now() - 86400_000 },
     { id: 5, text: "Volunteer application — Mission Teams", dot: "#C49A3C", time: "2 days ago", ts: Date.now() - 172800_000 },
   ],
-  registrations: [],
-  volunteerRequests: [],
+  registrations: [
+    { id: 201, camperName: "Ella Thompson", parentName: "Marcus Thompson", email: "marcus.thompson@example.com", phone: "(501) 555-0142", session: "Balsam (Jun 7–12)", campType: "Overnight", age: 11, notes: "Peanut allergy", status: "confirmed", receivedISO: new Date(Date.now() - 86_400_000).toISOString(), received: "May 25, 9:14 AM" },
+    { id: 202, camperName: "Noah Patel", parentName: "Priya Patel", email: "priya.patel@example.com", phone: "(479) 555-0188", session: "Cedar (Jun 14–19)", campType: "Day Camp", age: 9, status: "new", receivedISO: new Date(Date.now() - 3_600_000).toISOString(), received: "May 26, 8:32 AM" },
+    { id: 203, camperName: "Sophia Reyes", parentName: "Elena Reyes", email: "elena.r@example.com", phone: "(501) 555-0119", session: "Dogwood (Jun 21–26)", campType: "Discovery", age: 13, notes: "Returning camper, cabin with Mia R.", status: "waitlist", receivedISO: new Date(Date.now() - 172_800_000).toISOString(), received: "May 24, 4:48 PM" },
+    { id: 204, camperName: "Liam Johnson", parentName: "Rachel Johnson", email: "rachel.j@example.com", phone: "(870) 555-0167", session: "Fern (Jul 5–10)", campType: "Overnight", age: 12, status: "confirmed", receivedISO: new Date(Date.now() - 259_200_000).toISOString(), received: "May 23, 11:02 AM" },
+    { id: 205, camperName: "Ava Williams", parentName: "Derek Williams", email: "derek.w@example.com", phone: "(501) 555-0203", session: "Elm (Jun 28–Jul 3)", campType: "Day Camp", age: 8, notes: "First-time camper", status: "new", receivedISO: new Date(Date.now() - 7_200_000).toISOString(), received: "May 26, 7:11 AM" },
+  ],
+  volunteerRequests: [
+    { id: 301, name: "Hannah Bradley", email: "hannah.b@example.com", interest: "Summer Camp Counselor", message: "College sophomore, available all of June and July. CPR certified.", status: "acknowledged", receivedISO: new Date(Date.now() - 86_400_000).toISOString(), received: "May 25, 2:30 PM" },
+    { id: 302, name: "Tyler Brooks", email: "tbrooks@example.com", interest: "Mission Teams", message: "Group of 8 from Conway Methodist wants to help with summer prep work.", status: "in-progress", receivedISO: new Date(Date.now() - 172_800_000).toISOString(), received: "May 24, 10:15 AM" },
+    { id: 303, name: "Megan Carter", email: "megan.carter@example.com", interest: "Nature School Helper", message: "Retired teacher, available Tues/Thurs mornings.", status: "new", receivedISO: new Date(Date.now() - 5_400_000).toISOString(), received: "May 26, 7:48 AM" },
+    { id: 304, name: "David Nguyen", email: "dnguyen@example.com", interest: "Retreat Hospitality", status: "resolved", receivedISO: new Date(Date.now() - 432_000_000).toISOString(), received: "May 21, 3:00 PM" },
+  ],
 };
 
 const ContentCtx = createContext<Ctx | null>(null);
