@@ -11,6 +11,7 @@ import {
   Tree, Compass, Backpack, Mountains, ArrowRight, Plus, Minus,
   Sun, Leaf, Baby, CalendarBlank, Star,
 } from "@phosphor-icons/react";
+import { EnrollmentModal } from "@/components/site/EnrollmentModal";
 
 export const Route = createFileRoute("/nature-school")({
   head: () => ({
