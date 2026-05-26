@@ -76,7 +76,7 @@ function NatureSchoolPage() {
             subtitle="Arkansas's first nature preschool, Wildcraft homeschool programs, and outdoor education — year-round on 1,200 acres."
           >
             <div className="flex flex-wrap gap-4">
-              <a href="https://ferncliff.campbrainregistration.com/" target="_blank" rel="noopener noreferrer" className="btn btn-teal">Enroll Now</a>
+              <button type="button" onClick={() => setEnrollOpen("Nature Preschool")} className="btn btn-teal">Enroll Now</button>
               <a href="#preschool" className="btn btn-outline">Explore Programs</a>
             </div>
           </CampHero>
@@ -131,7 +131,7 @@ function NatureSchoolPage() {
                   </p>
                   <cite className="block mt-2.5 not-italic font-sans text-[13px] text-text-muted font-semibold">— Nature Preschool Parent</cite>
                 </blockquote>
-                <a href="https://ferncliff.campbrainregistration.com/" target="_blank" rel="noopener noreferrer" className="btn btn-teal">Enroll Your Child</a>
+                <button type="button" onClick={() => setEnrollOpen("Nature Preschool")} className="btn btn-teal">Enroll Your Child</button>
               </div>
             </div>
 
@@ -188,13 +188,14 @@ function NatureSchoolPage() {
               <h2 className="mb-3" style={{ fontSize: "clamp(28px, 4vw, 40px)" }}>Ready to <Hw>explore?</Hw></h2>
               <p className="text-[16px] text-text-muted max-w-[520px] mx-auto mb-7">Reach out to enroll, schedule a tour, or learn more about any of our Nature School programs.</p>
               <div className="flex flex-wrap justify-center gap-3">
-                <a href="https://ferncliff.campbrainregistration.com/" target="_blank" rel="noopener noreferrer" className="btn btn-teal">Enroll Now</a>
+                <button type="button" onClick={() => setEnrollOpen("Nature Preschool")} className="btn btn-teal">Enroll Now</button>
                 <a href="tel:5018213063" className="btn btn-gold-outline">Call (501) 821-3063</a>
               </div>
             </div>
           </div>
         </section>
       </main>
+      <EnrollmentModal open={!!enrollOpen} onClose={() => setEnrollOpen(false)} defaultProgram={typeof enrollOpen === "string" ? enrollOpen : "Nature Preschool"} />
 
       <Footer />
       <MobileBottomBar />
