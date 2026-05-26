@@ -61,6 +61,7 @@ const faqs = [
 
 function NatureSchoolPage() {
   useScrollReveal();
+  const [enrollOpen, setEnrollOpen] = useState<false | string>(false);
   return (
     <div className="bg-offwhite">
       <Nav />
