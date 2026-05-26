@@ -67,6 +67,32 @@ export type Homepage = {
   campaignGoal: number;
 };
 
+export type Registration = {
+  id: number;
+  camperName: string;
+  parentName: string;
+  email: string;
+  phone: string;
+  session: string;
+  campType: string;
+  age: number;
+  notes?: string;
+  status: "new" | "confirmed" | "waitlist" | "cancelled";
+  receivedISO: string;
+  received: string;
+};
+
+export type VolunteerRequest = {
+  id: number;
+  name: string;
+  email: string;
+  interest: string;
+  message?: string;
+  status: "new" | "acknowledged" | "in-progress" | "resolved";
+  receivedISO: string;
+  received: string;
+};
+
 type State = {
   homepage: Homepage;
   pages: PageEntry[];
@@ -75,6 +101,8 @@ type State = {
   inquiries: Inquiry[];
   donations: Donation[];
   activity: ActivityEvent[];
+  registrations: Registration[];
+  volunteerRequests: VolunteerRequest[];
 };
 
 type Ctx = State & {
@@ -83,6 +111,10 @@ type Ctx = State & {
   setBlogStatus: (id: number, status: BlogPost["status"]) => void;
   addInquiry: (i: Omit<Inquiry, "id" | "received" | "status">) => void;
   setInquiryStatus: (id: number, status: Inquiry["status"]) => void;
+  addRegistration: (r: Omit<Registration, "id" | "received" | "receivedISO" | "status">) => void;
+  setRegistrationStatus: (id: number, status: Registration["status"]) => void;
+  addVolunteerRequest: (v: Omit<VolunteerRequest, "id" | "received" | "receivedISO" | "status">) => void;
+  setVolunteerStatus: (id: number, status: VolunteerRequest["status"]) => void;
   pushActivity: (text: string, dot?: string) => void;
 };
 
