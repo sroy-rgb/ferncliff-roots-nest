@@ -3,7 +3,7 @@ import { useState, type ReactNode } from "react";
 import {
   House, Files, Article, Images, Campfire, Buildings, Leaf, HandHeart,
   Heart, Envelope, ChatsCircle, UsersThree, UserGear, ChartLine, Sparkle,
-  Gear, Globe, List, X, SignOut, ClipboardText,
+  Gear, Globe, List, X, SignOut,
 } from "@phosphor-icons/react";
 import { useAdminAuth } from "./adminStore";
 
@@ -19,7 +19,6 @@ const sections: NavSection[] = [
   ]},
   { label: "Programs", items: [
     { to: "/admin/camp", label: "Camp Sessions", Icon: Campfire },
-    { to: "/admin/registrations", label: "Registrations", Icon: ClipboardText },
     { to: "/admin/retreats", label: "Retreats & Bookings", Icon: Buildings },
     { to: "/admin/nature", label: "Nature School", Icon: Leaf },
     { to: "/admin/outreach", label: "Outreach", Icon: HandHeart },

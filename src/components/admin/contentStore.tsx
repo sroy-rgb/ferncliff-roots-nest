@@ -120,6 +120,19 @@ export type GeneralInquiry = {
   received: string;
 };
 
+export type Booking = {
+  id: number;
+  org: string;
+  contact: string;
+  email: string;
+  dates: string;
+  facility: string;
+  guests: number;
+  status: "Confirmed" | "Pending" | "Inquiry" | "Cancelled";
+  createdISO: string;
+  fromInquiryId?: number;
+};
+
 type State = {
   homepage: Homepage;
   pages: PageEntry[];
@@ -132,12 +145,18 @@ type State = {
   volunteerRequests: VolunteerRequest[];
   enrollments: Enrollment[];
   generalInquiries: GeneralInquiry[];
+  bookings: Booking[];
 };
 
 type Ctx = State & {
   updateHomepage: (patch: Partial<Homepage>) => void;
   updatePage: (id: string, patch: Partial<PageEntry>) => void;
   setBlogStatus: (id: number, status: BlogPost["status"]) => void;
+  addBlogPost: (b: Omit<BlogPost, "id" | "date">) => void;
+  updateBlogPost: (id: number, patch: Partial<BlogPost>) => void;
+  deleteBlogPost: (id: number) => void;
+  addBooking: (b: Omit<Booking, "id" | "createdISO">) => void;
+  setBookingStatus: (id: number, status: Booking["status"]) => void;
   addInquiry: (i: Omit<Inquiry, "id" | "received" | "status">) => void;
   setInquiryStatus: (id: number, status: Inquiry["status"]) => void;
   addRegistration: (r: Omit<Registration, "id" | "received" | "receivedISO" | "status">) => void;
@@ -232,8 +251,13 @@ const initial: State = {
     { id: 502, name: "Brian Walsh", email: "brian.w@example.com", source: "Give", subject: "Question about monthly giving", message: "Can I change my recurring gift amount?", status: "acknowledged", receivedISO: new Date(Date.now() - 86_400_000).toISOString(), received: "May 25, 11:20 AM" },
     { id: 503, name: "Sara Kim", email: "sara.k@example.com", source: "Volunteer", subject: "Group volunteer slot", message: "Our youth group has 12 people available July 15.", status: "pending", receivedISO: new Date(Date.now() - 18_000_000).toISOString(), received: "May 26, 3:00 AM" },
   ],
-
+  bookings: [
+    { id: 601, org: "First Presbyterian, LR", contact: "Sarah Mitchell", email: "sarah@fpclr.org", dates: "Oct 18–20, 2026", facility: "Camp McMillan", guests: 45, status: "Confirmed", createdISO: new Date(Date.now() - 5 * 86_400_000).toISOString() },
+    { id: 602, org: "Conway Youth", contact: "Pastor Mike Davis", email: "mike@conwaychurch.org", dates: "Sep 12–14, 2026", facility: "Brown Center", guests: 28, status: "Pending", createdISO: new Date(Date.now() - 3 * 86_400_000).toISOString() },
+    { id: 603, org: "Pulaski Heights UMC", contact: "Anne Reed", email: "areed@phumc.org", dates: "Jan 9–11, 2027", facility: "Camp McMillan", guests: 35, status: "Confirmed", createdISO: new Date(Date.now() - 86_400_000).toISOString() },
+  ],
 };
+
 
 const ContentCtx = createContext<Ctx | null>(null);
 
@@ -287,6 +311,57 @@ export function ContentStoreProvider({ children }: { children: ReactNode }) {
       };
     });
   }, []);
+
+  const addBlogPost: Ctx["addBlogPost"] = useCallback((b) => {
+    setState((s) => {
+      const now = new Date();
+      const date = now.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" });
+      const post: BlogPost = { ...b, id: ++nextInquiryId, date };
+      return {
+        ...s,
+        blogPosts: [post, ...s.blogPosts],
+        activity: [{ id: ++nextActivityId, text: `Blog post created — ${b.title}`, dot: "#C49A3C", time: "Just now", ts: Date.now() }, ...s.activity],
+      };
+    });
+  }, []);
+
+  const updateBlogPost: Ctx["updateBlogPost"] = useCallback((id, patch) => {
+    setState((s) => ({
+      ...s,
+      blogPosts: s.blogPosts.map((b) => (b.id === id ? { ...b, ...patch } : b)),
+      activity: [{ id: ++nextActivityId, text: `Blog post updated — ${patch.title ?? s.blogPosts.find(b=>b.id===id)?.title ?? ""}`, dot: "#C49A3C", time: "Just now", ts: Date.now() }, ...s.activity],
+    }));
+  }, []);
+
+  const deleteBlogPost: Ctx["deleteBlogPost"] = useCallback((id) => {
+    setState((s) => {
+      const post = s.blogPosts.find((b) => b.id === id);
+      return {
+        ...s,
+        blogPosts: s.blogPosts.filter((b) => b.id !== id),
+        activity: post ? [{ id: ++nextActivityId, text: `Blog post deleted — ${post.title}`, dot: "#C49A3C", time: "Just now", ts: Date.now() }, ...s.activity] : s.activity,
+      };
+    });
+  }, []);
+
+  const addBooking: Ctx["addBooking"] = useCallback((b) => {
+    setState((s) => {
+      const booking: Booking = { ...b, id: ++nextInquiryId, createdISO: new Date().toISOString() };
+      return {
+        ...s,
+        bookings: [booking, ...s.bookings],
+        activity: [{ id: ++nextActivityId, text: `Booking added — ${b.org} · ${b.dates}`, dot: "#2B7A6F", time: "Just now", ts: Date.now() }, ...s.activity],
+      };
+    });
+  }, []);
+
+  const setBookingStatus = useCallback((id: number, status: Booking["status"]) => {
+    setState((s) => ({
+      ...s,
+      bookings: s.bookings.map((b) => (b.id === id ? { ...b, status } : b)),
+    }));
+  }, []);
+
 
   const addInquiry: Ctx["addInquiry"] = useCallback((i) => {
     setState((s) => {
@@ -447,7 +522,8 @@ export function ContentStoreProvider({ children }: { children: ReactNode }) {
   return (
     <ContentCtx.Provider value={{
       ...state,
-      updateHomepage, updatePage, setBlogStatus,
+      updateHomepage, updatePage, setBlogStatus, addBlogPost, updateBlogPost, deleteBlogPost,
+      addBooking, setBookingStatus,
       addInquiry, setInquiryStatus,
       addRegistration, setRegistrationStatus,
       addVolunteerRequest, setVolunteerStatus,

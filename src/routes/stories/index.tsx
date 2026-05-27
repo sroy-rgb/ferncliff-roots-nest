@@ -4,6 +4,7 @@ import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { MobileBottomBar } from "@/components/site/MobileBottomBar";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useContentStore } from "@/components/admin/contentStore";
 
 export const Route = createFileRoute("/stories/")({
   head: () => ({
@@ -36,8 +37,26 @@ const filters = ["All", "Support", "Nature Pre School", "Summer Camp", "Giving"]
 
 function StoriesIndex() {
   useScrollReveal();
+  const { blogPosts } = useContentStore();
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
-  const visible = filter === "All" ? stories : stories.filter((s) => s.category === filter);
+
+  // Pull additional published posts from the admin store (those not already in the hardcoded list)
+  const tagMap: Record<string, "teal" | "coral" | "gold"> = {
+    "Support": "coral", "Nature Pre School": "teal", "Summer Camp": "teal", "Giving": "gold", "Outreach": "teal",
+  };
+  const extraFromStore: Story[] = blogPosts
+    .filter((p) => p.status === "Published")
+    .filter((p) => !stories.some((s) => s.title === p.title))
+    .map((p) => ({
+      href: p.slug ?? "/stories",
+      image: "https://images.pexels.com/photos/1612351/pexels-photo-1612351.jpeg?auto=compress&cs=tinysrgb&w=800",
+      category: (p.category as Story["category"]) ?? "Support",
+      tagVariant: tagMap[p.category] ?? "teal",
+      title: p.title,
+      excerpt: p.excerpt || "Read this story…",
+    }));
+  const all = [...stories, ...extraFromStore];
+  const visible = filter === "All" ? all : all.filter((s) => s.category === filter);
 
   return (
     <div className="bg-offwhite">

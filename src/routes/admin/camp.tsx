@@ -1,26 +1,20 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Fragment, useState } from "react";
 import { AdminLayout, Card, PageHeader, Button, Table, Pill } from "@/components/admin/AdminLayout";
 import { Plus } from "@phosphor-icons/react";
-import { useContentStore } from "@/components/admin/contentStore";
+import { useContentStore, type Registration } from "@/components/admin/contentStore";
 
 export const Route = createFileRoute("/admin/camp")({
   component: CampPage,
   head: () => ({ meta: [{ title: "Camp Sessions — Ferncliff CMS" }] }),
 });
 
-const regs = [
-  ["Emma Johnson", "Sarah Johnson", "Overnight", "Balsam", "Paid", "1"],
-  ["Marcus Lee", "David Lee", "Day", "Aspen", "Pending", "2"],
-  ["Sophia Chen", "Mei Chen", "Discovery", "Dogwood", "Paid", "1"],
-  ["Liam Brown", "Karen Brown", "Overnight", "Cedar", "Partial", "3"],
-  ["Ava Williams", "Rob Williams", "Day", "Aspen", "Paid", "1"],
-];
-
 function CampPage() {
-  const { campSessions } = useContentStore();
+  const { campSessions, registrations, setRegistrationStatus } = useContentStore();
   const [tab, setTab] = useState<"sessions" | "registrations">("sessions");
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [regFilter, setRegFilter] = useState<"all" | Registration["status"]>("all");
+  const filteredRegs = registrations.filter((r) => regFilter === "all" || r.status === regFilter);
 
   return (
     <AdminLayout title="Camp Sessions">
@@ -83,16 +77,31 @@ function CampPage() {
       )}
 
       {tab === "registrations" && (
-        <Card>
-          <Table
-            headers={["Camper Name", "Guardian", "Camp Type", "Week", "Payment", "Tier"]}
-            rows={regs.map((r) => [
-              <span className="font-medium">{r[0]}</span>, r[1], r[2], r[3],
-              <Pill color={r[4] === "Paid" ? "green" : r[4] === "Partial" ? "gold" : "yellow"}>{r[4]}</Pill>,
-              r[5],
-            ])}
-          />
-        </Card>
+        <>
+          <Card className="p-3 mb-4 flex flex-wrap items-center gap-3">
+            <select value={regFilter} onChange={(e) => setRegFilter(e.target.value as any)} className="h-9 px-2 rounded-md border border-[#E8E2D8] bg-white text-[13px]">
+              <option value="all">All statuses</option>
+              <option value="new">New</option><option value="confirmed">Confirmed</option><option value="waitlist">Waitlist</option><option value="cancelled">Cancelled</option>
+            </select>
+            <Link to="/admin/registrations" className="ml-auto text-[12px] text-[#2B7A6F] hover:underline">Open detailed view →</Link>
+          </Card>
+          <Card>
+            <Table
+              headers={["Camper Name", "Guardian", "Camp Type", "Session", "Status", "Received", "Actions"]}
+              rows={filteredRegs.map((r) => [
+                <span className="font-medium">{r.camperName} <span className="text-[11px] text-[#8a857c] font-normal">· age {r.age}</span></span>,
+                <div><div>{r.parentName}</div><div className="text-[11px] text-[#8a857c]">{r.email}</div></div>,
+                r.campType,
+                r.session,
+                <Pill color={r.status === "confirmed" ? "green" : r.status === "waitlist" ? "gold" : r.status === "cancelled" ? "red" : "yellow"}>{r.status}</Pill>,
+                <span className="text-[12px] text-[#6b665d]">{r.received}</span>,
+                <select value={r.status} onChange={(e) => setRegistrationStatus(r.id, e.target.value as Registration["status"])} className="h-7 px-2 rounded border border-[#E8E2D8] bg-white text-[12px]">
+                  <option value="new">New</option><option value="confirmed">Confirmed</option><option value="waitlist">Waitlist</option><option value="cancelled">Cancelled</option>
+                </select>,
+              ])}
+            />
+          </Card>
+        </>
       )}
     </AdminLayout>
   );
