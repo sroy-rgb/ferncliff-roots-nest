@@ -62,7 +62,7 @@ function DashboardPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
         <StatCard to="/admin/registrations" accent="teal" value={String(totalReg)} label="Registrations" sub={`${newRegs} new`} arrow={newRegs > 0 ? "up" : undefined} />
-        <StatCard to="/admin/enrollments" accent="gold" value={String(enrollments.length)} label="Enrollments" sub={`${enrollments.filter((e) => e.status === "new").length} new`} arrow={enrollments.some((e) => e.status === "new") ? "up" : undefined} />
+        <StatCard to="/admin/nature" accent="gold" value={String(enrollments.filter((e) => ["Nature Preschool","Wildcraft","WILD Passport","Homeschool Day"].includes(e.program)).length)} label="Nature Enrollments" sub={`${enrollments.filter((e) => e.status === "new").length} new`} arrow={enrollments.some((e) => e.status === "new") ? "up" : undefined} />
         <StatCard to="/admin/inquiries" accent="gold" value={String(totalInquiries + generalInquiries.length)} label="Inquiries" sub={`${pendingInquiries + generalInquiries.filter((g) => g.status === "pending").length} pending`} />
         <StatCard to="/admin/volunteers" accent="teal" value={String(totalVolunteers)} label="Volunteer Requests" sub={`${newVolunteers} new`} arrow={newVolunteers > 0 ? "up" : undefined} />
         <StatCard to="/admin/giving" accent="gold" value={fmtMoney(monthDonations)} label="Donations This Month" sub={`${donations.length} gifts · ${donations.filter((d) => d.type === "Monthly").length} monthly`} arrow="up" />
