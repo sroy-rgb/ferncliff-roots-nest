@@ -522,7 +522,8 @@ export function ContentStoreProvider({ children }: { children: ReactNode }) {
   return (
     <ContentCtx.Provider value={{
       ...state,
-      updateHomepage, updatePage, setBlogStatus,
+      updateHomepage, updatePage, setBlogStatus, addBlogPost, updateBlogPost, deleteBlogPost,
+      addBooking, setBookingStatus,
       addInquiry, setInquiryStatus,
       addRegistration, setRegistrationStatus,
       addVolunteerRequest, setVolunteerStatus,
