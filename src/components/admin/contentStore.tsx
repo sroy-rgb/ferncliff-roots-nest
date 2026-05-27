@@ -312,6 +312,57 @@ export function ContentStoreProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const addBlogPost: Ctx["addBlogPost"] = useCallback((b) => {
+    setState((s) => {
+      const now = new Date();
+      const date = now.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" });
+      const post: BlogPost = { ...b, id: ++nextInquiryId, date };
+      return {
+        ...s,
+        blogPosts: [post, ...s.blogPosts],
+        activity: [{ id: ++nextActivityId, text: `Blog post created — ${b.title}`, dot: "#C49A3C", time: "Just now", ts: Date.now() }, ...s.activity],
+      };
+    });
+  }, []);
+
+  const updateBlogPost: Ctx["updateBlogPost"] = useCallback((id, patch) => {
+    setState((s) => ({
+      ...s,
+      blogPosts: s.blogPosts.map((b) => (b.id === id ? { ...b, ...patch } : b)),
+      activity: [{ id: ++nextActivityId, text: `Blog post updated — ${patch.title ?? s.blogPosts.find(b=>b.id===id)?.title ?? ""}`, dot: "#C49A3C", time: "Just now", ts: Date.now() }, ...s.activity],
+    }));
+  }, []);
+
+  const deleteBlogPost: Ctx["deleteBlogPost"] = useCallback((id) => {
+    setState((s) => {
+      const post = s.blogPosts.find((b) => b.id === id);
+      return {
+        ...s,
+        blogPosts: s.blogPosts.filter((b) => b.id !== id),
+        activity: post ? [{ id: ++nextActivityId, text: `Blog post deleted — ${post.title}`, dot: "#C49A3C", time: "Just now", ts: Date.now() }, ...s.activity] : s.activity,
+      };
+    });
+  }, []);
+
+  const addBooking: Ctx["addBooking"] = useCallback((b) => {
+    setState((s) => {
+      const booking: Booking = { ...b, id: ++nextInquiryId, createdISO: new Date().toISOString() };
+      return {
+        ...s,
+        bookings: [booking, ...s.bookings],
+        activity: [{ id: ++nextActivityId, text: `Booking added — ${b.org} · ${b.dates}`, dot: "#2B7A6F", time: "Just now", ts: Date.now() }, ...s.activity],
+      };
+    });
+  }, []);
+
+  const setBookingStatus = useCallback((id: number, status: Booking["status"]) => {
+    setState((s) => ({
+      ...s,
+      bookings: s.bookings.map((b) => (b.id === id ? { ...b, status } : b)),
+    }));
+  }, []);
+
+
   const addInquiry: Ctx["addInquiry"] = useCallback((i) => {
     setState((s) => {
       const inquiry: Inquiry = { ...i, id: ++nextInquiryId, status: "new", received: "Just now" };
