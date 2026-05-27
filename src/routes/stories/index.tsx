@@ -4,6 +4,7 @@ import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { MobileBottomBar } from "@/components/site/MobileBottomBar";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useContentStore } from "@/components/admin/contentStore";
 
 export const Route = createFileRoute("/stories/")({
   head: () => ({
