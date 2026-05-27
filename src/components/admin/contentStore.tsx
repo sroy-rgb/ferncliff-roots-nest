@@ -251,8 +251,13 @@ const initial: State = {
     { id: 502, name: "Brian Walsh", email: "brian.w@example.com", source: "Give", subject: "Question about monthly giving", message: "Can I change my recurring gift amount?", status: "acknowledged", receivedISO: new Date(Date.now() - 86_400_000).toISOString(), received: "May 25, 11:20 AM" },
     { id: 503, name: "Sara Kim", email: "sara.k@example.com", source: "Volunteer", subject: "Group volunteer slot", message: "Our youth group has 12 people available July 15.", status: "pending", receivedISO: new Date(Date.now() - 18_000_000).toISOString(), received: "May 26, 3:00 AM" },
   ],
-
+  bookings: [
+    { id: 601, org: "First Presbyterian, LR", contact: "Sarah Mitchell", email: "sarah@fpclr.org", dates: "Oct 18–20, 2026", facility: "Camp McMillan", guests: 45, status: "Confirmed", createdISO: new Date(Date.now() - 5 * 86_400_000).toISOString() },
+    { id: 602, org: "Conway Youth", contact: "Pastor Mike Davis", email: "mike@conwaychurch.org", dates: "Sep 12–14, 2026", facility: "Brown Center", guests: 28, status: "Pending", createdISO: new Date(Date.now() - 3 * 86_400_000).toISOString() },
+    { id: 603, org: "Pulaski Heights UMC", contact: "Anne Reed", email: "areed@phumc.org", dates: "Jan 9–11, 2027", facility: "Camp McMillan", guests: 35, status: "Confirmed", createdISO: new Date(Date.now() - 86_400_000).toISOString() },
+  ],
 };
+
 
 const ContentCtx = createContext<Ctx | null>(null);
 
