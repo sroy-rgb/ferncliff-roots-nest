@@ -1,26 +1,20 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Fragment, useState } from "react";
 import { AdminLayout, Card, PageHeader, Button, Table, Pill } from "@/components/admin/AdminLayout";
 import { Plus } from "@phosphor-icons/react";
-import { useContentStore } from "@/components/admin/contentStore";
+import { useContentStore, type Registration } from "@/components/admin/contentStore";
 
 export const Route = createFileRoute("/admin/camp")({
   component: CampPage,
   head: () => ({ meta: [{ title: "Camp Sessions — Ferncliff CMS" }] }),
 });
 
-const regs = [
-  ["Emma Johnson", "Sarah Johnson", "Overnight", "Balsam", "Paid", "1"],
-  ["Marcus Lee", "David Lee", "Day", "Aspen", "Pending", "2"],
-  ["Sophia Chen", "Mei Chen", "Discovery", "Dogwood", "Paid", "1"],
-  ["Liam Brown", "Karen Brown", "Overnight", "Cedar", "Partial", "3"],
-  ["Ava Williams", "Rob Williams", "Day", "Aspen", "Paid", "1"],
-];
-
 function CampPage() {
-  const { campSessions } = useContentStore();
+  const { campSessions, registrations, setRegistrationStatus } = useContentStore();
   const [tab, setTab] = useState<"sessions" | "registrations">("sessions");
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [regFilter, setRegFilter] = useState<"all" | Registration["status"]>("all");
+  const filteredRegs = registrations.filter((r) => regFilter === "all" || r.status === regFilter);
 
   return (
     <AdminLayout title="Camp Sessions">
