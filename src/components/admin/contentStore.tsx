@@ -120,6 +120,19 @@ export type GeneralInquiry = {
   received: string;
 };
 
+export type Booking = {
+  id: number;
+  org: string;
+  contact: string;
+  email: string;
+  dates: string;
+  facility: string;
+  guests: number;
+  status: "Confirmed" | "Pending" | "Inquiry" | "Cancelled";
+  createdISO: string;
+  fromInquiryId?: number;
+};
+
 type State = {
   homepage: Homepage;
   pages: PageEntry[];
@@ -132,12 +145,18 @@ type State = {
   volunteerRequests: VolunteerRequest[];
   enrollments: Enrollment[];
   generalInquiries: GeneralInquiry[];
+  bookings: Booking[];
 };
 
 type Ctx = State & {
   updateHomepage: (patch: Partial<Homepage>) => void;
   updatePage: (id: string, patch: Partial<PageEntry>) => void;
   setBlogStatus: (id: number, status: BlogPost["status"]) => void;
+  addBlogPost: (b: Omit<BlogPost, "id" | "date">) => void;
+  updateBlogPost: (id: number, patch: Partial<BlogPost>) => void;
+  deleteBlogPost: (id: number) => void;
+  addBooking: (b: Omit<Booking, "id" | "createdISO">) => void;
+  setBookingStatus: (id: number, status: Booking["status"]) => void;
   addInquiry: (i: Omit<Inquiry, "id" | "received" | "status">) => void;
   setInquiryStatus: (id: number, status: Inquiry["status"]) => void;
   addRegistration: (r: Omit<Registration, "id" | "received" | "receivedISO" | "status">) => void;
