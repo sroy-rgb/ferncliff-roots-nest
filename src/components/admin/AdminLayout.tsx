@@ -19,7 +19,6 @@ const sections: NavSection[] = [
   ]},
   { label: "Programs", items: [
     { to: "/admin/camp", label: "Camp Sessions", Icon: Campfire },
-    { to: "/admin/registrations", label: "Registrations", Icon: ClipboardText },
     { to: "/admin/retreats", label: "Retreats & Bookings", Icon: Buildings },
     { to: "/admin/nature", label: "Nature School", Icon: Leaf },
     { to: "/admin/outreach", label: "Outreach", Icon: HandHeart },
