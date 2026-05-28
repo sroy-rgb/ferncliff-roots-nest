@@ -303,6 +303,29 @@ export function ContentStoreProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const addPage: Ctx["addPage"] = useCallback((p) => {
+    setState((s) => {
+      const id = `page-${Date.now()}`;
+      const entry: PageEntry = { ...p, id, modified: "Just now" };
+      return {
+        ...s,
+        pages: [...s.pages, entry],
+        activity: [{ id: ++nextActivityId, text: `Page created — ${p.title}`, dot: "#2B7A6F", time: "Just now", ts: Date.now() }, ...s.activity],
+      };
+    });
+  }, []);
+
+  const deletePage: Ctx["deletePage"] = useCallback((id) => {
+    setState((s) => {
+      const page = s.pages.find((p) => p.id === id);
+      return {
+        ...s,
+        pages: s.pages.filter((p) => p.id !== id && p.parent !== id),
+        activity: page ? [{ id: ++nextActivityId, text: `Page deleted — ${page.title}`, dot: "#2B7A6F", time: "Just now", ts: Date.now() }, ...s.activity] : s.activity,
+      };
+    });
+  }, []);
+
   const setBlogStatus = useCallback((id: number, status: BlogPost["status"]) => {
     setState((s) => {
       const next = s.blogPosts.map((b) => (b.id === id ? { ...b, status } : b));
