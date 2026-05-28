@@ -7,6 +7,9 @@ export type PageEntry = {
   status: "Published" | "Draft" | "Archived";
   modified: string;
   parent?: string;
+  body?: string;
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export type BlogPost = {
