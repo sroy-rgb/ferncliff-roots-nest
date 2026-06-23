@@ -1,0 +1,54 @@
+import { jsxs, jsx } from "react/jsx-runtime";
+import { A as AdminLayout, b as PageHeader, C as Card, S as StatCard, T as Table } from "./AdminLayout-CKgi6IRm.js";
+import "@tanstack/react-router";
+import "react";
+import "@phosphor-icons/react";
+import "./router-DASrCSie.js";
+import "@tanstack/react-query";
+const audit = [["Homepage", "✓", "✓", "100%", "✓", 98], ["Camp Overview", "✓", "✓", "85%", "✓", 94], ["First-Time Campers", "✓", "⚠ (too short)", "100%", "✓", 88], ["Retreats", "✓", "✓", "70%", "✗", 76], ["Giving", "✓", "✗ (missing)", "90%", "✓", 82]];
+const ind = (v) => {
+  if (v.startsWith("✓")) return /* @__PURE__ */ jsx("span", { className: "text-green-600", children: v });
+  if (v.startsWith("⚠")) return /* @__PURE__ */ jsx("span", { className: "text-yellow-600", children: v });
+  if (v.startsWith("✗")) return /* @__PURE__ */ jsx("span", { className: "text-red-600", children: v });
+  return v;
+};
+function SeoPage() {
+  return /* @__PURE__ */ jsxs(AdminLayout, { title: "SEO & Analytics", children: [
+    /* @__PURE__ */ jsx(PageHeader, { title: "SEO & Analytics" }),
+    /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6", children: [
+      /* @__PURE__ */ jsxs(Card, { className: "p-5", children: [
+        /* @__PURE__ */ jsx("div", { className: "text-[11px] uppercase tracking-wider text-[#888]", children: "Core Web Vitals" }),
+        /* @__PURE__ */ jsxs("div", { className: "mt-3 space-y-1 text-[12px]", children: [
+          /* @__PURE__ */ jsxs("div", { className: "flex justify-between", children: [
+            /* @__PURE__ */ jsx("span", { children: "LCP" }),
+            /* @__PURE__ */ jsx("span", { className: "text-green-600", children: "1.8s" })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "flex justify-between", children: [
+            /* @__PURE__ */ jsx("span", { children: "FID" }),
+            /* @__PURE__ */ jsx("span", { className: "text-green-600", children: "45ms" })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "flex justify-between", children: [
+            /* @__PURE__ */ jsx("span", { children: "CLS" }),
+            /* @__PURE__ */ jsx("span", { className: "text-green-600", children: "0.05" })
+          ] })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs(Card, { className: "p-5 text-center", children: [
+        /* @__PURE__ */ jsx("div", { className: "text-[11px] uppercase tracking-wider text-[#888]", children: "SEO Score" }),
+        /* @__PURE__ */ jsxs("div", { className: "mt-3 relative inline-flex", children: [
+          /* @__PURE__ */ jsxs("svg", { width: "80", height: "80", viewBox: "0 0 80 80", children: [
+            /* @__PURE__ */ jsx("circle", { cx: "40", cy: "40", r: "34", fill: "none", stroke: "#F0F0F0", strokeWidth: "8" }),
+            /* @__PURE__ */ jsx("circle", { cx: "40", cy: "40", r: "34", fill: "none", stroke: "#2B7A6F", strokeWidth: "8", strokeDasharray: `${92 / 100 * 213.6} 213.6`, strokeLinecap: "round", transform: "rotate(-90 40 40)" })
+          ] }),
+          /* @__PURE__ */ jsx("div", { className: "absolute inset-0 flex items-center justify-center font-semibold text-[#2B7A6F]", children: "92" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsx(StatCard, { accent: "teal", value: "47", label: "Indexed Pages" }),
+      /* @__PURE__ */ jsx(StatCard, { accent: "gold", value: "3,240", label: "Monthly Organic Traffic", sub: "visits" })
+    ] }),
+    /* @__PURE__ */ jsx(Card, { children: /* @__PURE__ */ jsx(Table, { headers: ["Page", "Meta Title", "Meta Description", "Alt Text Coverage", "Schema", "Score"], rows: audit.map((r) => [/* @__PURE__ */ jsx("span", { className: "font-medium", children: r[0] }), ind(String(r[1])), ind(String(r[2])), ind(String(r[3])), ind(String(r[4])), /* @__PURE__ */ jsx("span", { className: "font-semibold", children: r[5] })]) }) })
+  ] });
+}
+export {
+  SeoPage as component
+};
